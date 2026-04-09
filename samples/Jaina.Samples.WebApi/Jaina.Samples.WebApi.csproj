@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Samples.ServiceDefaults\Jaina.Samples.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\src\caching\Jaina.Caching.Redis\Jaina.Caching.Redis.csproj" />
+    <ProjectReference Include="..\..\src\caching\Jaina.Caching.Memory\Jaina.Caching.Memory.csproj" />
+    <ProjectReference Include="..\..\src\storage\Jaina.Storage.Local\Jaina.Storage.Local.csproj" />
+    <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.RabbitMQ\Jaina.Messaging.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\src\diagnostics\Jaina.Diagnostics\Jaina.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\src\core\Jaina.Core\Jaina.Core.csproj" />
+  </ItemGroup>
+</Project>

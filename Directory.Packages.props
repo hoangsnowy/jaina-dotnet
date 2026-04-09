@@ -1,0 +1,98 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Microsoft.Extensions (all aligned to 9.0.x) -->
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="9.0.0" />
+
+    <!-- ASP.NET Core (for netstandard2.0 compat) -->
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+
+    <!-- Compatibility -->
+    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.0" />
+
+    <!-- Caching -->
+    <PackageVersion Include="LazyCache" Version="2.4.0" />
+    <PackageVersion Include="LazyCache.AspNetCore" Version="2.4.0" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.8.16" />
+    <PackageVersion Include="ZiggyCreatures.FusionCache" Version="2.1.0" />
+    <PackageVersion Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" Version="2.1.0" />
+
+    <!-- Storage -->
+    <PackageVersion Include="Azure.Storage.Blobs" Version="12.22.2" />
+    <PackageVersion Include="Azure.Storage.Files.Shares" Version="12.20.1" />
+    <PackageVersion Include="SSH.NET" Version="2024.2.0" />
+    <PackageVersion Include="SharpZipLib" Version="1.4.2" />
+
+    <!-- Logging & Monitoring -->
+    <PackageVersion Include="NLog" Version="5.3.4" />
+    <PackageVersion Include="NLog.Extensions.Logging" Version="5.3.14" />
+    <PackageVersion Include="Elastic.Apm.NetCoreAll" Version="1.29.0" />
+    <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
+
+    <!-- Message Brokers -->
+    <PackageVersion Include="RabbitMQ.Client" Version="7.0.0" />
+    <PackageVersion Include="Azure.Messaging.ServiceBus" Version="7.18.2" />
+
+    <!-- Security -->
+    <PackageVersion Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageVersion Include="BouncyCastle.Cryptography" Version="2.6.2" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageVersion Include="Azure.Identity" Version="1.13.2" />
+    <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.4.0" />
+    <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
+
+    <!-- Data -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />
+    <PackageVersion Include="Dapper" Version="2.1.35" />
+    <PackageVersion Include="AutoMapper" Version="14.0.0" />
+    <PackageVersion Include="Elastic.Clients.Elasticsearch" Version="8.16.3" />
+
+    <!-- ASP.NET Core -->
+    <PackageVersion Include="Grpc.Net.Client" Version="2.67.0" />
+    <PackageVersion Include="Google.Protobuf" Version="3.29.3" />
+    <PackageVersion Include="Grpc.Tools" Version="2.67.0" />
+    <PackageVersion Include="Grpc.Net.ClientFactory" Version="2.67.0" />
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.67.0" />
+
+    <!-- OpenAPI / Swagger -->
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+
+    <!-- Notification -->
+    <PackageVersion Include="MailKit" Version="4.9.0" />
+
+    <!-- Testing -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="xunit" Version="2.9.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="FluentAssertions" Version="7.0.0" />
+
+    <!-- Aspire -->
+    <PackageVersion Include="Aspire.Hosting" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.Redis" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.SqlServer" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.Azure.Storage" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.Elasticsearch" Version="9.0.0" />
+  </ItemGroup>
+</Project>
