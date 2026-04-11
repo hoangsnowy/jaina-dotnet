@@ -50,6 +50,8 @@ src/
                   Jaina.Diagnostics.ApplicationInsights  Azure App Insights
                   Jaina.Diagnostics.ElasticApm           Elastic APM
                   Jaina.Diagnostics.NLog                 NLog structured spans
+  mapping/        Jaina.Mapping            IMapper abstraction
+                  Jaina.Mapping.Mapster    Mapster provider
   notifications/  Jaina.Notifications       IEmailSender, ISmsSender abstractions
                   Jaina.Notifications.Smtp         SMTP email provider (MailKit)
                   Jaina.Notifications.ConsoleSms   Console/logger SMS provider (dev/test)
@@ -73,6 +75,7 @@ Add packages from NuGet (replace providers as needed):
 dotnet add package Jaina.Core
 dotnet add package Jaina.Caching.Memory
 dotnet add package Jaina.Data.EfCore     # or Jaina.Data.Dapper
+dotnet add package Jaina.Mapping.Mapster
 dotnet add package Jaina.Storage.Local
 dotnet add package Jaina.Security
 dotnet add package Jaina.Notifications
@@ -339,6 +342,26 @@ public class PaymentService(ITelemetry telemetry)
             return Result.Fail(ex);
         }
     }
+}
+```
+
+---
+
+### Mapping
+
+```csharp
+// Program.cs
+builder.Services.AddJainaMapster();                    // default — no custom rules
+builder.Services.AddJainaMapster(cfg => {              // with custom rules
+    cfg.NewConfig<User, UserDto>()
+       .Map(dest => dest.FullName, src => $"{src.FirstName} {src.LastName}");
+});
+
+// Inject and use
+public class UserService(IMapper mapper)
+{
+    public UserDto ToDto(User user) => mapper.Map<UserDto>(user);
+    public UserDto ToDtoTyped(User user) => mapper.Map<User, UserDto>(user);
 }
 ```
 

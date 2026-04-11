@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>Object mapping abstractions for Jaina framework</Description>
+    <PackageId>Jaina.Mapping</PackageId>
+  </PropertyGroup>
+</Project>

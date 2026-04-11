@@ -51,6 +51,8 @@ src/
   security/     Jaina.Security        — AES/RSA/BCrypt/JWT
                 Jaina.Security.Authentication* — JWT bearer auth, Azure KeyVault
   diagnostics/  Jaina.Diagnostics*    — ITelemetry + AppInsights/ElasticAPM/NLog
+  mapping/      Jaina.Mapping               — IMapper abstraction
+                Jaina.Mapping.Mapster         — Mapster provider (AddJainaMapster)
   notifications/ Jaina.Notifications          — IEmailSender, ISmsSender abstractions
                 Jaina.Notifications.Smtp        — SMTP provider (MailKit)
                 Jaina.Notifications.ConsoleSms  — Console/logger SMS provider (dev/test)
@@ -59,6 +61,17 @@ tests/          (empty — test infra configured, no projects yet)
 ```
 
 Each functional area follows the same pattern: one abstraction package + one or more provider packages.
+
+## Banned Packages
+
+**Do NOT use or reference these packages anywhere in the solution:**
+
+| Package | Reason | Replacement |
+|---------|--------|-------------|
+| `AutoMapper` | Commercial license (v13+) | `Jaina.Mapping.Mapster` — use `AddJainaMapster()` and inject `IMapper` |
+| `FluentAssertions` | Commercial license (v7+) | `xunit` built-in `Assert.*` only |
+
+If you see either package in any `.csproj` or `Directory.Packages.props`, remove it.
 
 ## Key Patterns
 

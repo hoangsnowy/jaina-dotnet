@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using AutoMapper;
+using Jaina.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jaina.Data.EfCore;
