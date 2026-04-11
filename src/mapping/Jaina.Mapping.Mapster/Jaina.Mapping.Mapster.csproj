@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFrameworks>$(AppTfms)</TargetFrameworks>
     <Description>Mapster object mapping implementation for Jaina framework</Description>
     <PackageId>Jaina.Mapping.Mapster</PackageId>
   </PropertyGroup>
