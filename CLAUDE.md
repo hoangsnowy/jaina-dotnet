@@ -19,6 +19,21 @@ dotnet test tests/Jaina.<Module>.Tests/<project>.csproj  # single project
 dotnet test --filter "FullyQualifiedName~ClassName"      # single test class
 ```
 
+## Verification Approach
+
+**Do NOT run `dotnet build Jaina.sln` as a verification step locally.** The solution targets `net8.0;net9.0;net10.0` but the local SDK may only support net8. The build will always fail with `NETSDK1045` for net9/net10 targets — this is an environment constraint, not a code error.
+
+**Correct verification strategy by task type:**
+
+| Task | How to verify |
+|------|---------------|
+| Code logic changes | Read the code — confirm correctness by inspection |
+| New package added / version changed | Push to CI — GitHub Actions runs on .NET 9+ SDK |
+| New project / .csproj added | Check that `.sln` includes it (`dotnet sln list`) |
+| DI registration / API surface | Check the file compiles for `net8.0` only: `dotnet build <project>.csproj -f net8.0` (only for projects that *exclusively* target net8) |
+
+CI is the authoritative build validator for this repository.
+
 ## Architecture
 
 Jaina is a modular .NET 8 framework library organized into independent packages:
