@@ -1,6 +1,7 @@
+using Jaina.Notifications.Sms;
 using Microsoft.Extensions.Logging;
 
-namespace Jaina.Notifications.Sms;
+namespace Jaina.Notifications.ConsoleSms.Sms;
 
 internal sealed class ConsoleSmsLogger : ISmsSender
 {

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Jaina.Data;
+namespace Jaina.Data.EfCore;
 
 public class EfUnitOfWork<TContext> : IUnitOfWork where TContext : DbContext
 {

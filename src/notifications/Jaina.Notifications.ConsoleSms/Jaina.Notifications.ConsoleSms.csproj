@@ -1,14 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(LibTfms)</TargetFrameworks>
-    <Description>Diagnostics, monitoring, and telemetry abstractions for Jaina framework</Description>
-    <PackageId>Jaina.Diagnostics</PackageId>
+    <Description>Console/logger SMS provider for Jaina Notifications — intended for development and testing</Description>
+    <PackageId>Jaina.Notifications.ConsoleSms</PackageId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Notifications\Jaina.Notifications.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" />
   </ItemGroup>
 </Project>

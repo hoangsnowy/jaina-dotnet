@@ -2,9 +2,9 @@ using System.Linq.Expressions;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jaina.Data;
+namespace Jaina.Data.EfCore;
 
-public class EfRepository<TContext, TEntity> : DapperRepository, IRepository<TEntity>
+public class EfRepository<TContext, TEntity> : IRepository<TEntity>
     where TContext : DbContext
     where TEntity : class, IEntity
 {
@@ -12,8 +12,7 @@ public class EfRepository<TContext, TEntity> : DapperRepository, IRepository<TEn
     protected IMapper Mapper { get; }
     private readonly DbSet<TEntity> _dbSet;
 
-    public EfRepository(TContext context, IMapper mapper, System.Data.IDbConnection dbConnection)
-        : base(dbConnection)
+    public EfRepository(TContext context, IMapper mapper)
     {
         Context = context;
         Mapper = mapper;

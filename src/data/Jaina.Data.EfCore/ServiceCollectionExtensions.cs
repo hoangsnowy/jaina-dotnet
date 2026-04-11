@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Jaina.Data;
+namespace Jaina.Data.EfCore;
 
 public static class ServiceCollectionExtensions
 {

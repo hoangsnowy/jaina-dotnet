@@ -1,5 +1,11 @@
 <Project>
   <PropertyGroup>
+    <!-- Shared target framework monikers — reference these in .csproj files -->
+    <LibTfms>netstandard2.0;net8.0;net9.0;net10.0</LibTfms>
+    <AppTfms>net8.0;net9.0;net10.0</AppTfms>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,6 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Version>0.1.0</Version>
     <Authors>HoangSnowy</Authors>
     <Company>Jaina</Company>
     <Product>Jaina Framework</Product>
