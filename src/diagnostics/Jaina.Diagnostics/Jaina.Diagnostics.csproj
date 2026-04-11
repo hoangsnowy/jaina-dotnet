@@ -10,5 +10,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" />
+    <PackageReference Include="System.Text.Encodings.Web" />
   </ItemGroup>
 </Project>

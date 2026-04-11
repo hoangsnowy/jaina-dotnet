@@ -12,5 +12,6 @@
   <ItemGroup>
     <PackageReference Include="NLog" />
     <PackageReference Include="NLog.Extensions.Logging" />
+    <PackageReference Include="System.Text.Encodings.Web" />
   </ItemGroup>
 </Project>
