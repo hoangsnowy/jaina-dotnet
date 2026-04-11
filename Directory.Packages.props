@@ -27,7 +27,6 @@
     <!-- Compatibility -->
     <PackageVersion Include="System.Text.Json" Version="10.0.5" />
     <PackageVersion Include="System.Text.Encodings.Web" Version="10.0.5" />
-    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="10.0.5" />
 
     <!-- Caching -->
     <PackageVersion Include="LazyCache" Version="2.4.0" />

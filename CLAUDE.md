@@ -30,7 +30,7 @@ dotnet test --filter "FullyQualifiedName~ClassName"      # single test class
 | Code logic changes | Read the code — confirm correctness by inspection |
 | New package added / version changed | Push to CI — GitHub Actions runs on .NET 9+ SDK |
 | New project / .csproj added | Check that `.sln` includes it (`dotnet sln list`) |
-| DI registration / API surface | Check the file compiles for `net8.0` only: `dotnet build <project>.csproj -f net8.0` (only for projects that *exclusively* target net8) |
+| DI registration / API surface | Check the file compiles for `net8.0` only: `dotnet build <project>.csproj -f net8.0` |
 
 CI is the authoritative build validator for this repository.
 
@@ -98,7 +98,7 @@ From `.editorconfig` and `Directory.Build.props`:
 - Nullable reference types enabled — annotate all APIs
 - `TreatWarningsAsErrors=true` — no suppressions without justification
 - LF line endings, UTF-8, 4-space indent (2 for JSON/XML/YAML)
-- Target frameworks: `$(LibTfms)` (`netstandard2.0;net8.0;net9.0;net10.0`) for pure abstraction libs; `$(AppTfms)` (`net8.0;net9.0;net10.0`) for provider packages using ASP.NET Core, EF Core, or Dapper
+- Target frameworks: both `$(LibTfms)` and `$(AppTfms)` resolve to `net8.0;net9.0;net10.0` — `netstandard2.0` is dropped. Use `$(LibTfms)` for abstraction packages, `$(AppTfms)` for provider packages
 
 ## Testing Conventions
 

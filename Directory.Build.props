@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- Shared target framework monikers — reference these in .csproj files -->
-    <LibTfms>netstandard2.0;net8.0;net9.0;net10.0</LibTfms>
+    <LibTfms>net8.0;net9.0;net10.0</LibTfms>
     <AppTfms>net8.0;net9.0;net10.0</AppTfms>
   </PropertyGroup>
 
