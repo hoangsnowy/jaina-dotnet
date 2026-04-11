@@ -12,7 +12,7 @@ public class AIOperation : IOperation
         _client = client;
     }
 
-    public string? CurrentTransactionId => _client.Context.Operation.Id;
+    public string? CurrentTransactionId => _client.Context.Operation.ParentId;
 
     public void SetLabel(string label) =>
         _client.Context.Operation.Name = label;

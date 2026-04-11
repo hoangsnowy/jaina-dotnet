@@ -62,7 +62,7 @@ public class AzureBlobFileStorage : IFileStorage
     {
         var results = new List<string>();
         var prefix = string.IsNullOrEmpty(directory) ? null : directory.TrimEnd('/') + "/";
-        await foreach (var blob in _container.GetBlobsAsync(prefix: prefix, cancellationToken: ct))
+        await foreach (var blob in _container.GetBlobsAsync(BlobTraits.None, BlobStates.None, prefix, ct))
             results.Add(Path.GetFileName(blob.Name));
         return results;
     }
@@ -74,12 +74,12 @@ public class AzureBlobFileStorage : IFileStorage
 
         if (recursive)
         {
-            await foreach (var blob in _container.GetBlobsAsync(prefix: prefix, cancellationToken: ct))
+            await foreach (var blob in _container.GetBlobsAsync(BlobTraits.None, BlobStates.None, prefix, ct))
                 results.Add(new FileEntry(blob.Name, Path.GetFileName(blob.Name)));
         }
         else
         {
-            await foreach (var item in _container.GetBlobsByHierarchyAsync(prefix: prefix, delimiter: "/", cancellationToken: ct))
+            await foreach (var item in _container.GetBlobsByHierarchyAsync(BlobTraits.None, BlobStates.None, "/", prefix, ct))
                 if (item.IsBlob)
                     results.Add(new FileEntry(item.Blob.Name, Path.GetFileName(item.Blob.Name)));
         }
