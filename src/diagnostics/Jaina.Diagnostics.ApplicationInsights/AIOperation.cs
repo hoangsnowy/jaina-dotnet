@@ -13,8 +13,7 @@ public class AIOperation : IOperation
         _client = client;
     }
 
-    public string? CurrentTransactionId => Activity.Current?.TraceId.ToString()
-        ?? _client.Context.Operation.Id;
+    public string? CurrentTransactionId => Activity.Current?.TraceId.ToString();
 
     public void SetLabel(string label) =>
         _client.Context.Operation.Name = label;
