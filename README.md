@@ -1,0 +1,450 @@
+# Jaina .NET
+
+A modular .NET 8 framework library providing production-ready abstractions and implementations for caching, data access, messaging, file storage, security, diagnostics, and notifications.
+
+[![Build](https://img.shields.io/github/actions/workflow/status/HoangSnowy/jaina-dotnet/build.yml?branch=main)](https://github.com/HoangSnowy/jaina-dotnet/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+---
+
+## Overview
+
+Jaina follows a consistent pattern: each functional area has one **abstraction** package and one or more **provider** packages. You swap providers by changing a single DI registration — your application code never changes.
+
+```
+your app → Jaina abstraction (ICache, IFileStorage, IQueue<T>…)
+                     ↓
+           Jaina provider (Memory, Redis, Azure Blob, RabbitMQ…)
+```
+
+---
+
+## Architecture
+
+```
+src/
+  core/           Jaina.Core               Guard, Result<T>, extensions, HttpClientBase
+  caching/        Jaina.Caching            ICache abstraction
+                  Jaina.Caching.Memory     In-process (LazyCache)
+                  Jaina.Caching.Redis      Distributed (StackExchange.Redis)
+                  Jaina.Caching.Fusion     Multi-level (FusionCache)
+  data/           Jaina.Data               IRepository<T>, IUnitOfWork (EF Core + Dapper)
+                  Jaina.Data.Cqrs          Command/Query buses, domain events, event store
+  messaging/      Jaina.Messaging          IQueue<T> / ITopic<T> abstraction
+                  Jaina.Messaging.RabbitMQ RabbitMQ provider
+                  Jaina.Messaging.AzureServiceBus  Azure Service Bus provider
+                  Jaina.Messaging.Broadcast        In-memory broadcast (dev/test)
+  storage/        Jaina.Storage            IFileStorage abstraction
+                  Jaina.Storage.Local      File system
+                  Jaina.Storage.AzureBlob  Azure Blob Storage
+                  Jaina.Storage.AzureFileShare  Azure Files
+                  Jaina.Storage.Sftp       SFTP
+                  Jaina.Storage.Compression  ZIP utilities
+  security/       Jaina.Security           AES, RSA, BCrypt, SHA, JWT helpers
+                  Jaina.Security.Authentication  JWT bearer auth
+                  Jaina.Security.Authentication.Client  Client credentials
+                  Jaina.Security.KeyVault  Azure Key Vault
+  diagnostics/    Jaina.Diagnostics        ITelemetry / ISpan abstraction + middleware
+                  Jaina.Diagnostics.ApplicationInsights  Azure App Insights
+                  Jaina.Diagnostics.ElasticApm           Elastic APM
+                  Jaina.Diagnostics.NLog                 NLog structured spans
+  notifications/  Jaina.Notifications      IEmailSender (SMTP), ISmsSender (console)
+samples/          Aspire AppHost, WebApi, Worker demos
+tests/            xUnit test projects
+```
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- .NET 8 SDK or later
+
+### Installation
+
+Add packages from NuGet (replace providers as needed):
+
+```bash
+dotnet add package Jaina.Core
+dotnet add package Jaina.Caching.Memory
+dotnet add package Jaina.Data
+dotnet add package Jaina.Storage.Local
+dotnet add package Jaina.Security
+dotnet add package Jaina.Notifications
+```
+
+---
+
+## Module Usage
+
+### Core — Guard & Result\<T\>
+
+```csharp
+using Jaina.Core;
+using Jaina.Core.Results;
+
+// Guard clauses — use CallerArgumentExpression, no need to pass param name
+public void Process(string input, object data)
+{
+    Guard.NotNullOrWhiteSpace(input);   // throws ArgumentException if null/whitespace
+    Guard.NotNull(data);                // throws ArgumentNullException if null
+    Guard.Requires<InvalidOperationException>(input.Length < 100, "Input too long");
+}
+
+// Result<T> — railway-oriented error handling
+public Result<User> GetUser(int id)
+{
+    var user = _db.Find(id);
+    if (user is null)
+        return Result.Fail<User>($"User {id} not found");
+    return Result.Ok(user);
+}
+
+// Consume
+var result = GetUser(42);
+if (result.IsSuccess)
+    Console.WriteLine(result.Value!.Name);
+else
+    Console.WriteLine(result.Message);
+```
+
+---
+
+### Caching
+
+```csharp
+// Program.cs — pick one provider
+builder.Services.AddJainaMemoryCache();               // in-process
+builder.Services.AddJainaRedisCache(o => {            // Redis
+    o.ConnectionString = "localhost:6379";
+});
+builder.Services.AddJainaFusionCache();               // multi-level
+
+// Usage
+public class ProductService(ICache cache)
+{
+    public async Task<Product?> GetProductAsync(int id)
+    {
+        return await cache.GetAsync<Product>($"product:{id}",
+            async () => await _db.FindAsync(id),
+            TimeSpan.FromMinutes(10));
+    }
+}
+```
+
+---
+
+### Data — Repository & Unit of Work
+
+```csharp
+// Program.cs
+builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(conn));
+builder.Services.AddJainaData<AppDbContext>();
+
+// Entity
+public class Order : IEntity
+{
+    public int Id { get; set; }
+    public string Status { get; set; } = "";
+}
+
+// Usage
+public class OrderService(IRepository<Order> repo, IUnitOfWork uow)
+{
+    public async Task CreateAsync(Order order)
+    {
+        await repo.AddAsync(order);
+        await uow.SaveChangesAsync();
+    }
+
+    public async Task<Order?> GetAsync(int id) =>
+        await repo.GetByIdAsync(id);
+}
+```
+
+---
+
+### Data — CQRS Buses
+
+```csharp
+// Program.cs
+builder.Services.AddJainaCqrs();
+builder.Services.AddCommandHandler<CreateOrderCommand, CreateOrderCommandHandler>();
+builder.Services.AddQueryHandler<GetOrderQuery, OrderDto, GetOrderQueryHandler>();
+
+// Command
+public record CreateOrderCommand(string CustomerName) : ICommand;
+
+public class CreateOrderCommandHandler(IRepository<Order> repo, IUnitOfWork uow)
+    : ICommandHandler<CreateOrderCommand>
+{
+    public async Task HandleAsync(CreateOrderCommand cmd, CancellationToken ct = default)
+    {
+        await repo.AddAsync(new Order { CustomerName = cmd.CustomerName });
+        await uow.SaveChangesAsync(ct);
+    }
+}
+
+// Query
+public record GetOrderQuery(int Id) : IQuery<OrderDto?>;
+
+public class GetOrderQueryHandler(IRepository<Order> repo)
+    : IQueryHandler<GetOrderQuery, OrderDto?>
+{
+    public async Task<OrderDto?> HandleAsync(GetOrderQuery query, CancellationToken ct = default)
+    {
+        var order = await repo.GetByIdAsync(query.Id);
+        return order is null ? null : new OrderDto(order.Id, order.CustomerName);
+    }
+}
+
+// Dispatch
+public class OrderController(ICommandBus commands, IQueryBus queries)
+{
+    public Task CreateOrder(string name) =>
+        commands.SendAsync(new CreateOrderCommand(name));
+
+    public Task<OrderDto?> GetOrder(int id) =>
+        queries.SendAsync<GetOrderQuery, OrderDto?>(new GetOrderQuery(id));
+}
+```
+
+---
+
+### Messaging
+
+```csharp
+// Program.cs — pick one provider
+builder.Services.AddJainaRabbitMQ(o => {
+    o.HostName = "localhost";
+    o.QueueName = "orders";
+});
+
+// Publish
+public class OrderPublisher(IQueue<OrderCreatedEvent> queue)
+{
+    public Task PublishAsync(OrderCreatedEvent evt) =>
+        queue.EnqueueAsync(evt);
+}
+
+// Subscribe
+queue.Subscribe(async (msg, ct) =>
+{
+    Console.WriteLine($"Received: {msg.Body.OrderId}");
+    await Task.CompletedTask;
+});
+```
+
+---
+
+### Storage
+
+```csharp
+// Program.cs — pick one provider
+builder.Services.AddJainaLocalStorage(o => o.BasePath = "/data/uploads");
+builder.Services.AddJainaAzureBlobStorage(o => {
+    o.ConnectionString = "DefaultEndpointsProtocol=https;...";
+    o.ContainerName = "uploads";
+});
+
+// Usage
+public class FileService(IFileStorage storage)
+{
+    public async Task UploadAsync(string path, byte[] data)
+    {
+        await storage.SaveAsync(path, data);
+    }
+
+    public async Task<byte[]> DownloadAsync(string path)
+    {
+        if (!await storage.ExistsAsync(path))
+            throw new FileNotFoundException(path);
+        return await storage.GetBytesAsync(path);
+    }
+
+    public async Task<IEnumerable<string>> ListAsync(string directory) =>
+        await storage.GetFileNamesAsync(directory);
+}
+```
+
+---
+
+### Security
+
+```csharp
+using Jaina.Security.Encryption;
+using Jaina.Security.Hashing;
+using Jaina.Security.Token;
+
+// Password hashing (BCrypt)
+string hash = BcryptHelper.Hash("myPassword");
+bool valid = BcryptHelper.Verify("myPassword", hash);
+
+// AES symmetric encryption
+string cipher = AesHelper.Encrypt("sensitive data", pepper: "app-key", salt: "user-salt");
+string plain  = AesHelper.Decrypt(cipher, pepper: "app-key", salt: "user-salt");
+
+// SHA-256
+string digest = Sha256Helper.Hash("data");
+
+// JWT
+var token = new JwtSecurityToken(...);
+var read  = JwtHelper.ReadToken(tokenString);
+
+// JWT Bearer auth
+builder.Services.AddJainaJwtAuthentication(o => {
+    o.SecretKey = "your-secret";
+    o.Issuer    = "your-api";
+    o.Audience  = "your-clients";
+});
+```
+
+---
+
+### Diagnostics
+
+```csharp
+// Program.cs — pick one provider
+builder.Services.AddJainaApplicationInsights();
+builder.Services.AddJainaElasticApm();
+builder.Services.AddJainaNLog();      // structured spans via NLog
+
+// Correlation ID middleware
+app.UseCorrelationId();
+
+// Usage
+public class PaymentService(ITelemetry telemetry)
+{
+    public async Task<Result> ChargeAsync(decimal amount)
+    {
+        using var span = telemetry.StartSpan("PaymentService.Charge", TelemetryTypes.External);
+        span.SetLabel("amount", amount.ToString());
+        try
+        {
+            await _gateway.ChargeAsync(amount);
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            span.CaptureException(ex);
+            return Result.Fail(ex);
+        }
+    }
+}
+```
+
+---
+
+### Notifications
+
+```csharp
+// Program.cs
+builder.Services.AddJainaSmtpEmail(o => {
+    o.Host     = "smtp.example.com";
+    o.Port     = 587;
+    o.Username = "user@example.com";
+    o.Password = "secret";
+});
+builder.Services.AddJainaConsoleSms();   // dev/test — logs to ILogger
+
+// Email
+public class WelcomeService(IEmailSender email)
+{
+    public Task SendWelcomeAsync(string to) =>
+        email.SendAsync(new EmailMessage
+        {
+            To      = [to],
+            Subject = "Welcome!",
+            Body    = "<h1>Welcome to Jaina</h1>",
+            IsHtml  = true
+        });
+}
+
+// SMS
+public class AlertService(ISmsSender sms)
+{
+    public Task SendAlertAsync(string phone, string message) =>
+        sms.SendAsync(new SmsMessage
+        {
+            From = "+15550001234",
+            To   = phone,
+            Body = message
+        });
+}
+```
+
+---
+
+## Running the Samples
+
+The samples use [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) to orchestrate Redis, SQL Server, and the application services.
+
+```bash
+# Clone and restore
+git clone https://github.com/HoangSnowy/jaina-dotnet.git
+cd jaina-dotnet
+dotnet restore Jaina.sln
+
+# Run Aspire AppHost (starts everything)
+dotnet run --project samples/Jaina.Samples.AppHost
+
+# Or run the Web API directly
+dotnet run --project samples/Jaina.Samples.WebApi
+# Open: http://localhost:5000/swagger
+```
+
+### Available Sample Endpoints
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET | `/api/cache/{key}` | Read from cache |
+| POST | `/api/cache/{key}` | Write to cache |
+| DELETE | `/api/cache/{key}` | Invalidate cache entry |
+| POST | `/api/files/{*path}` | Upload a file |
+| GET | `/api/files/{*path}` | Download a file |
+| GET | `/api/files` | List files |
+| POST | `/api/items` | Create item (CQRS command) |
+| GET | `/api/items/{id}` | Get item (CQRS query) |
+| POST | `/api/security/hash` | Hash a password (BCrypt) |
+| POST | `/api/security/verify` | Verify a password |
+| POST | `/api/security/encrypt` | AES encrypt |
+| POST | `/api/security/decrypt` | AES decrypt |
+| POST | `/api/notify/sms` | Send SMS (logged to console) |
+
+---
+
+## Running Tests
+
+```bash
+dotnet test Jaina.sln
+
+# Single project
+dotnet test tests/Jaina.Core.Tests/Jaina.Core.Tests.csproj
+
+# Single test class
+dotnet test --filter "FullyQualifiedName~GuardTests"
+```
+
+---
+
+## Package Versioning
+
+All NuGet package versions are centralized in [`Directory.Packages.props`](Directory.Packages.props). Do **not** specify versions in individual `.csproj` files.
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feat/your-feature`
+3. Follow the code style defined in [`.editorconfig`](.editorconfig)
+4. Ensure `dotnet build Jaina.sln` passes with zero warnings
+5. Add or update tests for your changes
+6. Open a pull request
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.

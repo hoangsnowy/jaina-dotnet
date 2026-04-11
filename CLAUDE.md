@@ -68,6 +68,37 @@ From `.editorconfig` and `Directory.Build.props`:
 - LF line endings, UTF-8, 4-space indent (2 for JSON/XML/YAML)
 - Target frameworks: `netstandard2.0;net8.0` for pure libs; `net8.0` only when using ASP.NET Core or EF Core
 
+## Testing Conventions
+
+**Test framework**: xUnit only. Use `Assert.*` from `Xunit` namespace — do **NOT** use FluentAssertions (changed to a commercial license in v7+).
+
+**Pattern**: Always use AAA (Arrange / Act / Assert) with inline comments:
+
+```csharp
+[Fact]
+public void MethodName_Condition_ExpectedBehavior()
+{
+    // Arrange
+    var input = "hello";
+
+    // Act
+    var result = Guard.NotNullOrEmpty(input);
+
+    // Assert
+    Assert.Equal("hello", result);
+}
+```
+
+**Naming**: `MethodName_Condition_ExpectedBehavior` (e.g. `Hash_EmptyInput_ThrowsHashingException`)
+
+**Allowed packages in test projects**:
+- `xunit` + `xunit.runner.visualstudio`
+- `Microsoft.NET.Test.Sdk`
+- `NSubstitute` (for interfaces — avoid on contravariant generic interfaces like `ICommandHandler<in T>`, use concrete classes instead)
+- `Microsoft.Extensions.DependencyInjection` (when testing DI wiring)
+
+**Forbidden in tests**: `FluentAssertions`, `Shouldly`, or any assertion library with a commercial/proprietary license.
+
 ## Package Versioning
 
 All NuGet versions are centralized in `Directory.Packages.props`. Do not specify versions in individual `.csproj` files — add the package reference without a version and let central management resolve it.

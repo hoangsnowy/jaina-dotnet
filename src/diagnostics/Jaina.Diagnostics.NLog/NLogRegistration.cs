@@ -1,4 +1,6 @@
+using Jaina.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
@@ -13,6 +15,8 @@ public static class ServiceCollectionExtensions
             builder.ClearProviders();
             builder.AddNLog();
         });
+
+        services.TryAddSingleton<ITelemetry, NLogTelemetry>();
         return services;
     }
 }

@@ -15,5 +15,8 @@
     <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.RabbitMQ\Jaina.Messaging.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\src\diagnostics\Jaina.Diagnostics\Jaina.Diagnostics.csproj" />
     <ProjectReference Include="..\..\src\core\Jaina.Core\Jaina.Core.csproj" />
+    <ProjectReference Include="..\..\src\data\Jaina.Data.Cqrs\Jaina.Data.Cqrs.csproj" />
+    <ProjectReference Include="..\..\src\security\Jaina.Security\Jaina.Security.csproj" />
+    <ProjectReference Include="..\..\src\notifications\Jaina.Notifications\Jaina.Notifications.csproj" />
   </ItemGroup>
 </Project>
