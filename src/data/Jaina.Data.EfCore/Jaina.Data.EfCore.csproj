@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(AppTfms)</TargetFrameworks>
+    <Description>Entity Framework Core implementation of Repository and Unit of Work for Jaina framework</Description>
+    <PackageId>Jaina.Data.EfCore</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Data\Jaina.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+</Project>

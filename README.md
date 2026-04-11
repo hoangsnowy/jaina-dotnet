@@ -28,7 +28,9 @@ src/
                   Jaina.Caching.Memory     In-process (LazyCache)
                   Jaina.Caching.Redis      Distributed (StackExchange.Redis)
                   Jaina.Caching.Fusion     Multi-level (FusionCache)
-  data/           Jaina.Data               IRepository<T>, IUnitOfWork (EF Core + Dapper)
+  data/           Jaina.Data               IRepository<T>, IUnitOfWork abstractions
+                  Jaina.Data.EfCore        EF Core provider (EfRepository, EfUnitOfWork)
+                  Jaina.Data.Dapper        Dapper provider (DapperRepository)
                   Jaina.Data.Cqrs          Command/Query buses, domain events, event store
   messaging/      Jaina.Messaging          IQueue<T> / ITopic<T> abstraction
                   Jaina.Messaging.RabbitMQ RabbitMQ provider
@@ -48,7 +50,9 @@ src/
                   Jaina.Diagnostics.ApplicationInsights  Azure App Insights
                   Jaina.Diagnostics.ElasticApm           Elastic APM
                   Jaina.Diagnostics.NLog                 NLog structured spans
-  notifications/  Jaina.Notifications      IEmailSender (SMTP), ISmsSender (console)
+  notifications/  Jaina.Notifications       IEmailSender, ISmsSender abstractions
+                  Jaina.Notifications.Smtp         SMTP email provider (MailKit)
+                  Jaina.Notifications.ConsoleSms   Console/logger SMS provider (dev/test)
 samples/          Aspire AppHost, WebApi, Worker demos
 tests/            xUnit test projects
 ```
@@ -68,7 +72,7 @@ Add packages from NuGet (replace providers as needed):
 ```bash
 dotnet add package Jaina.Core
 dotnet add package Jaina.Caching.Memory
-dotnet add package Jaina.Data
+dotnet add package Jaina.Data.EfCore     # or Jaina.Data.Dapper
 dotnet add package Jaina.Storage.Local
 dotnet add package Jaina.Security
 dotnet add package Jaina.Notifications
@@ -140,7 +144,7 @@ public class ProductService(ICache cache)
 ```csharp
 // Program.cs
 builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(conn));
-builder.Services.AddJainaData<AppDbContext>();
+builder.Services.AddJainaUnitOfWork<AppDbContext>();   // from Jaina.Data.EfCore
 
 // Entity
 public class Order : IEntity
@@ -149,17 +153,21 @@ public class Order : IEntity
     public string Status { get; set; } = "";
 }
 
+// Repository — extend EfRepository<TContext, TEntity>
+public class OrderRepository(AppDbContext ctx, IMapper mapper)
+    : EfRepository<AppDbContext, Order>(ctx, mapper), IRepository<Order>;
+
 // Usage
 public class OrderService(IRepository<Order> repo, IUnitOfWork uow)
 {
     public async Task CreateAsync(Order order)
     {
-        await repo.AddAsync(order);
+        await repo.CreateAsync(order);
         await uow.SaveChangesAsync();
     }
 
     public async Task<Order?> GetAsync(int id) =>
-        await repo.GetByIdAsync(id);
+        await repo.GetEntityAsync(id);
 }
 ```
 
@@ -339,14 +347,14 @@ public class PaymentService(ITelemetry telemetry)
 ### Notifications
 
 ```csharp
-// Program.cs
-builder.Services.AddJainaSmtpEmail(o => {
+// Program.cs — pick providers independently
+builder.Services.AddJainaSmtpEmail(o => {   // from Jaina.Notifications.Smtp
     o.Host     = "smtp.example.com";
     o.Port     = 587;
     o.Username = "user@example.com";
     o.Password = "secret";
 });
-builder.Services.AddJainaConsoleSms();   // dev/test — logs to ILogger
+builder.Services.AddJainaConsoleSms();       // from Jaina.Notifications.ConsoleSms — dev/test
 
 // Email
 public class WelcomeService(IEmailSender email)

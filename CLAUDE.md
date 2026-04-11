@@ -19,6 +19,21 @@ dotnet test tests/Jaina.<Module>.Tests/<project>.csproj  # single project
 dotnet test --filter "FullyQualifiedName~ClassName"      # single test class
 ```
 
+## Verification Approach
+
+**Do NOT run `dotnet build Jaina.sln` as a verification step locally.** The solution targets `net8.0;net9.0;net10.0` but the local SDK may only support net8. The build will always fail with `NETSDK1045` for net9/net10 targets — this is an environment constraint, not a code error.
+
+**Correct verification strategy by task type:**
+
+| Task | How to verify |
+|------|---------------|
+| Code logic changes | Read the code — confirm correctness by inspection |
+| New package added / version changed | Push to CI — GitHub Actions runs on .NET 9+ SDK |
+| New project / .csproj added | Check that `.sln` includes it (`dotnet sln list`) |
+| DI registration / API surface | Check the file compiles for `net8.0` only: `dotnet build <project>.csproj -f net8.0` (only for projects that *exclusively* target net8) |
+
+CI is the authoritative build validator for this repository.
+
 ## Architecture
 
 Jaina is a modular .NET 8 framework library organized into independent packages:
@@ -27,14 +42,18 @@ Jaina is a modular .NET 8 framework library organized into independent packages:
 src/
   core/         Jaina.Core            — Guard, Result<T>, extensions, HttpClientBase
   caching/      Jaina.Caching*        — ICache abstraction + Memory/Redis/Fusion impls
-  data/         Jaina.Data            — Repository, Unit of Work (EF Core + Dapper)
+  data/         Jaina.Data            — IRepository<T>, IUnitOfWork abstractions
+                Jaina.Data.EfCore     — EF Core provider (EfRepository, EfUnitOfWork)
+                Jaina.Data.Dapper     — Dapper provider (DapperRepository)
                 Jaina.Data.Cqrs       — Command/Query buses, domain events, event store
   messaging/    Jaina.Messaging*      — IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus/Broadcast
   storage/      Jaina.Storage*        — IFileStorage + Local/AzureBlob/FileShare/SFTP
   security/     Jaina.Security        — AES/RSA/BCrypt/JWT
                 Jaina.Security.Authentication* — JWT bearer auth, Azure KeyVault
   diagnostics/  Jaina.Diagnostics*    — ITelemetry + AppInsights/ElasticAPM/NLog
-  notifications/ Jaina.Notifications  — IEmailSender (SMTP), ISmsSender
+  notifications/ Jaina.Notifications          — IEmailSender, ISmsSender abstractions
+                Jaina.Notifications.Smtp        — SMTP provider (MailKit)
+                Jaina.Notifications.ConsoleSms  — Console/logger SMS provider (dev/test)
 samples/        Aspire AppHost, WebApi, Worker demos
 tests/          (empty — test infra configured, no projects yet)
 ```
@@ -49,7 +68,7 @@ Each functional area follows the same pattern: one abstraction package + one or 
 
 **DI registration**: Every module exposes `AddJaina<Feature>()` extension methods on `IServiceCollection`. Use `TryAddSingleton`/`TryAddScoped` so callers can override implementations.
 
-**Repository / Unit of Work**: `IRepository<TEntity>` and `IUnitOfWork` in `Jaina.Data`. EF Core implementations in `EfRepository` / `EfUnitOfWork`. Raw SQL via `DapperRepository`.
+**Repository / Unit of Work**: `IRepository<TEntity>` and `IUnitOfWork` abstractions in `Jaina.Data`. EF Core implementations (`EfRepository`, `EfUnitOfWork`, `AddJainaUnitOfWork<TContext>()`) in `Jaina.Data.EfCore`. Raw SQL via `DapperRepository` (`AddJainaDapper<TConnection>()`) in `Jaina.Data.Dapper`.
 
 ## Naming Conventions
 
@@ -66,7 +85,7 @@ From `.editorconfig` and `Directory.Build.props`:
 - Nullable reference types enabled — annotate all APIs
 - `TreatWarningsAsErrors=true` — no suppressions without justification
 - LF line endings, UTF-8, 4-space indent (2 for JSON/XML/YAML)
-- Target frameworks: `netstandard2.0;net8.0` for pure libs; `net8.0` only when using ASP.NET Core or EF Core
+- Target frameworks: `$(LibTfms)` (`netstandard2.0;net8.0;net9.0;net10.0`) for pure abstraction libs; `$(AppTfms)` (`net8.0;net9.0;net10.0`) for provider packages using ASP.NET Core, EF Core, or Dapper
 
 ## Testing Conventions
 
@@ -102,3 +121,12 @@ public void MethodName_Condition_ExpectedBehavior()
 ## Package Versioning
 
 All NuGet versions are centralized in `Directory.Packages.props`. Do not specify versions in individual `.csproj` files — add the package reference without a version and let central management resolve it.
+
+## Documentation Upkeep
+
+After any task that adds, removes, renames, or restructures a package — update both files before considering the task done:
+
+- **`README.md`**: Architecture table (src/ block), Installation snippet, and the relevant Module Usage code example
+- **`CLAUDE.md`**: Architecture section and Key Patterns section
+
+Common triggers: adding a provider package, splitting abstraction from implementation, renaming a DI method.

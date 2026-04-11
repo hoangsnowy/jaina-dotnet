@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>SMTP email provider for Jaina Notifications</Description>
+    <PackageId>Jaina.Notifications.Smtp</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Notifications\Jaina.Notifications.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" />
+    <PackageReference Include="MimeKit" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+</Project>

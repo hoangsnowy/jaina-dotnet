@@ -1,17 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>$(AppTfms)</TargetFrameworks>
     <Description>JWT Bearer authentication and authorization for Jaina framework</Description>
     <PackageId>Jaina.Security.Authentication</PackageId>
-    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Jaina.Security\Jaina.Security.csproj" />
   </ItemGroup>
 
+  <!-- JwtBearer ships a separate NuGet per .NET major version -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" VersionOverride="8.0.11" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" VersionOverride="9.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" VersionOverride="10.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <PackageReference Include="Grpc.AspNetCore" />
   </ItemGroup>
 </Project>

@@ -1,21 +1,21 @@
 using Jaina.Caching;
 using Jaina.Caching.Memory;
-using Jaina.Core.Results;
+using Jaina.Core.WebApi;
 using Jaina.Data.Cqrs;
 using Jaina.Data.Cqrs.Commands;
 using Jaina.Data.Cqrs.Queries;
-using Jaina.Notifications;
+using Jaina.Notifications.ConsoleSms;
 using Jaina.Notifications.Sms;
 using Jaina.Samples.ServiceDefaults;
 using Jaina.Security.Encryption;
 using Jaina.Security.Hashing;
 using Jaina.Storage;
 using Jaina.Storage.Local;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddServiceDefaults();
+builder.AddServiceDefaults();
+builder.Services.AddJainaProblemDetails();
 builder.Services.AddJainaMemoryCache();
 builder.Services.AddJainaLocalStorage(o => o.BasePath = Path.Combine(Path.GetTempPath(), "jaina-samples"));
 builder.Services.AddEndpointsApiExplorer();
@@ -31,6 +31,9 @@ builder.Services.AddJainaConsoleSms();
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
+app.UseStatusCodePages();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -43,19 +46,21 @@ app.MapDefaultEndpoints();
 app.MapGet("/api/cache/{key}", (string key, ICache cache) =>
 {
     var value = cache.Get<string>(key);
-    return value is not null ? Results.Ok(Result.Ok(value)) : Results.NotFound();
+    return value is not null
+        ? Results.Ok(value)
+        : Results.Problem(title: "Not Found", detail: $"Cache key '{key}' does not exist.", statusCode: 404);
 });
 
 app.MapPost("/api/cache/{key}", (string key, string value, ICache cache) =>
 {
     cache.Set(key, value, TimeSpan.FromMinutes(5));
-    return Results.Ok(Result.Ok("Cached"));
+    return Results.Ok(new { message = "Cached" });
 });
 
 app.MapDelete("/api/cache/{key}", (string key, ICache cache) =>
 {
     cache.Remove(key);
-    return Results.Ok(Result.Ok("Removed"));
+    return Results.Ok(new { message = "Removed" });
 });
 
 // ── Storage ────────────────────────────────────────────────────────────
@@ -63,13 +68,13 @@ app.MapPost("/api/files/{*path}", async (string path, IFileStorage storage) =>
 {
     var content = System.Text.Encoding.UTF8.GetBytes($"Sample content created at {DateTime.UtcNow:O}");
     await storage.SaveAsync(path, content);
-    return Results.Ok(Result.Ok("File saved"));
+    return Results.Ok(new { message = "File saved" });
 });
 
 app.MapGet("/api/files/{*path}", async (string path, IFileStorage storage) =>
 {
     if (!await storage.ExistsAsync(path))
-        return Results.NotFound();
+        return Results.Problem(title: "Not Found", detail: $"File '{path}' does not exist.", statusCode: 404);
     var bytes = await storage.GetBytesAsync(path);
     return Results.Text(System.Text.Encoding.UTF8.GetString(bytes));
 });
@@ -84,13 +89,15 @@ app.MapGet("/api/files", async (string? directory, IFileStorage storage) =>
 app.MapPost("/api/items", async (CreateItemRequest req, ICommandBus bus) =>
 {
     await bus.SendAsync(new CreateItemCommand(req.Name));
-    return Results.Ok(Result.Ok("Item created"));
+    return Results.Ok(new { message = "Item created" });
 });
 
 app.MapGet("/api/items/{id:int}", async (int id, IQueryBus bus) =>
 {
     var item = await bus.SendAsync<GetItemQuery, ItemDto?>(new GetItemQuery(id));
-    return item is not null ? Results.Ok(Result.Ok(item)) : Results.NotFound();
+    return item is not null
+        ? Results.Ok(item)
+        : Results.Problem(title: "Not Found", detail: $"Item {id} not found.", statusCode: 404);
 });
 
 // ── Security ───────────────────────────────────────────────────────────
@@ -122,7 +129,7 @@ app.MapPost("/api/security/decrypt", (DecryptRequest req) =>
 app.MapPost("/api/notify/sms", async (SmsRequest req, ISmsSender sms) =>
 {
     await sms.SendAsync(new SmsMessage { From = req.From, To = req.To, Body = req.Body });
-    return Results.Ok(Result.Ok("SMS queued (logged to console in dev mode)"));
+    return Results.Ok(new { message = "SMS queued (logged to console in dev mode)" });
 });
 
 app.Run();

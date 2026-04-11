@@ -1,7 +1,7 @@
 using System.Data;
 using Dapper;
 
-namespace Jaina.Data;
+namespace Jaina.Data.Dapper;
 
 public abstract class DapperRepository : IRepository
 {

@@ -115,7 +115,7 @@ public class RedisCache : ICache
         if (value.IsNull) return default;
 
         RefreshSliding(key);
-        return JsonSerializer.Deserialize<T>(value!, _jsonOptions);
+        return JsonSerializer.Deserialize<T>((string)value!, _jsonOptions);
     }
 
     public T Get<T>(string key, TimeSpan expiry, Func<T> factory)
@@ -136,7 +136,7 @@ public class RedisCache : ICache
         if (value.IsNull) return default;
 
         await RefreshSlidingAsync(key).ConfigureAwait(false);
-        return JsonSerializer.Deserialize<T>(value!, _jsonOptions);
+        return JsonSerializer.Deserialize<T>((string)value!, _jsonOptions);
     }
 
     public async Task<T> GetAsync<T>(string key, TimeSpan expiry, Func<T> factory, CancellationToken ct = default)

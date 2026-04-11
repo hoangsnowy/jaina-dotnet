@@ -1,9 +1,10 @@
+using Jaina.Notifications.Email;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace Jaina.Notifications.Email;
+namespace Jaina.Notifications.Smtp.Email;
 
 public class SmtpEmailSenderOptions
 {
