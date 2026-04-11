@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Registers <see cref="IMapper"/> backed by Mapster.
     /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
     /// <param name="configure">Optional delegate to customise mapping rules via <see cref="TypeAdapterConfig"/>.</param>
     public static IServiceCollection AddJainaMapster(
         this IServiceCollection services,

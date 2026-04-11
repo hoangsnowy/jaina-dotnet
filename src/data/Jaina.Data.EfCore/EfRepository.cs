@@ -22,7 +22,7 @@ public class EfRepository<TContext, TEntity> : IRepository<TEntity>
     protected async Task<TDto?> GetSingleAsync<TDto>(Expression<Func<TEntity, bool>> predicate)
     {
         var entity = await _dbSet.AsNoTracking().SingleOrDefaultAsync(predicate).ConfigureAwait(false);
-        return Mapper.Map<TDto>(entity);
+        return entity is null ? default : Mapper.Map<TDto>(entity);
     }
 
     protected async Task<IEnumerable<TDto>> GetListAsync<TDto>()
