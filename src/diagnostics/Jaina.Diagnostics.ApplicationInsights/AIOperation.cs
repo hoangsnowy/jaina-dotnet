@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 
@@ -12,7 +13,8 @@ public class AIOperation : IOperation
         _client = client;
     }
 
-    public string? CurrentTransactionId => _client.Context.Operation.ParentId;
+    public string? CurrentTransactionId => Activity.Current?.TraceId.ToString()
+        ?? _client.Context.Operation.Id;
 
     public void SetLabel(string label) =>
         _client.Context.Operation.Name = label;
