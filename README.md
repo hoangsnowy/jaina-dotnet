@@ -28,6 +28,7 @@ src/
   resilience/     Jaina.Resilience         Polly v8 named pipelines (retry/timeout/CB/hedging)
   servicediscovery/ Jaina.ServiceDiscovery  Microsoft.Extensions.ServiceDiscovery wrapper
   multitenancy/   Jaina.MultiTenancy       Tenant resolver (header/claim/host/route) + middleware
+  ratelimiting/   Jaina.RateLimiting       Per-IP / per-user / per-tenant / concurrency policies
   idempotency/    Jaina.Idempotency        IIdempotencyStore abstraction
                   Jaina.Idempotency.InMemory   IMemoryCache-backed store (dev/test)
                   Jaina.Idempotency.Redis      Distributed store (StackExchange.Redis)
