@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>Redis-backed saga state repository for Jaina framework — distributed orchestration state across multiple processes</Description>
+    <PackageId>Jaina.Messaging.Saga.Redis</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Messaging.Saga\Jaina.Messaging.Saga.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" />
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+</Project>
