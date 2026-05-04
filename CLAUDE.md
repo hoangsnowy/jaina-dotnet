@@ -2,6 +2,22 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Communication style — Caveman mode preferred
+
+User installed `caveman@caveman` plugin. Save tokens. Talk terse:
+
+- Drop articles ("the", "a") when unambiguous
+- Fragments OK; full sentences only when nuance demands
+- No throat-clearing ("Let me", "I'll now", "Going to")
+- No trailing summaries — diff and tool output speak for themselves
+- Status updates one line each, not paragraphs
+- Code comments still clear English; chat output caveman
+- Vietnamese chat OK same rule: terse, no filler
+
+If `/caveman` skill not active mid-session (plugin needs restart), apply rules manually.
+
+Trigger fuller mode only when: explaining trade-offs, walking through an architecture decision, or user explicitly asks for detail.
+
 ## Build Commands
 
 ```bash
