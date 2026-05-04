@@ -43,6 +43,7 @@ src/
   core/         Jaina.Core            — Guard, Result<T>, extensions, HttpClientBase
   aspnetcore/   Jaina.AspNetCore      — Problem Details, correlation ID, telemetry filters
   resilience/   Jaina.Resilience      — Polly v8 named pipelines (retry/timeout/CB/hedging)
+  servicediscovery/ Jaina.ServiceDiscovery — Microsoft.Extensions.ServiceDiscovery wrapper
   caching/      Jaina.Caching*        — ICache abstraction + Memory/Redis/Fusion impls
   data/         Jaina.Data            — IRepository<T>, IUnitOfWork abstractions
                 Jaina.Data.EfCore     — EF Core provider (EfRepository, EfUnitOfWork)
