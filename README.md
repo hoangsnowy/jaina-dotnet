@@ -47,9 +47,9 @@ src/
                   Jaina.Security.Authentication  JWT bearer auth
                   Jaina.Security.Authentication.Client  Client credentials
                   Jaina.Security.KeyVault  Azure Key Vault
-  diagnostics/    Jaina.Diagnostics        ITelemetry / ISpan abstraction + middleware
-                  Jaina.Diagnostics.ApplicationInsights  Azure App Insights
-                  Jaina.Diagnostics.ElasticApm           Elastic APM
+  observability/  Jaina.Observability      ITelemetry / ISpan abstraction + structured logging
+                  Jaina.Observability.ApplicationInsights  Azure App Insights
+                  Jaina.Observability.ElasticApm           Elastic APM
   mapping/        Jaina.Mapping            IMapper abstraction
                   Jaina.Mapping.Mapster    Mapster provider
   notifications/  Jaina.Notifications       IEmailSender, ISmsSender abstractions
@@ -314,7 +314,7 @@ builder.Services.AddJainaJwtAuthentication(o => {
 
 ---
 
-### Diagnostics
+### Observability
 
 ```csharp
 // Program.cs — pick one provider

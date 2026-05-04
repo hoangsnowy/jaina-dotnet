@@ -1,4 +1,4 @@
-using Jaina.Diagnostics;
+using Jaina.Observability;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Jaina.AspNetCore;

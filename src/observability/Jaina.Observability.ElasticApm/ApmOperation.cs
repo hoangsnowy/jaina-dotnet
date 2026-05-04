@@ -1,7 +1,7 @@
 using Elastic.Apm;
 using Elastic.Apm.Api;
 
-namespace Jaina.Diagnostics.ElasticApm;
+namespace Jaina.Observability.ElasticApm;
 
 public class ApmOperation : IOperation
 {

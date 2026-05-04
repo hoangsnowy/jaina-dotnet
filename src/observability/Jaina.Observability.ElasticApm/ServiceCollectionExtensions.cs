@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Jaina.Diagnostics.ElasticApm;
+namespace Jaina.Observability.ElasticApm;
 
 public static class ServiceCollectionExtensions
 {

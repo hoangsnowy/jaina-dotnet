@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(AppTfms)</TargetFrameworks>
-    <Description>Application Insights integration for Jaina Diagnostics</Description>
-    <PackageId>Jaina.Diagnostics.ApplicationInsights</PackageId>
+    <Description>Application Insights integration for Jaina Observability</Description>
+    <PackageId>Jaina.Observability.ApplicationInsights</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jaina.Diagnostics\Jaina.Diagnostics.csproj" />
+    <ProjectReference Include="..\Jaina.Observability\Jaina.Observability.csproj" />
   </ItemGroup>
 
   <ItemGroup>

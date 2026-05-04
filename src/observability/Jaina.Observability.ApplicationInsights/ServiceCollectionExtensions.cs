@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Jaina.Diagnostics.ApplicationInsights;
+namespace Jaina.Observability.ApplicationInsights;
 
 public static class ServiceCollectionExtensions
 {

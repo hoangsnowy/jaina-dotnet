@@ -11,7 +11,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591;NU1903</NoWarn>
+    <!-- TODO: bump OpenTelemetry past 1.15.0 to fix GHSA-g94r-2vxg-569j etc; remove NU1902 then -->
+    <NoWarn>$(NoWarn);CS1591;NU1902;NU1903</NoWarn>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

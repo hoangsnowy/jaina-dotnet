@@ -1,7 +1,7 @@
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 
-namespace Jaina.Diagnostics.ApplicationInsights;
+namespace Jaina.Observability.ApplicationInsights;
 
 public class AITelemetry : ITelemetry
 {

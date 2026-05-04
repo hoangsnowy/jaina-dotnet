@@ -14,7 +14,7 @@
     <ProjectReference Include="..\..\src\caching\Jaina.Caching.Memory\Jaina.Caching.Memory.csproj" />
     <ProjectReference Include="..\..\src\storage\Jaina.Storage.Local\Jaina.Storage.Local.csproj" />
     <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.RabbitMQ\Jaina.Messaging.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\src\diagnostics\Jaina.Diagnostics\Jaina.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\src\observability\Jaina.Observability\Jaina.Observability.csproj" />
     <ProjectReference Include="..\..\src\aspnetcore\Jaina.AspNetCore\Jaina.AspNetCore.csproj" />
     <ProjectReference Include="..\..\src\core\Jaina.Core\Jaina.Core.csproj" />
     <ProjectReference Include="..\..\src\data\Jaina.Data.Cqrs\Jaina.Data.Cqrs.csproj" />

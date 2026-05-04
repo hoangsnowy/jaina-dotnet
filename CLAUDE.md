@@ -51,7 +51,7 @@ src/
   storage/      Jaina.Storage*        — IFileStorage + Local/AzureBlob/FileShare/SFTP
   security/     Jaina.Security        — AES/RSA/BCrypt/JWT
                 Jaina.Security.Authentication* — JWT bearer auth, Azure KeyVault
-  diagnostics/  Jaina.Diagnostics*    — ITelemetry + AppInsights/ElasticAPM
+  observability/ Jaina.Observability*  — ITelemetry + AppInsights/ElasticAPM
   mapping/      Jaina.Mapping               — IMapper abstraction
                 Jaina.Mapping.Mapster         — Mapster provider (AddJainaMapster)
   notifications/ Jaina.Notifications          — IEmailSender, ISmsSender abstractions

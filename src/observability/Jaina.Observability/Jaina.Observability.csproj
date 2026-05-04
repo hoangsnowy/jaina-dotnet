@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(LibTfms)</TargetFrameworks>
-    <Description>Diagnostics, monitoring, and telemetry abstractions for Jaina framework</Description>
-    <PackageId>Jaina.Diagnostics</PackageId>
+    <Description>Observability, telemetry, and structured logging abstractions for Jaina framework</Description>
+    <PackageId>Jaina.Observability</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

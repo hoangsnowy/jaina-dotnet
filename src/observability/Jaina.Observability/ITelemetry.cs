@@ -1,4 +1,4 @@
-namespace Jaina.Diagnostics;
+namespace Jaina.Observability;
 
 public interface ITelemetry
 {

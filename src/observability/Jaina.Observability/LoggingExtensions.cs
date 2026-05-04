@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Jaina.Diagnostics;
+namespace Jaina.Observability;
 
 public static class LoggingExtensions
 {
