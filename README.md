@@ -64,7 +64,13 @@ src/
                   Jaina.Notifications.ConsoleSms   Console/logger SMS provider (dev/test)
 samples/          Aspire AppHost, WebApi, Worker demos
 tests/            xUnit test projects
+docs/blog/        Cookbook posts (real-world patterns + error scenarios)
 ```
+
+📚 **Cookbook** — see [`docs/blog/`](docs/blog/README.md) for runnable recipe posts:
+- [Idempotency: surviving the mobile retry storm](docs/blog/2026-05-04-idempotency-retry-storm.md)
+- [Outbox: never lose another order on Black Friday](docs/blog/2026-05-04-outbox-black-friday.md)
+- More posts coming as M1+ modules ship
 
 ---
 

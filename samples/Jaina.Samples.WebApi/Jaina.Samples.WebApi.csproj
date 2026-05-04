@@ -20,5 +20,12 @@
     <ProjectReference Include="..\..\src\data\Jaina.Data.Cqrs\Jaina.Data.Cqrs.csproj" />
     <ProjectReference Include="..\..\src\security\Jaina.Security\Jaina.Security.csproj" />
     <ProjectReference Include="..\..\src\notifications\Jaina.Notifications.ConsoleSms\Jaina.Notifications.ConsoleSms.csproj" />
+    <ProjectReference Include="..\..\src\resilience\Jaina.Resilience\Jaina.Resilience.csproj" />
+    <ProjectReference Include="..\..\src\servicediscovery\Jaina.ServiceDiscovery\Jaina.ServiceDiscovery.csproj" />
+    <ProjectReference Include="..\..\src\idempotency\Jaina.Idempotency\Jaina.Idempotency.csproj" />
+    <ProjectReference Include="..\..\src\idempotency\Jaina.Idempotency.InMemory\Jaina.Idempotency.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\idempotency\Jaina.Idempotency.AspNetCore\Jaina.Idempotency.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.Outbox\Jaina.Messaging.Outbox.csproj" />
+    <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.Outbox.InMemory\Jaina.Messaging.Outbox.InMemory.csproj" />
   </ItemGroup>
 </Project>
