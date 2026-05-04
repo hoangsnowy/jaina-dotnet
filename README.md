@@ -44,6 +44,8 @@ src/
                   Jaina.Messaging.Broadcast        In-memory broadcast (dev/test)
                   Jaina.Messaging.Outbox          Transactional outbox abstractions + relay
                   Jaina.Messaging.Outbox.InMemory In-memory outbox store (dev/test)
+                  Jaina.Messaging.Inbox           Consumer-side dedup abstraction
+                  Jaina.Messaging.Inbox.InMemory  In-memory inbox dedup (dev/test)
   storage/        Jaina.Storage            IFileStorage abstraction
                   Jaina.Storage.Local      File system
                   Jaina.Storage.AzureBlob  Azure Blob Storage
