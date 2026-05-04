@@ -41,6 +41,7 @@ Jaina is a modular .NET 8 framework library organized into independent packages:
 ```
 src/
   core/         Jaina.Core            — Guard, Result<T>, extensions, HttpClientBase
+  aspnetcore/   Jaina.AspNetCore      — Problem Details, correlation ID, telemetry filters
   caching/      Jaina.Caching*        — ICache abstraction + Memory/Redis/Fusion impls
   data/         Jaina.Data            — IRepository<T>, IUnitOfWork abstractions
                 Jaina.Data.EfCore     — EF Core provider (EfRepository, EfUnitOfWork)
@@ -57,7 +58,7 @@ src/
                 Jaina.Notifications.Smtp        — SMTP provider (MailKit)
                 Jaina.Notifications.ConsoleSms  — Console/logger SMS provider (dev/test)
 samples/        Aspire AppHost, WebApi, Worker demos
-tests/          (empty — test infra configured, no projects yet)
+tests/          xUnit projects for Core, Caching, Security, Data.Cqrs
 ```
 
 Each functional area follows the same pattern: one abstraction package + one or more provider packages.

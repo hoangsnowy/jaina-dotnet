@@ -20,10 +20,6 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.5" />
 
-    <!-- ASP.NET Core (kept at 2.2.x for netstandard2.0 compat in abstraction packages) -->
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-
     <!-- Compatibility -->
     <PackageVersion Include="System.Text.Json" Version="10.0.5" />
     <PackageVersion Include="System.Text.Encodings.Web" Version="10.0.5" />

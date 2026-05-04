@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>ASP.NET Core integration for Jaina framework — Problem Details, correlation ID, telemetry filters, middleware, endpoint filters</Description>
+    <PackageId>Jaina.AspNetCore</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Jaina.Core\Jaina.Core.csproj" />
+    <ProjectReference Include="..\..\diagnostics\Jaina.Diagnostics\Jaina.Diagnostics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

@@ -24,6 +24,7 @@ your app → Jaina abstraction (ICache, IFileStorage, IQueue<T>…)
 ```
 src/
   core/           Jaina.Core               Guard, Result<T>, extensions, HttpClientBase
+  aspnetcore/     Jaina.AspNetCore         Problem Details, correlation ID, telemetry filters
   caching/        Jaina.Caching            ICache abstraction
                   Jaina.Caching.Memory     In-process (Microsoft.Extensions.Caching.Memory)
                   Jaina.Caching.Redis      Distributed (StackExchange.Redis)
@@ -72,6 +73,7 @@ Add packages from NuGet (replace providers as needed):
 
 ```bash
 dotnet add package Jaina.Core
+dotnet add package Jaina.AspNetCore       # Problem Details, correlation ID, filters
 dotnet add package Jaina.Caching.Memory
 dotnet add package Jaina.Data.EfCore     # or Jaina.Data.Dapper
 dotnet add package Jaina.Mapping.Mapster

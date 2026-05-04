@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
-namespace Jaina.Diagnostics;
+namespace Jaina.AspNetCore;
 
 public class CorrelationIdActionFilter : IAsyncActionFilter
 {

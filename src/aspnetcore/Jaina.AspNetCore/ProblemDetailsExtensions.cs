@@ -1,10 +1,8 @@
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Jaina.Core.WebApi;
-
-#if NET8_0_OR_GREATER
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+namespace Jaina.AspNetCore;
 
 public static class ProblemDetailsExtensions
 {
@@ -57,4 +55,3 @@ public static class ProblemDetailsExtensions
         return services;
     }
 }
-#endif

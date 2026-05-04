@@ -1,6 +1,7 @@
+using Jaina.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Jaina.Diagnostics;
+namespace Jaina.AspNetCore;
 
 public class OperationActionFilter : IAsyncActionFilter
 {

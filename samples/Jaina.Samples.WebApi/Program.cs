@@ -1,6 +1,6 @@
 using Jaina.Caching;
 using Jaina.Caching.Memory;
-using Jaina.Core.WebApi;
+using Jaina.AspNetCore;
 using Jaina.Data.Cqrs;
 using Jaina.Data.Cqrs.Commands;
 using Jaina.Data.Cqrs.Queries;
