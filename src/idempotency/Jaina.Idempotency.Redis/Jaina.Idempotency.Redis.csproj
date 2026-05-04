@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>Redis-backed IIdempotencyStore for Jaina framework — distributed dedup across multiple application instances</Description>
+    <PackageId>Jaina.Idempotency.Redis</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Idempotency\Jaina.Idempotency.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" />
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+</Project>
