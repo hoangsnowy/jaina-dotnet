@@ -29,6 +29,7 @@ src/
   servicediscovery/ Jaina.ServiceDiscovery  Microsoft.Extensions.ServiceDiscovery wrapper
   idempotency/    Jaina.Idempotency        IIdempotencyStore abstraction
                   Jaina.Idempotency.InMemory   IMemoryCache-backed store (dev/test)
+                  Jaina.Idempotency.Redis      Distributed store (StackExchange.Redis)
                   Jaina.Idempotency.AspNetCore Middleware for Idempotency-Key replay
   caching/        Jaina.Caching            ICache abstraction
                   Jaina.Caching.Memory     In-process (Microsoft.Extensions.Caching.Memory)
@@ -46,6 +47,7 @@ src/
                   Jaina.Messaging.Outbox.InMemory In-memory outbox store (dev/test)
                   Jaina.Messaging.Inbox           Consumer-side dedup abstraction
                   Jaina.Messaging.Inbox.InMemory  In-memory inbox dedup (dev/test)
+                  Jaina.Messaging.Inbox.Redis     Distributed dedup (Redis SETNX)
                   Jaina.Messaging.Saga            Orchestration saga + reverse compensation
                   Jaina.Messaging.Saga.InMemory   In-memory saga state repository (dev/test)
   storage/        Jaina.Storage            IFileStorage abstraction
