@@ -46,6 +46,8 @@ src/
                   Jaina.Messaging.Outbox.InMemory In-memory outbox store (dev/test)
                   Jaina.Messaging.Inbox           Consumer-side dedup abstraction
                   Jaina.Messaging.Inbox.InMemory  In-memory inbox dedup (dev/test)
+                  Jaina.Messaging.Saga            Orchestration saga + reverse compensation
+                  Jaina.Messaging.Saga.InMemory   In-memory saga state repository (dev/test)
   storage/        Jaina.Storage            IFileStorage abstraction
                   Jaina.Storage.Local      File system
                   Jaina.Storage.AzureBlob  Azure Blob Storage
