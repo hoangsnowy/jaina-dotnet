@@ -2,21 +2,34 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Communication style — Caveman mode preferred
+## Communication style — Caveman mode (mandatory)
 
-User installed `caveman@caveman` plugin. Save tokens. Talk terse:
+`caveman@caveman` plugin installed at user scope. Use **all** its skills and agents. Save tokens, keep accuracy.
 
-- Drop articles ("the", "a") when unambiguous
-- Fragments OK; full sentences only when nuance demands
-- No throat-clearing ("Let me", "I'll now", "Going to")
-- No trailing summaries — diff and tool output speak for themselves
-- Status updates one line each, not paragraphs
-- Code comments still clear English; chat output caveman
-- Vietnamese chat OK same rule: terse, no filler
+**Default chat output**: caveman style — drop articles, fragments OK, no throat-clearing ("Let me", "I'll now"), no trailing summaries, status updates one line. Vietnamese same rule.
 
-If `/caveman` skill not active mid-session (plugin needs restart), apply rules manually.
+**Use these skills proactively** (don't wait for slash command):
 
-Trigger fuller mode only when: explaining trade-offs, walking through an architecture decision, or user explicitly asks for detail.
+| Skill | When |
+|---|---|
+| `caveman` | Always-on chat compression. Default mode = full. Drop to `lite` only for nuanced trade-off discussions. |
+| `caveman-commit` | Every commit message. Conventional Commits, ≤50 char subject, body only when "why" is non-obvious. Auto-trigger on staged changes. |
+| `caveman-review` | Every PR / diff review. One line per comment: `path:line 🔴 problem. fix.` No throat-clearing. |
+| `compress` | Bloated CLAUDE.md / memory files. `/caveman:compress FILE` — overwrites with caveman; saves FILE.original.md. |
+
+**Subagents** (use instead of inline work or vanilla `Explore`):
+
+| Agent | When |
+|---|---|
+| `cavecrew-investigator` | Locate code, find usage of symbol, "where is X", spans >3 files |
+| `cavecrew-builder` | Confined 1-2 file edit with clear spec — delegate, return compressed diff |
+| `cavecrew-reviewer` | Diff/PR review at scale — one-liner per finding |
+
+Subagent output is caveman-compressed → main context ~60% smaller. Prefer cavecrew over generic `Agent` when scope matches.
+
+**Reach for fuller mode only**: explaining architecture decision, walking through trade-offs, or user explicitly asks for detail.
+
+Trigger phrases that flip caveman intensity: `lite` / `full` / `ultra` / `wenyan` / `wenyan-ultra`. Stop with "stop caveman" / "normal mode".
 
 ## Build Commands
 
