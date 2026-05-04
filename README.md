@@ -25,6 +25,7 @@ your app → Jaina abstraction (ICache, IFileStorage, IQueue<T>…)
 src/
   core/           Jaina.Core               Guard, Result<T>, extensions, HttpClientBase
   aspnetcore/     Jaina.AspNetCore         Problem Details, correlation ID, telemetry filters
+  resilience/     Jaina.Resilience         Polly v8 named pipelines (retry/timeout/CB/hedging)
   caching/        Jaina.Caching            ICache abstraction
                   Jaina.Caching.Memory     In-process (Microsoft.Extensions.Caching.Memory)
                   Jaina.Caching.Redis      Distributed (StackExchange.Redis)
@@ -74,6 +75,7 @@ Add packages from NuGet (replace providers as needed):
 ```bash
 dotnet add package Jaina.Core
 dotnet add package Jaina.AspNetCore       # Problem Details, correlation ID, filters
+dotnet add package Jaina.Resilience       # Polly v8 named pipelines
 dotnet add package Jaina.Caching.Memory
 dotnet add package Jaina.Data.EfCore     # or Jaina.Data.Dapper
 dotnet add package Jaina.Mapping.Mapster
@@ -310,6 +312,31 @@ builder.Services.AddJainaJwtAuthentication(o => {
     o.Issuer    = "your-api";
     o.Audience  = "your-clients";
 });
+```
+
+---
+
+### Resilience
+
+```csharp
+// Register the four default Jaina pipelines (default / queue-publish / external-http / database)
+builder.Services.AddJainaResilience();
+
+// Or customize / add your own
+builder.Services.AddJainaResilience(b => b.AddPipeline("retry-fast", p => p
+    .AddRetry(new RetryStrategyOptions { MaxRetryAttempts = 2, Delay = TimeSpan.FromMilliseconds(50) })
+    .AddTimeout(TimeSpan.FromSeconds(2))));
+
+// Resolve and execute
+public class OrderClient(ResiliencePipelineProvider<string> pipelines)
+{
+    public async Task<Result> PlaceOrderAsync(Order order, CancellationToken ct)
+    {
+        var pipeline = pipelines.GetPipeline(JainaResiliencePipelines.ExternalHttp);
+        return await pipeline.ExecuteAsync(async token =>
+            await _http.PostAsync("/orders", order, token), ct);
+    }
+}
 ```
 
 ---
