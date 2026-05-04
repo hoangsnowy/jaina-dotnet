@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>In-memory saga repository for Jaina framework — single-process scope, suitable for development and tests</Description>
+    <PackageId>Jaina.Messaging.Saga.InMemory</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Messaging.Saga\Jaina.Messaging.Saga.csproj" />
+  </ItemGroup>
+</Project>
