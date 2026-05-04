@@ -29,8 +29,6 @@
     <PackageVersion Include="System.Text.Encodings.Web" Version="10.0.5" />
 
     <!-- Caching -->
-    <PackageVersion Include="LazyCache" Version="2.4.0" />
-    <PackageVersion Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageVersion Include="StackExchange.Redis" Version="2.11.8" />
     <PackageVersion Include="ZiggyCreatures.FusionCache" Version="2.6.0" />
     <PackageVersion Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" Version="2.6.0" />
@@ -42,8 +40,6 @@
     <PackageVersion Include="SharpZipLib" Version="1.4.2" />
 
     <!-- Logging & Monitoring -->
-    <PackageVersion Include="NLog" Version="6.1.2" />
-    <PackageVersion Include="NLog.Extensions.Logging" Version="6.1.2" />
     <PackageVersion Include="Elastic.Apm.NetCoreAll" Version="1.34.1" />
     <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="3.0.0" />
 
@@ -53,7 +49,6 @@
 
     <!-- Security -->
     <PackageVersion Include="BCrypt.Net-Next" Version="4.1.0" />
-    <PackageVersion Include="BouncyCastle.Cryptography" Version="2.6.2" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
     <PackageVersion Include="Azure.Identity" Version="1.18.0" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.5.0" />

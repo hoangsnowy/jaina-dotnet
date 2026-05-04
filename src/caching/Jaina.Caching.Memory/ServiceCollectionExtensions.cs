@@ -7,6 +7,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddJainaMemoryCache(this IServiceCollection services)
     {
+        services.AddMemoryCache();
         services.TryAddSingleton<ICache, MemoryCache>();
         return services;
     }

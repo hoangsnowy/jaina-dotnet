@@ -25,7 +25,7 @@ your app → Jaina abstraction (ICache, IFileStorage, IQueue<T>…)
 src/
   core/           Jaina.Core               Guard, Result<T>, extensions, HttpClientBase
   caching/        Jaina.Caching            ICache abstraction
-                  Jaina.Caching.Memory     In-process (LazyCache)
+                  Jaina.Caching.Memory     In-process (Microsoft.Extensions.Caching.Memory)
                   Jaina.Caching.Redis      Distributed (StackExchange.Redis)
                   Jaina.Caching.Fusion     Multi-level (FusionCache)
   data/           Jaina.Data               IRepository<T>, IUnitOfWork abstractions
@@ -49,7 +49,6 @@ src/
   diagnostics/    Jaina.Diagnostics        ITelemetry / ISpan abstraction + middleware
                   Jaina.Diagnostics.ApplicationInsights  Azure App Insights
                   Jaina.Diagnostics.ElasticApm           Elastic APM
-                  Jaina.Diagnostics.NLog                 NLog structured spans
   mapping/        Jaina.Mapping            IMapper abstraction
                   Jaina.Mapping.Mapster    Mapster provider
   notifications/  Jaina.Notifications       IEmailSender, ISmsSender abstractions
@@ -319,7 +318,6 @@ builder.Services.AddJainaJwtAuthentication(o => {
 // Program.cs — pick one provider
 builder.Services.AddJainaApplicationInsights();
 builder.Services.AddJainaElasticApm();
-builder.Services.AddJainaNLog();      // structured spans via NLog
 
 // Correlation ID middleware
 app.UseCorrelationId();

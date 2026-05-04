@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(LibTfms)</TargetFrameworks>
-    <Description>In-memory caching implementation using LazyCache for Jaina framework</Description>
+    <Description>In-memory caching implementation built on Microsoft.Extensions.Caching.Memory for Jaina framework</Description>
     <PackageId>Jaina.Caching.Memory</PackageId>
   </PropertyGroup>
 
@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LazyCache" />
-    <PackageReference Include="LazyCache.AspNetCore" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
   </ItemGroup>
