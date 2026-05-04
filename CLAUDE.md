@@ -51,6 +51,7 @@ src/
                 Jaina.Data.Dapper     — Dapper provider (DapperRepository)
                 Jaina.Data.Cqrs       — Command/Query buses, domain events, event store
   messaging/    Jaina.Messaging*      — IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus/Broadcast
+                Jaina.Messaging.Outbox* — transactional outbox + relay (InMemory; EfCore TBD)
   storage/      Jaina.Storage*        — IFileStorage + Local/AzureBlob/FileShare/SFTP
   security/     Jaina.Security        — AES/RSA/BCrypt/JWT
                 Jaina.Security.Authentication* — JWT bearer auth, Azure KeyVault

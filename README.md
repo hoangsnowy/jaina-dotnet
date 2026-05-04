@@ -42,6 +42,8 @@ src/
                   Jaina.Messaging.RabbitMQ RabbitMQ provider
                   Jaina.Messaging.AzureServiceBus  Azure Service Bus provider
                   Jaina.Messaging.Broadcast        In-memory broadcast (dev/test)
+                  Jaina.Messaging.Outbox          Transactional outbox abstractions + relay
+                  Jaina.Messaging.Outbox.InMemory In-memory outbox store (dev/test)
   storage/        Jaina.Storage            IFileStorage abstraction
                   Jaina.Storage.Local      File system
                   Jaina.Storage.AzureBlob  Azure Blob Storage
