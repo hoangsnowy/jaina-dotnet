@@ -159,6 +159,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Idempotency.Redis", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Messaging.Inbox.Redis", "src\messaging\Jaina.Messaging.Inbox.Redis\Jaina.Messaging.Inbox.Redis.csproj", "{8DF124BC-2E72-43D8-9D96-E7DD3F694B6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Messaging.Outbox.EfCore", "src\messaging\Jaina.Messaging.Outbox.EfCore\Jaina.Messaging.Outbox.EfCore.csproj", "{31FAAA75-A7E1-468B-B479-D1EBA1EDFC30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Messaging.Inbox.EfCore", "src\messaging\Jaina.Messaging.Inbox.EfCore\Jaina.Messaging.Inbox.EfCore.csproj", "{9C450BBD-89A8-48BF-8551-494566922D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Messaging.Saga.EfCore", "src\messaging\Jaina.Messaging.Saga.EfCore\Jaina.Messaging.Saga.EfCore.csproj", "{EA31F20A-D68A-4CF3-BCC4-9E9BC45B6669}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Messaging.Outbox.EfCore.Tests", "tests\Jaina.Messaging.Outbox.EfCore.Tests\Jaina.Messaging.Outbox.EfCore.Tests.csproj", "{94F77D96-0EF6-4577-A16D-D945849F98D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -408,6 +416,22 @@ Global
 		{8DF124BC-2E72-43D8-9D96-E7DD3F694B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DF124BC-2E72-43D8-9D96-E7DD3F694B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DF124BC-2E72-43D8-9D96-E7DD3F694B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31FAAA75-A7E1-468B-B479-D1EBA1EDFC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FAAA75-A7E1-468B-B479-D1EBA1EDFC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FAAA75-A7E1-468B-B479-D1EBA1EDFC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FAAA75-A7E1-468B-B479-D1EBA1EDFC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C450BBD-89A8-48BF-8551-494566922D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C450BBD-89A8-48BF-8551-494566922D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C450BBD-89A8-48BF-8551-494566922D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C450BBD-89A8-48BF-8551-494566922D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA31F20A-D68A-4CF3-BCC4-9E9BC45B6669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA31F20A-D68A-4CF3-BCC4-9E9BC45B6669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA31F20A-D68A-4CF3-BCC4-9E9BC45B6669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA31F20A-D68A-4CF3-BCC4-9E9BC45B6669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94F77D96-0EF6-4577-A16D-D945849F98D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94F77D96-0EF6-4577-A16D-D945849F98D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94F77D96-0EF6-4577-A16D-D945849F98D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94F77D96-0EF6-4577-A16D-D945849F98D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BCB5C20D-45A8-4441-993B-633D236FB959} = {C68ECA19-44DF-410E-955B-EF0E1C69F463}
@@ -483,5 +507,9 @@ Global
 		{99316013-8317-44D4-B173-F5579DA71655} = {AF37749E-C656-454F-9F88-7F91491175D4}
 		{441ADDD5-40EF-4A3F-BF3A-FB67315C15D9} = {C03C8ACD-AAAF-4398-BDE6-1024DA7774D0}
 		{8DF124BC-2E72-43D8-9D96-E7DD3F694B6B} = {82D5A227-3184-4519-90F5-2DC12C4F0F4F}
+		{31FAAA75-A7E1-468B-B479-D1EBA1EDFC30} = {82D5A227-3184-4519-90F5-2DC12C4F0F4F}
+		{9C450BBD-89A8-48BF-8551-494566922D9F} = {82D5A227-3184-4519-90F5-2DC12C4F0F4F}
+		{EA31F20A-D68A-4CF3-BCC4-9E9BC45B6669} = {82D5A227-3184-4519-90F5-2DC12C4F0F4F}
+		{94F77D96-0EF6-4577-A16D-D945849F98D4} = {AF37749E-C656-454F-9F88-7F91491175D4}
 	EndGlobalSection
 EndGlobal

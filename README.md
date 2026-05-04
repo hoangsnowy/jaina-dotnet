@@ -45,11 +45,14 @@ src/
                   Jaina.Messaging.Broadcast        In-memory broadcast (dev/test)
                   Jaina.Messaging.Outbox          Transactional outbox abstractions + relay
                   Jaina.Messaging.Outbox.InMemory In-memory outbox store (dev/test)
+                  Jaina.Messaging.Outbox.EfCore   EF Core outbox (atomic with domain writes)
                   Jaina.Messaging.Inbox           Consumer-side dedup abstraction
                   Jaina.Messaging.Inbox.InMemory  In-memory inbox dedup (dev/test)
                   Jaina.Messaging.Inbox.Redis     Distributed dedup (Redis SETNX)
+                  Jaina.Messaging.Inbox.EfCore    Distributed dedup (EF Core unique key)
                   Jaina.Messaging.Saga            Orchestration saga + reverse compensation
                   Jaina.Messaging.Saga.InMemory   In-memory saga state repository (dev/test)
+                  Jaina.Messaging.Saga.EfCore     EF Core saga state repository
   storage/        Jaina.Storage            IFileStorage abstraction
                   Jaina.Storage.Local      File system
                   Jaina.Storage.AzureBlob  Azure Blob Storage
