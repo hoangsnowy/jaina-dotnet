@@ -74,6 +74,7 @@ src/
   resilience/   Jaina.Resilience      — Polly v8 named pipelines (retry/timeout/CB/hedging)
   servicediscovery/ Jaina.ServiceDiscovery — Microsoft.Extensions.ServiceDiscovery wrapper
   multitenancy/ Jaina.MultiTenancy    — tenant resolver (header/claim/host/route) + middleware
+  ratelimiting/ Jaina.RateLimiting    — per-IP / per-user / per-tenant / concurrency policies
   idempotency/  Jaina.Idempotency*    — IIdempotencyStore + InMemory/AspNetCore middleware
   caching/      Jaina.Caching*        — ICache abstraction + Memory/Redis/Fusion impls
   data/         Jaina.Data            — IRepository<T>, IUnitOfWork abstractions
