@@ -24,7 +24,7 @@ What breaks: {{ specific failure mode the naive code can't handle }}.
 ## Jaina solution
 
 ```csharp
-// Code lifted from samples/Jaina.Samples.WebApi
+// Code lifted from samples/JainaShop/JainaShop.AppHost
 ```
 
 Wiring (`Program.cs`):
@@ -93,7 +93,7 @@ What the operator sees in logs/traces: {{ }}.
 git clone https://github.com/HoangSnowy/jaina-dotnet
 cd jaina-dotnet
 git checkout {{ sample_branch }}
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 ```
 
 Then run the curl scripts above against `http://localhost:5000`.

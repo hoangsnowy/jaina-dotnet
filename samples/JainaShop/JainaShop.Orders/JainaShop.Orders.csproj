@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Jaina.Samples.ServiceDefaults\Jaina.Samples.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\src\core\Jaina.Core\Jaina.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\aspnetcore\Jaina.AspNetCore\Jaina.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\idempotency\Jaina.Idempotency\Jaina.Idempotency.csproj" />
+    <ProjectReference Include="..\..\..\src\idempotency\Jaina.Idempotency.InMemory\Jaina.Idempotency.InMemory.csproj" />
+    <ProjectReference Include="..\..\..\src\idempotency\Jaina.Idempotency.AspNetCore\Jaina.Idempotency.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\messaging\Jaina.Messaging.Outbox\Jaina.Messaging.Outbox.csproj" />
+    <ProjectReference Include="..\..\..\src\messaging\Jaina.Messaging.Outbox.EfCore\Jaina.Messaging.Outbox.EfCore.csproj" />
+    <ProjectReference Include="..\..\..\src\healthchecks\Jaina.HealthChecks\Jaina.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\src\observability\Jaina.Observability\Jaina.Observability.csproj" />
+  </ItemGroup>
+</Project>

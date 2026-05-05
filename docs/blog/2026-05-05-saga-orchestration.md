@@ -3,7 +3,7 @@ title: "Payment + Shipping rollback gracefully with Saga orchestration"
 date: 2026-05-05
 tags: [saga, orchestration, distributed-transactions, microservices]
 reading_time: "~10 min"
-sample: tests/Jaina.Messaging.Saga.Tests/OrderSagaTests.cs
+sample: tests/unit/Jaina.Messaging.Saga.UnitTests/OrderSagaTests.cs
 ---
 
 # Payment + Shipping rollback gracefully with Saga orchestration
@@ -198,7 +198,7 @@ Useful metrics:
 The runner is exercised in unit tests with deterministic step controllers — no broker required:
 
 ```bash
-dotnet test tests/Jaina.Messaging.Saga.Tests/Jaina.Messaging.Saga.Tests.csproj -f net8.0
+dotnet test tests/unit/Jaina.Messaging.Saga.UnitTests/Jaina.Messaging.Saga.Tests.csproj -f net8.0
 ```
 
 You can also wire it end-to-end in the sample WebApi by adding the `OrderSaga` above and a `POST /api/orders/saga` endpoint that calls `runner.RunAsync(state)`.
@@ -206,5 +206,5 @@ You can also wire it end-to-end in the sample WebApi by adding the `OrderSaga` a
 ## Further reading
 
 - Source: [`SagaRunner.cs`](../../src/messaging/Jaina.Messaging.Saga/SagaRunner.cs), [`InMemorySagaRepository.cs`](../../src/messaging/Jaina.Messaging.Saga.InMemory/InMemorySagaRepository.cs), [`EfSagaRepository.cs`](../../src/messaging/Jaina.Messaging.Saga.EfCore/EfSagaRepository.cs), [`RedisSagaRepository.cs`](../../src/messaging/Jaina.Messaging.Saga.Redis/RedisSagaRepository.cs)
-- Tests (5/5 — happy path, mid-step failure with compensation, first-step failure, resume from partial, persistence): [`OrderSagaTests.cs`](../../tests/Jaina.Messaging.Saga.Tests/OrderSagaTests.cs)
+- Tests (5/5 — happy path, mid-step failure with compensation, first-step failure, resume from partial, persistence): [`OrderSagaTests.cs`](../../tests/unit/Jaina.Messaging.Saga.UnitTests/OrderSagaTests.cs)
 - Companion posts: [Outbox](2026-05-04-outbox-black-friday.md) for the producer side, [Idempotency](2026-05-04-idempotency-retry-storm.md) for handler-level dedup.

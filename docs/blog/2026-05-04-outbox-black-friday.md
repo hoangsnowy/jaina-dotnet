@@ -3,7 +3,7 @@ title: "Outbox: never lose another order on Black Friday"
 date: 2026-05-04
 tags: [messaging, outbox, transactional, microservices]
 reading_time: "~9 min"
-sample: samples/Jaina.Samples.WebApi/Program.cs
+sample: samples/JainaShop/JainaShop.AppHost/Program.cs
 ---
 
 # Outbox: never lose another order on Black Friday
@@ -173,7 +173,7 @@ Useful metrics:
 ```bash
 git clone https://github.com/HoangSnowy/jaina-dotnet
 cd jaina-dotnet
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # Terminal 2 — enqueue 5 orders
 for i in 1 2 3 4 5; do
@@ -193,6 +193,6 @@ To simulate failure scenario #1, change `ConsoleOutboxDispatcher.DispatchAsync` 
 ## Further reading
 
 - Source: [`OutboxRelay.cs`](../../src/messaging/Jaina.Messaging.Outbox/OutboxRelay.cs), [`InMemoryOutboxStore.cs`](../../src/messaging/Jaina.Messaging.Outbox.InMemory/InMemoryOutboxStore.cs)
-- Tests (5 cases including dispatch-fails-then-reschedules): [`InMemoryOutboxTests.cs`](../../tests/Jaina.Messaging.Outbox.Tests/InMemoryOutboxTests.cs)
+- Tests (5 cases including dispatch-fails-then-reschedules): [`InMemoryOutboxTests.cs`](../../tests/unit/Jaina.Messaging.Outbox.UnitTests/InMemoryOutboxTests.cs)
 - Companion post: [Idempotency: surviving the mobile retry storm](2026-05-04-idempotency-retry-storm.md) — pairs with outbox to give you producer-side reliability + consumer-side dedup.
 - Coming soon: the EF Core provider (transactional enqueue inside `SaveChanges`), Inbox pattern (consumer dedup), and Saga (cross-service compensations).

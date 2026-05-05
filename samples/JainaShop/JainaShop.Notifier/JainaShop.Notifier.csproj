@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Jaina.Samples.ServiceDefaults\Jaina.Samples.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\src\core\Jaina.Core\Jaina.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\aspnetcore\Jaina.AspNetCore\Jaina.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\backgroundjobs\Jaina.BackgroundJobs\Jaina.BackgroundJobs.csproj" />
+    <ProjectReference Include="..\..\..\src\backgroundjobs\Jaina.BackgroundJobs.Quartz\Jaina.BackgroundJobs.Quartz.csproj" />
+    <ProjectReference Include="..\..\..\src\messaging\Jaina.Messaging.Inbox\Jaina.Messaging.Inbox.csproj" />
+    <ProjectReference Include="..\..\..\src\messaging\Jaina.Messaging.Inbox.InMemory\Jaina.Messaging.Inbox.InMemory.csproj" />
+    <ProjectReference Include="..\..\..\src\notifications\Jaina.Notifications\Jaina.Notifications.csproj" />
+    <ProjectReference Include="..\..\..\src\notifications\Jaina.Notifications.ConsoleSms\Jaina.Notifications.ConsoleSms.csproj" />
+    <ProjectReference Include="..\..\..\src\healthchecks\Jaina.HealthChecks\Jaina.HealthChecks.csproj" />
+  </ItemGroup>
+</Project>

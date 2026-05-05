@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\core\Jaina.Core\Jaina.Core.csproj" />
     <ProjectReference Include="..\..\messaging\Jaina.Messaging\Jaina.Messaging.csproj" />
     <ProjectReference Include="..\..\observability\Jaina.Observability\Jaina.Observability.csproj" />
   </ItemGroup>

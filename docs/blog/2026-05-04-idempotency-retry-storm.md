@@ -3,7 +3,7 @@ title: "Idempotency: surviving the mobile retry storm"
 date: 2026-05-04
 tags: [idempotency, http, microservices]
 reading_time: "~6 min"
-sample: samples/Jaina.Samples.WebApi/Program.cs
+sample: samples/JainaShop/JainaShop.AppHost/Program.cs
 ---
 
 # Idempotency: surviving the mobile retry storm
@@ -131,7 +131,7 @@ Add a counter on the `Idempotent-Replay` response header in your gateway to char
 ```bash
 git clone https://github.com/HoangSnowy/jaina-dotnet
 cd jaina-dotnet
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # In another terminal
 KEY=demo-$(date +%s)
@@ -149,5 +149,5 @@ You will see the first response with `201 Created`, and the next two with `201 C
 ## Further reading
 
 - Source: [`Jaina.Idempotency.AspNetCore/IdempotencyMiddleware.cs`](../../src/idempotency/Jaina.Idempotency.AspNetCore/IdempotencyMiddleware.cs)
-- Tests (5 cases including failure paths): [`Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs`](../../tests/Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs)
+- Tests (5 cases including failure paths): [`Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs`](../../tests/unit/Jaina.Idempotency.UnitTests/IdempotencyMiddlewareTests.cs)
 - Next post: [Outbox: never lose another order on Black Friday](2026-05-04-outbox-black-friday.md) — pairs naturally with idempotency for end-to-end reliability.

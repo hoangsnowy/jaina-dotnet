@@ -1,3 +1,4 @@
+using Jaina.Observability.Telemetry;
 using Microsoft.Extensions.Logging;
 
 namespace Jaina.Messaging.Saga;
@@ -19,6 +20,8 @@ public sealed class SagaRunner<TSaga, TState> : ISagaRunner<TSaga, TState>
 
     public async Task<TState> RunAsync(TState state, CancellationToken ct = default)
     {
+        using var rootSpan = JainaActivitySource.StartSpan("saga", "run");
+        rootSpan?.SetTag(TagConventions.SagaCorrelation, state.CorrelationId.ToString());
         await _repo.SaveAsync(state, ct);
 
         var completed = new HashSet<string>(state.CompletedSteps, StringComparer.Ordinal);
@@ -33,6 +36,9 @@ public sealed class SagaRunner<TSaga, TState> : ISagaRunner<TSaga, TState>
                 continue;
             }
 
+            using var stepSpan = JainaActivitySource.StartSpan("saga", "step");
+            stepSpan?.SetTag(TagConventions.SagaCorrelation, state.CorrelationId.ToString());
+            stepSpan?.SetTag(TagConventions.SagaStep, step.Name);
             try
             {
                 await step.ExecuteAsync(state, ct);
@@ -42,6 +48,7 @@ public sealed class SagaRunner<TSaga, TState> : ISagaRunner<TSaga, TState>
             }
             catch (Exception ex)
             {
+                stepSpan?.SetStatus(System.Diagnostics.ActivityStatusCode.Error, ex.Message);
                 _logger.LogWarning(ex, "Saga {Id} failed at step {Step}", state.CorrelationId, step.Name);
                 state.FailedAt = step.Name;
                 state.LastError = ex.Message;

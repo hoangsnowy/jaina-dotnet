@@ -227,7 +227,7 @@ Useful metrics:
 The resolvers are unit-tested deterministically (no need for a real HTTP server):
 
 ```bash
-dotnet test tests/Jaina.MultiTenancy.Tests/Jaina.MultiTenancy.Tests.csproj -f net8.0
+dotnet test tests/unit/Jaina.MultiTenancy.UnitTests/Jaina.MultiTenancy.Tests.csproj -f net8.0
 ```
 
 End-to-end exercise (in your own app):
@@ -246,5 +246,5 @@ curl -H "Authorization: Bearer ..." -H "X-Tenant: globex" http://localhost:5000/
 ## Further reading
 
 - Source: [`Resolvers.cs`](../../src/multitenancy/Jaina.MultiTenancy/Resolvers.cs), [`TenantResolutionMiddleware.cs`](../../src/multitenancy/Jaina.MultiTenancy/TenantResolutionMiddleware.cs), [`ITenantContext.cs`](../../src/multitenancy/Jaina.MultiTenancy/ITenantContext.cs)
-- Tests (10/10 — each resolver hit + miss + composite first-non-null wins): [`TenantResolverTests.cs`](../../tests/Jaina.MultiTenancy.Tests/TenantResolverTests.cs)
+- Tests (10/10 — each resolver hit + miss + composite first-non-null wins): [`TenantResolverTests.cs`](../../tests/unit/Jaina.MultiTenancy.UnitTests/TenantResolverTests.cs)
 - Companion posts: [Idempotency](2026-05-04-idempotency-retry-storm.md) (per-tenant idempotency keys), [Outbox](2026-05-04-outbox-black-friday.md) (carry tenant in message headers)

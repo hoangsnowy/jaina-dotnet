@@ -1,3 +1,4 @@
+using Jaina.Observability.Telemetry;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -34,13 +35,18 @@ public sealed class IdempotencyMiddleware
         }
 
         var key = keys[0]!;
+        using var span = JainaActivitySource.StartSpan("idempotency", "evaluate");
+        span?.SetTag(TagConventions.IdempotencyKey, key);
+
         var existing = await _store.GetAsync(key, ctx.RequestAborted);
         if (existing is not null)
         {
+            span?.SetTag(TagConventions.IdempotencyReplay, true);
             await ReplayAsync(ctx, existing);
             return;
         }
 
+        span?.SetTag(TagConventions.IdempotencyReplay, false);
         await CaptureAndStoreAsync(ctx, key);
     }
 

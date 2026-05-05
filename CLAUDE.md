@@ -2,34 +2,43 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Communication style — Caveman mode (mandatory)
+## Communication style — Caveman mode (MANDATORY, enforced)
 
-`caveman@caveman` plugin installed at user scope. Use **all** its skills and agents. Save tokens, keep accuracy.
+`caveman@caveman` plugin installed at user scope. **Every** skill + agent MUST be invoked when its trigger condition fires. Skipping = bug.
 
-**Default chat output**: caveman style — drop articles, fragments OK, no throat-clearing ("Let me", "I'll now"), no trailing summaries, status updates one line. Vietnamese same rule.
+**Chat output**: full caveman by default. Drop articles, fragments OK, no throat-clearing, no trailing summaries. Vietnamese same rule.
 
-**Use these skills proactively** (don't wait for slash command):
+### Triggers (NOT optional)
 
-| Skill | When |
-|---|---|
-| `caveman` | Always-on chat compression. Default mode = full. Drop to `lite` only for nuanced trade-off discussions. |
-| `caveman-commit` | Every commit message. Conventional Commits, ≤50 char subject, body only when "why" is non-obvious. Auto-trigger on staged changes. |
-| `caveman-review` | Every PR / diff review. One line per comment: `path:line 🔴 problem. fix.` No throat-clearing. |
-| `compress` | Bloated CLAUDE.md / memory files. `/caveman:compress FILE` — overwrites with caveman; saves FILE.original.md. |
+| Trigger | Tool to invoke | Output shape |
+|---|---|---|
+| Writing a commit message (any `git commit`) | `caveman-commit` skill | Conventional Commits. Subject ≤50 chars. Body only if *why* is non-obvious — most commits = subject only. NO multi-paragraph essays. |
+| Reviewing a diff / PR / file (any "review", "audit this", PR feedback) | `caveman-review` skill | `path:L<n>: <emoji> <severity>: problem. fix.` per finding. 🔴 bug 🟡 risk 🔵 nit ❓ q. |
+| File >150 lines that's mostly prose (CLAUDE.md, blog post, memory file) bloating context | `compress` skill | `/caveman:compress FILE` — overwrites caveman, backs up `FILE.original.md`. |
+| Locate code, "where is X", "what calls Y", spans >2 files | `cavecrew-investigator` agent | NOT vanilla `Explore`. Output is pre-compressed. |
+| Confined 1-2 file edit with clear spec | `cavecrew-builder` agent | NOT inline edit. Delegate; return compressed diff. |
+| Diff/PR review at scale (>5 files) | `cavecrew-reviewer` agent | One-liner per finding, no throat-clearing. |
 
-**Subagents** (use instead of inline work or vanilla `Explore`):
+### Hard rules
 
-| Agent | When |
-|---|---|
-| `cavecrew-investigator` | Locate code, find usage of symbol, "where is X", spans >3 files |
-| `cavecrew-builder` | Confined 1-2 file edit with clear spec — delegate, return compressed diff |
-| `cavecrew-reviewer` | Diff/PR review at scale — one-liner per finding |
+1. **Commit messages**: ≤50 char subject. Body forbidden unless commit fixes a non-obvious bug or makes a load-bearing decision. Multi-paragraph commit messages = caveman violation.
+2. **Diff reviews**: never write prose paragraphs. Output `caveman-review` format only.
+3. **Multi-file work**: invoke `cavecrew-*` agent. Inline = lazy.
+4. **Bloated files** (>500 lines mostly prose): run `compress` before adding more.
 
-Subagent output is caveman-compressed → main context ~60% smaller. Prefer cavecrew over generic `Agent` when scope matches.
+### When fuller mode is allowed
 
-**Reach for fuller mode only**: explaining architecture decision, walking through trade-offs, or user explicitly asks for detail.
+Architecture decisions, trade-off walkthroughs, security warnings, irreversible action confirmations. User asks for detail. **Otherwise: caveman.**
 
-Trigger phrases that flip caveman intensity: `lite` / `full` / `ultra` / `wenyan` / `wenyan-ultra`. Stop with "stop caveman" / "normal mode".
+Trigger phrases flip intensity: `lite` / `full` / `ultra` / `wenyan` / `wenyan-ultra`. Stop with `stop caveman` / `normal mode`.
+
+### Self-check before responding
+
+- Chat reply >5 lines and not architecture/security? → compress
+- About to commit? → invoke `caveman-commit`
+- About to review? → invoke `caveman-review`
+- Edit spans >2 files? → consider `cavecrew-builder`
+- Searching code? → use `cavecrew-investigator`, not inline grep loops
 
 ## Build Commands
 
@@ -40,7 +49,7 @@ dotnet build Jaina.sln
 dotnet build Jaina.sln -c Release
 
 # Run a specific sample
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # Run tests (once test projects exist)
 dotnet test Jaina.sln
@@ -69,7 +78,7 @@ Jaina is a modular .NET 8 framework library organized into independent packages:
 
 ```
 src/
-  core/         Jaina.Core            — Guard, Result<T>, extensions, HttpClientBase
+  core/         Jaina.Core            — Result<T> + IResult (shared kernel)
   aspnetcore/   Jaina.AspNetCore      — Problem Details, correlation ID, telemetry filters
   resilience/   Jaina.Resilience      — Polly v8 named pipelines (retry/timeout/CB/hedging)
   servicediscovery/ Jaina.ServiceDiscovery — Microsoft.Extensions.ServiceDiscovery wrapper
@@ -113,9 +122,7 @@ If you see either package in any `.csproj` or `Directory.Packages.props`, remove
 
 ## Key Patterns
 
-**Result pattern** (`Jaina.Core/Results/`): Use `Result` / `Result<T>` as return types instead of throwing exceptions for expected failures. Factory methods: `Result.Ok()`, `Result.Fail("msg")`.
-
-**Guard clauses** (`Jaina.Core/Guard.cs`): Validate arguments at entry points. Methods: `Guard.NotNull()`, `Guard.NotNullOrEmpty()`, `Guard.Requires<TException>()`. Uses `CallerArgumentExpression` — no need to pass parameter name strings.
+**Result pattern** (`Jaina.Core/Results/`): Use `Result` / `Result<T>` as return types instead of throwing exceptions for expected failures. Factory methods: `Result.Ok()`, `Result.Fail("msg")`. `Jaina.Core` is intentionally tiny — only the Result kernel; no Guard, no extensions. Argument validation: use `ArgumentNullException.ThrowIfNull(x)` from BCL.
 
 **DI registration**: Every module exposes `AddJaina<Feature>()` extension methods on `IServiceCollection`. Use `TryAddSingleton`/`TryAddScoped` so callers can override implementations.
 
@@ -152,10 +159,11 @@ public void MethodName_Condition_ExpectedBehavior()
     var input = "hello";
 
     // Act
-    var result = Guard.NotNullOrEmpty(input);
+    var result = Result.Ok(input);
 
     // Assert
-    Assert.Equal("hello", result);
+    Assert.True(result.IsSuccess);
+    Assert.Equal("hello", result.Value);
 }
 ```
 

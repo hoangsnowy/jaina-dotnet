@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting" />
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="Aspire.Hosting.Redis" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JainaShop.Catalog\JainaShop.Catalog.csproj"   IsAspireProjectResource="true" />
+    <ProjectReference Include="..\JainaShop.Orders\JainaShop.Orders.csproj"     IsAspireProjectResource="true" />
+    <ProjectReference Include="..\JainaShop.Identity\JainaShop.Identity.csproj" IsAspireProjectResource="true" />
+    <ProjectReference Include="..\JainaShop.Notifier\JainaShop.Notifier.csproj" IsAspireProjectResource="true" />
+    <ProjectReference Include="..\JainaShop.Gateway\JainaShop.Gateway.csproj"   IsAspireProjectResource="true" />
+  </ItemGroup>
+</Project>
