@@ -20,6 +20,7 @@ Real production patterns, real failure modes, runnable sample code. Every post f
 | 3 | [Resilience pipelines: 5 Polly patterns in 3 lines](2026-05-05-resilience-pipelines.md) | Resilience | ✅ |
 | 4 | Service discovery: from hard-coded URLs to tenant-aware routing | ServiceDiscovery | TBD |
 | 5 | [Saga orchestration: Payment + Shipping rollback](2026-05-05-saga-orchestration.md) | Messaging.Saga | ✅ |
+| 5b | [Multi-tenant SaaS: shared schema, row-level isolation](2026-05-05-multi-tenancy.md) | MultiTenancy + EF query filters | ✅ |
 | 6 | Reading OTEL traces like a novel: distributed bug detective work | Observability | TBD (after M2) |
 | 7 | Health checks that don't fool Kubernetes: live vs ready vs startup | HealthChecks | TBD (after M3) |
 | 8 | gRPC + JWT + tenant: auth flow between microservices | Grpc, Auth, MultiTenancy | TBD (after M2/M3) |
