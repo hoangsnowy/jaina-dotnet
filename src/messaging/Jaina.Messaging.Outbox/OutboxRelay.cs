@@ -1,3 +1,4 @@
+using Jaina.Observability.Telemetry;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -64,12 +65,19 @@ public sealed class OutboxRelay : BackgroundService
     /// </summary>
     public async Task ProcessOnceAsync(CancellationToken ct = default)
     {
+        using var tickSpan = JainaActivitySource.StartSpan("outbox", "relay.tick");
         var batch = await _store.ClaimBatchAsync(_opts.BatchSize, ct);
+        tickSpan?.SetTag("jaina.outbox.batch_size", batch.Count);
         if (batch.Count == 0) return;
 
         foreach (var msg in batch)
         {
             ct.ThrowIfCancellationRequested();
+            using var span = JainaActivitySource.StartSpan("outbox", "dispatch");
+            span?.SetTag(TagConventions.MessageId, msg.Id.ToString());
+            span?.SetTag(TagConventions.MessageType, msg.PayloadType);
+            span?.SetTag(TagConventions.Destination, msg.Destination ?? "(none)");
+            span?.SetTag(TagConventions.OutboxAttempt, msg.Attempts + 1);
             try
             {
                 await _dispatcher.DispatchAsync(msg, ct);
@@ -78,6 +86,7 @@ public sealed class OutboxRelay : BackgroundService
             catch (Exception ex)
             {
                 var nextAttempt = ComputeNextAttempt(msg.Attempts + 1);
+                span?.SetStatus(System.Diagnostics.ActivityStatusCode.Error, ex.Message);
                 _logger.LogWarning(ex,
                     "Outbox dispatch failed for message {Id} (attempt {Attempts}); retrying at {NextAttempt}",
                     msg.Id, msg.Attempts + 1, nextAttempt);
