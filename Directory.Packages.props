@@ -129,7 +129,7 @@
 
   <!-- EF Core: 9.x supports net8+net9, 10.x requires net10 -->
   <ItemGroup Condition="'$(TargetFramework)' != 'net10.0'">
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.15" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.5" />
   </ItemGroup>
