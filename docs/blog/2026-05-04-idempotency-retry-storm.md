@@ -149,5 +149,5 @@ You will see the first response with `201 Created`, and the next two with `201 C
 ## Further reading
 
 - Source: [`Jaina.Idempotency.AspNetCore/IdempotencyMiddleware.cs`](../../src/idempotency/Jaina.Idempotency.AspNetCore/IdempotencyMiddleware.cs)
-- Tests (5 cases including failure paths): [`Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs`](../../tests/Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs)
+- Tests (5 cases including failure paths): [`Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs`](../../tests/unit/Jaina.Idempotency.UnitTests/IdempotencyMiddlewareTests.cs)
 - Next post: [Outbox: never lose another order on Black Friday](2026-05-04-outbox-black-friday.md) — pairs naturally with idempotency for end-to-end reliability.

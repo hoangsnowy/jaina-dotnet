@@ -193,6 +193,6 @@ To simulate failure scenario #1, change `ConsoleOutboxDispatcher.DispatchAsync` 
 ## Further reading
 
 - Source: [`OutboxRelay.cs`](../../src/messaging/Jaina.Messaging.Outbox/OutboxRelay.cs), [`InMemoryOutboxStore.cs`](../../src/messaging/Jaina.Messaging.Outbox.InMemory/InMemoryOutboxStore.cs)
-- Tests (5 cases including dispatch-fails-then-reschedules): [`InMemoryOutboxTests.cs`](../../tests/Jaina.Messaging.Outbox.Tests/InMemoryOutboxTests.cs)
+- Tests (5 cases including dispatch-fails-then-reschedules): [`InMemoryOutboxTests.cs`](../../tests/unit/Jaina.Messaging.Outbox.UnitTests/InMemoryOutboxTests.cs)
 - Companion post: [Idempotency: surviving the mobile retry storm](2026-05-04-idempotency-retry-storm.md) — pairs with outbox to give you producer-side reliability + consumer-side dedup.
 - Coming soon: the EF Core provider (transactional enqueue inside `SaveChanges`), Inbox pattern (consumer dedup), and Saga (cross-service compensations).

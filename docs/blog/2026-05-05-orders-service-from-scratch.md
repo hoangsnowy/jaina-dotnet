@@ -331,7 +331,7 @@ public async Task SecondCall_WithSameKey_ReplaysCachedResponse()
 }
 ```
 
-The unit test suite has 5 of these (happy path, 5xx not cached, GET ignored, etc.) — see [`IdempotencyMiddlewareTests.cs`](../../tests/Jaina.Idempotency.Tests/IdempotencyMiddlewareTests.cs).
+The unit test suite has 5 of these (happy path, 5xx not cached, GET ignored, etc.) — see [`IdempotencyMiddlewareTests.cs`](../../tests/unit/Jaina.Idempotency.UnitTests/IdempotencyMiddlewareTests.cs).
 
 ### What's still broken
 
@@ -512,7 +512,7 @@ Hit `GET /_outbox` after a flaky run and you'll see the failed attempts captured
 
 ### Test
 
-The full Outbox test suite ([`InMemoryOutboxTests.cs`](../../tests/Jaina.Messaging.Outbox.Tests/InMemoryOutboxTests.cs)) covers:
+The full Outbox test suite ([`InMemoryOutboxTests.cs`](../../tests/unit/Jaina.Messaging.Outbox.UnitTests/InMemoryOutboxTests.cs)) covers:
 
 - enqueue then claim returns the message
 - claim is exclusive (a second claim does not return the same message)
@@ -520,7 +520,7 @@ The full Outbox test suite ([`InMemoryOutboxTests.cs`](../../tests/Jaina.Messagi
 - relay dispatches successfully and marks processed
 - relay catches exceptions and reschedules
 
-Plus the EF Core integration test ([`EfOutboxIntegrationTests.cs`](../../tests/Jaina.Messaging.Outbox.EfCore.IntegrationTests/EfOutboxIntegrationTests.cs)) runs against a real Postgres container.
+Plus the EF Core integration test ([`EfOutboxIntegrationTests.cs`](../../tests/integration/Jaina.Messaging.Outbox.EfCore.IntegrationTests/EfOutboxIntegrationTests.cs)) runs against a real Postgres container.
 
 ### What's still broken
 
@@ -716,7 +716,7 @@ if (state is not null)
     await runner.RunAsync(state, ct);
 ```
 
-This is the "resume" tested in [`OrderSagaTests.cs:RunAsync_ResumesFromPartialState_SkipsAlreadyCompletedSteps`](../../tests/Jaina.Messaging.Saga.Tests/OrderSagaTests.cs).
+This is the "resume" tested in [`OrderSagaTests.cs:RunAsync_ResumesFromPartialState_SkipsAlreadyCompletedSteps`](../../tests/unit/Jaina.Messaging.Saga.UnitTests/OrderSagaTests.cs).
 
 ### Compensation idempotency — the part teams get wrong
 

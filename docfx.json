@@ -13,7 +13,7 @@
       "includePrivateMembers": false,
       "disableDefaultFilter": false,
       "noRestore": false,
-      "filter": "filterConfig.yml",
+      "filter": "docs/filterConfig.yml",
       "memberLayout": "samePage"
     }
   ],
@@ -23,10 +23,6 @@
         "files": [ "**/*.{md,yml}" ],
         "src": "docs",
         "exclude": [ "blog/_template.md" ]
-      },
-      {
-        "files": [ "toc.yml", "index.md" ],
-        "src": "."
       }
     ],
     "resource": [

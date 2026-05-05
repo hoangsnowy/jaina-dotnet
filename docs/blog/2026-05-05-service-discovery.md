@@ -140,5 +140,5 @@ curl -H "X-Tenant: acme" -X POST http://localhost:5000/api/orders \
 ## Further reading
 
 - Source: [`Jaina.ServiceDiscovery/ServiceCollectionExtensions.cs`](../../src/servicediscovery/Jaina.ServiceDiscovery/ServiceCollectionExtensions.cs)
-- Tests: [`JainaServiceDiscoveryTests.cs`](../../tests/Jaina.ServiceDiscovery.Tests/JainaServiceDiscoveryTests.cs)
+- Tests: [`JainaServiceDiscoveryTests.cs`](../../tests/unit/Jaina.ServiceDiscovery.UnitTests/JainaServiceDiscoveryTests.cs)
 - Companion post: [Resilience pipelines](2026-05-05-resilience-pipelines.md)

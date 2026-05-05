@@ -1,0 +1,37 @@
+- name: Home
+  href: index.md
+- name: Getting started
+  href: getting-started.md
+- name: Architecture
+  href: architecture.md
+- name: Modules
+  href: modules.md
+- name: Cookbook
+  href: blog/README.md
+  items:
+    - name: 📘 Ebook — Orders service from scratch
+      href: blog/2026-05-05-orders-service-from-scratch.md
+    - name: Idempotency
+      href: blog/2026-05-04-idempotency-retry-storm.md
+    - name: Outbox
+      href: blog/2026-05-04-outbox-black-friday.md
+    - name: Resilience
+      href: blog/2026-05-05-resilience-pipelines.md
+    - name: Service Discovery
+      href: blog/2026-05-05-service-discovery.md
+    - name: Saga
+      href: blog/2026-05-05-saga-orchestration.md
+    - name: Multi-tenancy
+      href: blog/2026-05-05-multi-tenancy.md
+    - name: Observability
+      href: blog/2026-05-05-observability-traces.md
+    - name: Health checks
+      href: blog/2026-05-05-health-checks.md
+    - name: gRPC + JWT + Tenant
+      href: blog/2026-05-05-grpc-jwt-tenant.md
+    - name: Background jobs
+      href: blog/2026-05-05-background-jobs.md
+    - name: Monolith → Microservices
+      href: blog/2026-05-05-monolith-to-microservices.md
+- name: API reference
+  href: api/

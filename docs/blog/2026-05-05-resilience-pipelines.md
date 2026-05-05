@@ -156,5 +156,5 @@ curl 'http://localhost:5000/api/resilience/flaky?fail=true'
 ## Further reading
 
 - Source: [`JainaResilienceBuilder.cs`](../../src/resilience/Jaina.Resilience/JainaResilienceBuilder.cs)
-- Tests (4/4 covering registration, retry, custom pipeline, override): [`JainaResilienceTests.cs`](../../tests/Jaina.Resilience.Tests/JainaResilienceTests.cs)
+- Tests (4/4 covering registration, retry, custom pipeline, override): [`JainaResilienceTests.cs`](../../tests/unit/Jaina.Resilience.UnitTests/JainaResilienceTests.cs)
 - Companion posts: [Outbox](2026-05-04-outbox-black-friday.md), [Idempotency](2026-05-04-idempotency-retry-storm.md)
