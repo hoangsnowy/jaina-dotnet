@@ -1,0 +1,56 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "src",
+          "files": [ "**/*.csproj" ],
+          "exclude": [ "**/bin/**", "**/obj/**" ]
+        }
+      ],
+      "dest": "docs/api",
+      "includePrivateMembers": false,
+      "disableDefaultFilter": false,
+      "noRestore": false,
+      "filter": "filterConfig.yml",
+      "memberLayout": "samePage"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [ "**/*.{md,yml}" ],
+        "src": "docs",
+        "exclude": [ "blog/_template.md" ]
+      },
+      {
+        "files": [ "toc.yml", "index.md" ],
+        "src": "."
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "icon.png", "LICENSE" ],
+        "src": "."
+      }
+    ],
+    "output": "_site",
+    "globalMetadata": {
+      "_appName": "Jaina .NET",
+      "_appTitle": "Jaina .NET — modular enterprise framework",
+      "_appLogoPath": "icon.png",
+      "_appFooter": "Built with DocFX. <a href='https://github.com/HoangSnowy/jaina-dotnet'>Source on GitHub</a>.",
+      "_enableSearch": true,
+      "_disableContribution": false,
+      "_gitContribute": {
+        "repo": "https://github.com/HoangSnowy/jaina-dotnet",
+        "branch": "main"
+      }
+    },
+    "template": [ "default", "modern" ],
+    "postProcessors": [ "ExtractSearchIndex" ],
+    "keepFileLink": false,
+    "disableGitFeatures": false
+  }
+}
