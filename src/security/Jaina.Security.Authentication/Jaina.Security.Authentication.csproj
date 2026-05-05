@@ -22,5 +22,6 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" />
+    <PackageReference Include="Grpc.Net.ClientFactory" VersionOverride="2.80.0" />
   </ItemGroup>
 </Project>
