@@ -2,6 +2,35 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Communication style — Caveman mode (mandatory)
+
+`caveman@caveman` plugin installed at user scope. Use **all** its skills and agents. Save tokens, keep accuracy.
+
+**Default chat output**: caveman style — drop articles, fragments OK, no throat-clearing ("Let me", "I'll now"), no trailing summaries, status updates one line. Vietnamese same rule.
+
+**Use these skills proactively** (don't wait for slash command):
+
+| Skill | When |
+|---|---|
+| `caveman` | Always-on chat compression. Default mode = full. Drop to `lite` only for nuanced trade-off discussions. |
+| `caveman-commit` | Every commit message. Conventional Commits, ≤50 char subject, body only when "why" is non-obvious. Auto-trigger on staged changes. |
+| `caveman-review` | Every PR / diff review. One line per comment: `path:line 🔴 problem. fix.` No throat-clearing. |
+| `compress` | Bloated CLAUDE.md / memory files. `/caveman:compress FILE` — overwrites with caveman; saves FILE.original.md. |
+
+**Subagents** (use instead of inline work or vanilla `Explore`):
+
+| Agent | When |
+|---|---|
+| `cavecrew-investigator` | Locate code, find usage of symbol, "where is X", spans >3 files |
+| `cavecrew-builder` | Confined 1-2 file edit with clear spec — delegate, return compressed diff |
+| `cavecrew-reviewer` | Diff/PR review at scale — one-liner per finding |
+
+Subagent output is caveman-compressed → main context ~60% smaller. Prefer cavecrew over generic `Agent` when scope matches.
+
+**Reach for fuller mode only**: explaining architecture decision, walking through trade-offs, or user explicitly asks for detail.
+
+Trigger phrases that flip caveman intensity: `lite` / `full` / `ultra` / `wenyan` / `wenyan-ultra`. Stop with "stop caveman" / "normal mode".
+
 ## Build Commands
 
 ```bash
@@ -42,12 +71,20 @@ Jaina is a modular .NET 8 framework library organized into independent packages:
 src/
   core/         Jaina.Core            — Guard, Result<T>, extensions, HttpClientBase
   aspnetcore/   Jaina.AspNetCore      — Problem Details, correlation ID, telemetry filters
+  resilience/   Jaina.Resilience      — Polly v8 named pipelines (retry/timeout/CB/hedging)
+  servicediscovery/ Jaina.ServiceDiscovery — Microsoft.Extensions.ServiceDiscovery wrapper
+  multitenancy/ Jaina.MultiTenancy    — tenant resolver (header/claim/host/route) + middleware
+  ratelimiting/ Jaina.RateLimiting    — per-IP / per-user / per-tenant / concurrency policies
+  idempotency/  Jaina.Idempotency*    — IIdempotencyStore + InMemory/AspNetCore middleware
   caching/      Jaina.Caching*        — ICache abstraction + Memory/Redis/Fusion impls
   data/         Jaina.Data            — IRepository<T>, IUnitOfWork abstractions
                 Jaina.Data.EfCore     — EF Core provider (EfRepository, EfUnitOfWork)
                 Jaina.Data.Dapper     — Dapper provider (DapperRepository)
                 Jaina.Data.Cqrs       — Command/Query buses, domain events, event store
   messaging/    Jaina.Messaging*      — IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus/Broadcast
+                Jaina.Messaging.Outbox* — transactional outbox + relay (InMemory; EfCore TBD)
+                Jaina.Messaging.Inbox*  — consumer dedup (InMemory; Redis/EfCore TBD)
+                Jaina.Messaging.Saga*   — orchestration + compensation (InMemory; EfCore/Redis TBD)
   storage/      Jaina.Storage*        — IFileStorage + Local/AzureBlob/FileShare/SFTP
   security/     Jaina.Security        — AES/RSA/BCrypt/JWT
                 Jaina.Security.Authentication* — JWT bearer auth, Azure KeyVault

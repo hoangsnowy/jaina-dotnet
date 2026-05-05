@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>In-memory outbox store + producer for Jaina framework — single-process scope, intended for development and tests</Description>
+    <PackageId>Jaina.Messaging.Outbox.InMemory</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Messaging.Outbox\Jaina.Messaging.Outbox.csproj" />
+  </ItemGroup>
+</Project>

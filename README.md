@@ -25,6 +25,14 @@ your app → Jaina abstraction (ICache, IFileStorage, IQueue<T>…)
 src/
   core/           Jaina.Core               Guard, Result<T>, extensions, HttpClientBase
   aspnetcore/     Jaina.AspNetCore         Problem Details, correlation ID, telemetry filters
+  resilience/     Jaina.Resilience         Polly v8 named pipelines (retry/timeout/CB/hedging)
+  servicediscovery/ Jaina.ServiceDiscovery  Microsoft.Extensions.ServiceDiscovery wrapper
+  multitenancy/   Jaina.MultiTenancy       Tenant resolver (header/claim/host/route) + middleware
+  ratelimiting/   Jaina.RateLimiting       Per-IP / per-user / per-tenant / concurrency policies
+  idempotency/    Jaina.Idempotency        IIdempotencyStore abstraction
+                  Jaina.Idempotency.InMemory   IMemoryCache-backed store (dev/test)
+                  Jaina.Idempotency.Redis      Distributed store (StackExchange.Redis)
+                  Jaina.Idempotency.AspNetCore Middleware for Idempotency-Key replay
   caching/        Jaina.Caching            ICache abstraction
                   Jaina.Caching.Memory     In-process (Microsoft.Extensions.Caching.Memory)
                   Jaina.Caching.Redis      Distributed (StackExchange.Redis)
@@ -37,6 +45,17 @@ src/
                   Jaina.Messaging.RabbitMQ RabbitMQ provider
                   Jaina.Messaging.AzureServiceBus  Azure Service Bus provider
                   Jaina.Messaging.Broadcast        In-memory broadcast (dev/test)
+                  Jaina.Messaging.Outbox          Transactional outbox abstractions + relay
+                  Jaina.Messaging.Outbox.InMemory In-memory outbox store (dev/test)
+                  Jaina.Messaging.Outbox.EfCore   EF Core outbox (atomic with domain writes)
+                  Jaina.Messaging.Inbox           Consumer-side dedup abstraction
+                  Jaina.Messaging.Inbox.InMemory  In-memory inbox dedup (dev/test)
+                  Jaina.Messaging.Inbox.Redis     Distributed dedup (Redis SETNX)
+                  Jaina.Messaging.Inbox.EfCore    Distributed dedup (EF Core unique key)
+                  Jaina.Messaging.Saga            Orchestration saga + reverse compensation
+                  Jaina.Messaging.Saga.InMemory   In-memory saga state repository (dev/test)
+                  Jaina.Messaging.Saga.EfCore     EF Core saga state repository
+                  Jaina.Messaging.Saga.Redis      Redis saga state repository
   storage/        Jaina.Storage            IFileStorage abstraction
                   Jaina.Storage.Local      File system
                   Jaina.Storage.AzureBlob  Azure Blob Storage
@@ -55,9 +74,24 @@ src/
   notifications/  Jaina.Notifications       IEmailSender, ISmsSender abstractions
                   Jaina.Notifications.Smtp         SMTP email provider (MailKit)
                   Jaina.Notifications.ConsoleSms   Console/logger SMS provider (dev/test)
+  validation/     Jaina.Validation         FluentValidation endpoint filter (400 ProblemDetails)
+  featureflags/   Jaina.FeatureFlags       Microsoft.FeatureManagement wrapper
+  healthchecks/   Jaina.HealthChecks       /health/live + /health/ready (live/ready tags)
+  localization/   Jaina.Localization       IStringLocalizer convention (Resources/ folder)
+  backgroundjobs/ Jaina.BackgroundJobs     IBackgroundJobScheduler (one-shot + cron)
+                  Jaina.BackgroundJobs.Quartz  Quartz.NET provider
+  grpc/           Jaina.Grpc               gRPC server interceptors (logging + correlation)
+  testing/        Jaina.Testing            JainaWebApplicationFactory + FakeClock + assertions
+                  Jaina.Testing.Containers Testcontainers fixtures (Postgres / Redis / RabbitMQ / Azurite)
 samples/          Aspire AppHost, WebApi, Worker demos
 tests/            xUnit test projects
+docs/blog/        Cookbook posts (real-world patterns + error scenarios)
 ```
+
+📚 **Cookbook** — see [`docs/blog/`](docs/blog/README.md) for runnable recipe posts:
+- [Idempotency: surviving the mobile retry storm](docs/blog/2026-05-04-idempotency-retry-storm.md)
+- [Outbox: never lose another order on Black Friday](docs/blog/2026-05-04-outbox-black-friday.md)
+- More posts coming as M1+ modules ship
 
 ---
 
@@ -74,6 +108,8 @@ Add packages from NuGet (replace providers as needed):
 ```bash
 dotnet add package Jaina.Core
 dotnet add package Jaina.AspNetCore       # Problem Details, correlation ID, filters
+dotnet add package Jaina.Resilience       # Polly v8 named pipelines
+dotnet add package Jaina.ServiceDiscovery # MS ServiceDiscovery wrapper
 dotnet add package Jaina.Caching.Memory
 dotnet add package Jaina.Data.EfCore     # or Jaina.Data.Dapper
 dotnet add package Jaina.Mapping.Mapster
@@ -310,6 +346,31 @@ builder.Services.AddJainaJwtAuthentication(o => {
     o.Issuer    = "your-api";
     o.Audience  = "your-clients";
 });
+```
+
+---
+
+### Resilience
+
+```csharp
+// Register the four default Jaina pipelines (default / queue-publish / external-http / database)
+builder.Services.AddJainaResilience();
+
+// Or customize / add your own
+builder.Services.AddJainaResilience(b => b.AddPipeline("retry-fast", p => p
+    .AddRetry(new RetryStrategyOptions { MaxRetryAttempts = 2, Delay = TimeSpan.FromMilliseconds(50) })
+    .AddTimeout(TimeSpan.FromSeconds(2))));
+
+// Resolve and execute
+public class OrderClient(ResiliencePipelineProvider<string> pipelines)
+{
+    public async Task<Result> PlaceOrderAsync(Order order, CancellationToken ct)
+    {
+        var pipeline = pipelines.GetPipeline(JainaResiliencePipelines.ExternalHttp);
+        return await pipeline.ExecuteAsync(async token =>
+            await _http.PostAsync("/orders", order, token), ct);
+    }
+}
 ```
 
 ---

@@ -1,16 +1,23 @@
+using System.Diagnostics;
+using Jaina.AspNetCore;
 using Jaina.Caching;
 using Jaina.Caching.Memory;
-using Jaina.AspNetCore;
 using Jaina.Data.Cqrs;
 using Jaina.Data.Cqrs.Commands;
 using Jaina.Data.Cqrs.Queries;
+using Jaina.Idempotency.AspNetCore;
+using Jaina.Idempotency.InMemory;
+using Jaina.Messaging.Outbox;
+using Jaina.Messaging.Outbox.InMemory;
 using Jaina.Notifications.ConsoleSms;
 using Jaina.Notifications.Sms;
+using Jaina.Resilience;
 using Jaina.Samples.ServiceDefaults;
 using Jaina.Security.Encryption;
 using Jaina.Security.Hashing;
 using Jaina.Storage;
 using Jaina.Storage.Local;
+using Polly.Registry;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +36,22 @@ builder.Services.AddQueryHandler<GetItemQuery, ItemDto?, GetItemQueryHandler>();
 // Notifications (console SMS for dev)
 builder.Services.AddJainaConsoleSms();
 
+// M1 microservice spine demos ---------------------------------------------
+builder.Services.AddJainaResilience();
+builder.Services.AddJainaInMemoryIdempotency();
+builder.Services.AddJainaInMemoryOutbox();
+builder.Services.AddSingleton<IOutboxDispatcher, ConsoleOutboxDispatcher>();
+builder.Services.AddJainaOutboxRelay(o =>
+{
+    o.PollingInterval = TimeSpan.FromMilliseconds(500);
+    o.BatchSize = 25;
+});
+
 var app = builder.Build();
 
 app.UseExceptionHandler();
 app.UseStatusCodePages();
+app.UseJainaIdempotency();
 
 if (app.Environment.IsDevelopment())
 {
@@ -132,6 +151,52 @@ app.MapPost("/api/notify/sms", async (SmsRequest req, ISmsSender sms) =>
     return Results.Ok(new { message = "SMS queued (logged to console in dev mode)" });
 });
 
+// ── Resilience ─────────────────────────────────────────────────────────
+// Demonstrates the "external-http" pipeline catching transient failures.
+// Pass ?fail=true to simulate the first attempt throwing — pipeline retries.
+app.MapGet("/api/resilience/flaky", async (bool? fail, ResiliencePipelineProvider<string> pipelines) =>
+{
+    var pipeline = pipelines.GetPipeline(JainaResiliencePipelines.ExternalHttp);
+    var attempts = 0;
+    var result = await pipeline.ExecuteAsync(_ =>
+    {
+        attempts++;
+        if (fail == true && attempts < 2)
+            throw new HttpRequestException("simulated transient failure");
+        return ValueTask.FromResult(new { attempts, ok = true });
+    });
+    return Results.Ok(result);
+});
+
+// ── Idempotency ────────────────────────────────────────────────────────
+// POST with header `Idempotency-Key: <key>`. The middleware caches the 2xx response;
+// subsequent calls with the same key replay it (200/201 + Idempotent-Replay: true).
+app.MapPost("/api/orders", (OrderRequest req) =>
+{
+    var orderId = Guid.NewGuid();
+    return Results.Created($"/api/orders/{orderId}", new { orderId, req.Sku, req.Quantity, createdAt = DateTimeOffset.UtcNow });
+});
+
+// ── Outbox ─────────────────────────────────────────────────────────────
+// Enqueue a domain event into the outbox. The relay dispatches it asynchronously
+// (here just logs to console). In production the dispatcher publishes to RabbitMQ etc.
+app.MapPost("/api/outbox/order-placed", async (OrderRequest req, IOutbox outbox) =>
+{
+    await outbox.EnqueueAsync(
+        new OrderPlacedEvent(Guid.NewGuid(), req.Sku, req.Quantity),
+        destination: "orders.events",
+        headers: new Dictionary<string, string> { ["correlation-id"] = Activity.Current?.Id ?? "n/a" });
+    return Results.Accepted(value: new { message = "Event enqueued; relay will dispatch shortly" });
+});
+
+app.MapGet("/api/outbox/snapshot", (InMemoryOutboxStore store) =>
+{
+    var msgs = store.Snapshot()
+        .Select(m => new { m.Id, m.PayloadType, m.Destination, m.Attempts, m.ProcessedAt, m.LastError })
+        .ToArray();
+    return Results.Ok(msgs);
+});
+
 app.Run();
 
 // ── CQRS types ─────────────────────────────────────────────────────────
@@ -179,3 +244,20 @@ record VerifyRequest(string Password, string Hash);
 record EncryptRequest(string PlainText, string Pepper, string Salt);
 record DecryptRequest(string CipherText, string Pepper, string Salt);
 record SmsRequest(string From, string To, string Body);
+record OrderRequest(string Sku, int Quantity);
+record OrderPlacedEvent(Guid OrderId, string Sku, int Quantity);
+
+// Sample dispatcher — production code would publish to RabbitMQ/ServiceBus/Kafka.
+sealed class ConsoleOutboxDispatcher : IOutboxDispatcher
+{
+    private readonly ILogger<ConsoleOutboxDispatcher> _logger;
+    public ConsoleOutboxDispatcher(ILogger<ConsoleOutboxDispatcher> logger) => _logger = logger;
+
+    public Task DispatchAsync(OutboxMessage message, CancellationToken ct = default)
+    {
+        _logger.LogInformation(
+            "[outbox] dispatch {Id} type={Type} dest={Destination} payload={Payload}",
+            message.Id, message.PayloadType, message.Destination, message.Payload);
+        return Task.CompletedTask;
+    }
+}

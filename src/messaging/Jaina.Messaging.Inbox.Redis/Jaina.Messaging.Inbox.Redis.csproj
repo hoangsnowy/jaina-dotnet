@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <Description>Redis-backed IInboxStore for Jaina framework — distributed consumer dedup across multiple instances</Description>
+    <PackageId>Jaina.Messaging.Inbox.Redis</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jaina.Messaging.Inbox\Jaina.Messaging.Inbox.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" />
+  </ItemGroup>
+</Project>
