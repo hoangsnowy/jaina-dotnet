@@ -17,9 +17,9 @@ Real production patterns, real failure modes, runnable sample code. Every post f
 |---|------|---------|--------|
 | 1 | [Idempotency: surviving the mobile retry storm](2026-05-04-idempotency-retry-storm.md) | Idempotency middleware | ✅ |
 | 2 | [Outbox: never lose another order on Black Friday](2026-05-04-outbox-black-friday.md) | Messaging.Outbox, relay | ✅ |
-| 3 | Resilience pipelines: 5 Polly patterns in 3 lines | Resilience | TBD |
+| 3 | [Resilience pipelines: 5 Polly patterns in 3 lines](2026-05-05-resilience-pipelines.md) | Resilience | ✅ |
 | 4 | Service discovery: from hard-coded URLs to tenant-aware routing | ServiceDiscovery | TBD |
-| 5 | Saga orchestration: rolling back across Payment + Shipping | Messaging.Saga | TBD (after M1 saga lands) |
+| 5 | [Saga orchestration: Payment + Shipping rollback](2026-05-05-saga-orchestration.md) | Messaging.Saga | ✅ |
 | 6 | Reading OTEL traces like a novel: distributed bug detective work | Observability | TBD (after M2) |
 | 7 | Health checks that don't fool Kubernetes: live vs ready vs startup | HealthChecks | TBD (after M3) |
 | 8 | gRPC + JWT + tenant: auth flow between microservices | Grpc, Auth, MultiTenancy | TBD (after M2/M3) |

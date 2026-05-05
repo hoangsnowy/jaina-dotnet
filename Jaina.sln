@@ -211,6 +211,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Testing", "src\testin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Testing.Containers", "src\testing\Jaina.Testing.Containers\Jaina.Testing.Containers.csproj", "{57CA2B04-B245-40C1-951C-90050A393302}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaina.Idempotency.Redis.IntegrationTests", "tests\Jaina.Idempotency.Redis.IntegrationTests\Jaina.Idempotency.Redis.IntegrationTests.csproj", "{8A459486-330E-43F8-BBBC-5213DD6C667A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -528,6 +530,10 @@ Global
 		{57CA2B04-B245-40C1-951C-90050A393302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57CA2B04-B245-40C1-951C-90050A393302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57CA2B04-B245-40C1-951C-90050A393302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A459486-330E-43F8-BBBC-5213DD6C667A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A459486-330E-43F8-BBBC-5213DD6C667A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A459486-330E-43F8-BBBC-5213DD6C667A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A459486-330E-43F8-BBBC-5213DD6C667A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BCB5C20D-45A8-4441-993B-633D236FB959} = {C68ECA19-44DF-410E-955B-EF0E1C69F463}
@@ -629,5 +635,6 @@ Global
 		{F300720F-A87E-48FB-9F20-524A35930731} = {C68ECA19-44DF-410E-955B-EF0E1C69F463}
 		{4EF95623-1F35-4B7B-BE0D-ADB8FBF44FD8} = {F300720F-A87E-48FB-9F20-524A35930731}
 		{57CA2B04-B245-40C1-951C-90050A393302} = {F300720F-A87E-48FB-9F20-524A35930731}
+		{8A459486-330E-43F8-BBBC-5213DD6C667A} = {AF37749E-C656-454F-9F88-7F91491175D4}
 	EndGlobalSection
 EndGlobal
