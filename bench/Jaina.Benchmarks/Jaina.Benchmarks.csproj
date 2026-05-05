@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\caching\Jaina.Caching\Jaina.Caching.csproj" />
+    <ProjectReference Include="..\..\src\caching\Jaina.Caching.Memory\Jaina.Caching.Memory.csproj" />
+    <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.Outbox\Jaina.Messaging.Outbox.csproj" />
+    <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.Outbox.InMemory\Jaina.Messaging.Outbox.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\messaging\Jaina.Messaging.Outbox.EfCore\Jaina.Messaging.Outbox.EfCore.csproj" />
+    <ProjectReference Include="..\..\src\idempotency\Jaina.Idempotency\Jaina.Idempotency.csproj" />
+    <ProjectReference Include="..\..\src\idempotency\Jaina.Idempotency.InMemory\Jaina.Idempotency.InMemory.csproj" />
+  </ItemGroup>
+</Project>
