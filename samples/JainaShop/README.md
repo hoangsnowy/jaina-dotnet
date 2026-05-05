@@ -7,8 +7,8 @@ A small e-commerce slice that wires together the Jaina framework patterns. Each 
 | Service | Status | Demonstrates |
 |---|---|---|
 | **JainaShop.Catalog** | ✅ shipped | Caching (Memory), EF Core (InMemory provider), HealthChecks (live/ready), Observability (`JainaActivitySource` + tag conventions), Result→IResult filter |
+| **JainaShop.Orders** | ✅ shipped | Outbox.EfCore (atomic with order write) + relay + Idempotency middleware + HealthChecks + Observability |
 | JainaShop.Identity | TBD | JWT issuer + ApiKey scheme + scope policies |
-| JainaShop.Orders | TBD | CQRS + Outbox (EF Core) + Saga (Payment + Shipping rollback) + Idempotency |
 | JainaShop.Gateway | TBD | RateLimiting + MultiTenancy + ServiceDiscovery + Resilience |
 | JainaShop.Notifier | TBD | BackgroundJobs (Quartz) + Inbox dedup |
 | JainaShop.AppHost | TBD | Aspire orchestration: spin everything + Postgres + Redis + RabbitMQ |
