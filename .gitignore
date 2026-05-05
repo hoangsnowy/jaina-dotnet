@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Claude Code per-user settings (personal toolbox; do not version)
+.claude/settings.local.json
