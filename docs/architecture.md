@@ -34,9 +34,7 @@ src/
   mapping/         Jaina.Mapping*          IMapper + Mapster provider
   notifications/   Jaina.Notifications*    IEmailSender/ISmsSender + SMTP / Console SMS
   validation/      Jaina.Validation        FluentValidation endpoint filter (400 ProblemDetails)
-  featureflags/    Jaina.FeatureFlags      Microsoft.FeatureManagement + TenantTargetingFilter + UserTargetingFilter
   healthchecks/    Jaina.HealthChecks      /health/live + /health/ready (live/ready tag convention)
-  localization/    Jaina.Localization      Tenant-aware IJainaLocalizer<T> with fallback
   backgroundjobs/  Jaina.BackgroundJobs*   IBackgroundJobScheduler + Quartz provider
   grpc/            Jaina.Grpc              gRPC server + interceptors (logging + correlation)
   testing/         Jaina.Testing*          JainaWebApplicationFactory + FakeClock + Testcontainers fixtures

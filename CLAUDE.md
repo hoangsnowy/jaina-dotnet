@@ -78,7 +78,7 @@ Jaina is a modular .NET 8 framework library organized into independent packages:
 
 ```
 src/
-  core/         Jaina.Core            — Guard, Result<T>, extensions, HttpClientBase
+  core/         Jaina.Core            — Result<T> + IResult (shared kernel)
   aspnetcore/   Jaina.AspNetCore      — Problem Details, correlation ID, telemetry filters
   resilience/   Jaina.Resilience      — Polly v8 named pipelines (retry/timeout/CB/hedging)
   servicediscovery/ Jaina.ServiceDiscovery — Microsoft.Extensions.ServiceDiscovery wrapper
@@ -122,9 +122,7 @@ If you see either package in any `.csproj` or `Directory.Packages.props`, remove
 
 ## Key Patterns
 
-**Result pattern** (`Jaina.Core/Results/`): Use `Result` / `Result<T>` as return types instead of throwing exceptions for expected failures. Factory methods: `Result.Ok()`, `Result.Fail("msg")`.
-
-**Guard clauses** (`Jaina.Core/Guard.cs`): Validate arguments at entry points. Methods: `Guard.NotNull()`, `Guard.NotNullOrEmpty()`, `Guard.Requires<TException>()`. Uses `CallerArgumentExpression` — no need to pass parameter name strings.
+**Result pattern** (`Jaina.Core/Results/`): Use `Result` / `Result<T>` as return types instead of throwing exceptions for expected failures. Factory methods: `Result.Ok()`, `Result.Fail("msg")`. `Jaina.Core` is intentionally tiny — only the Result kernel; no Guard, no extensions. Argument validation: use `ArgumentNullException.ThrowIfNull(x)` from BCL.
 
 **DI registration**: Every module exposes `AddJaina<Feature>()` extension methods on `IServiceCollection`. Use `TryAddSingleton`/`TryAddScoped` so callers can override implementations.
 
@@ -161,10 +159,11 @@ public void MethodName_Condition_ExpectedBehavior()
     var input = "hello";
 
     // Act
-    var result = Guard.NotNullOrEmpty(input);
+    var result = Result.Ok(input);
 
     // Assert
-    Assert.Equal("hello", result);
+    Assert.True(result.IsSuccess);
+    Assert.Equal("hello", result.Value);
 }
 ```
 

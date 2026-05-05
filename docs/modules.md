@@ -6,7 +6,7 @@ One line per package. Click through for details.
 
 | Package | What it gives you |
 |---|---|
-| [`Jaina.Core`](#) | `Result<T>`, `Guard`, extension helpers, `HttpClientBase` |
+| [`Jaina.Core`](#) | `Result<T>` + `IResult` — shared kernel for the Result pattern across modules |
 | [`Jaina.AspNetCore`](#) | `AddJainaProblemDetails()`, `UseJainaPipeline()`, `WithJainaResultFilter()` |
 
 ## Microservice spine
@@ -34,9 +34,7 @@ One line per package. Click through for details.
 | Package | What it gives you |
 |---|---|
 | [`Jaina.Validation`](#) | FluentValidation endpoint filter — auto 400 ProblemDetails |
-| [`Jaina.FeatureFlags`](#) | `Jaina.Tenant` + `Jaina.User` config-driven targeting filters with sticky percentage rollout |
 | [`Jaina.HealthChecks`](blog/2026-05-05-health-checks.md) | `/health/live` + `/health/ready` with the live/ready tag convention |
-| [`Jaina.Localization`](#) | Tenant-aware `IJainaLocalizer<T>` — `{tenant}/{key}` first, fallback to `{key}` |
 | [`Jaina.BackgroundJobs`](blog/2026-05-05-background-jobs.md) | `IBackgroundJobScheduler` + Quartz provider for one-shot + cron |
 | [`Jaina.Grpc`](blog/2026-05-05-grpc-jwt-tenant.md) | gRPC server interceptors — logging, correlation |
 | [`Jaina.Testing`](#) | `JainaWebApplicationFactory<T>` + `FakeClock` + Testcontainers fixtures |
