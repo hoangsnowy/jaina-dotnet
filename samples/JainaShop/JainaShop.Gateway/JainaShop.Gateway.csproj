@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Jaina.Samples.ServiceDefaults\Jaina.Samples.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\src\core\Jaina.Core\Jaina.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\aspnetcore\Jaina.AspNetCore\Jaina.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\multitenancy\Jaina.MultiTenancy\Jaina.MultiTenancy.csproj" />
+    <ProjectReference Include="..\..\..\src\ratelimiting\Jaina.RateLimiting\Jaina.RateLimiting.csproj" />
+    <ProjectReference Include="..\..\..\src\resilience\Jaina.Resilience\Jaina.Resilience.csproj" />
+    <ProjectReference Include="..\..\..\src\servicediscovery\Jaina.ServiceDiscovery\Jaina.ServiceDiscovery.csproj" />
+    <ProjectReference Include="..\..\..\src\healthchecks\Jaina.HealthChecks\Jaina.HealthChecks.csproj" />
+  </ItemGroup>
+</Project>
