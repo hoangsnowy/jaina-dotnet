@@ -55,7 +55,7 @@
 
     <!-- Data -->
     <PackageVersion Include="Dapper" Version="2.1.72" />
-    <PackageVersion Include="Elastic.Clients.Elasticsearch" Version="9.3.4" />
+    <PackageVersion Include="Elastic.Clients.Elasticsearch" Version="9.3.6" />
 
     <!-- gRPC -->
     <PackageVersion Include="Grpc.Net.Client" Version="2.76.0" />
