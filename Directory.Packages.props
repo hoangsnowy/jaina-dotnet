@@ -67,8 +67,8 @@
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.7" />
 
     <!-- Notification -->
-    <PackageVersion Include="MailKit" Version="4.15.1" />
-    <PackageVersion Include="MimeKit" Version="4.15.1" />
+    <PackageVersion Include="MailKit" Version="4.16.0" />
+    <PackageVersion Include="MimeKit" Version="4.16.0" />
 
     <!-- M3: productivity packages -->
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
