@@ -51,7 +51,7 @@
     <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.9.0" />
 
     <!-- Mapping -->
-    <PackageVersion Include="Mapster" Version="7.4.0" />
+    <PackageVersion Include="Mapster" Version="10.0.7" />
 
     <!-- Data -->
     <PackageVersion Include="Dapper" Version="2.1.72" />
