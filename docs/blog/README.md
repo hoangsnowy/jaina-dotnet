@@ -25,7 +25,7 @@ Real production patterns, real failure modes, runnable sample code. Every post f
 | 7 | [Health checks that don't fool Kubernetes: live vs ready vs startup](2026-05-05-health-checks.md) | HealthChecks | ✅ |
 | 8 | [gRPC + JWT + tenant: auth flow between microservices](2026-05-05-grpc-jwt-tenant.md) | Grpc, Auth, MultiTenancy | ✅ |
 | 9 | [Background jobs that survive 1M-row reprocessing](2026-05-05-background-jobs.md) | BackgroundJobs, Outbox | ✅ |
-| 10 | Migrating monolith → microservices, one slice at a time | Strangler fig, Outbox, ServiceDiscovery | TBD |
+| 10 | [Migrating monolith → microservices, one slice at a time](2026-05-05-monolith-to-microservices.md) | Strangler fig, Outbox, ServiceDiscovery | ✅ |
 
 ## Conventions
 
