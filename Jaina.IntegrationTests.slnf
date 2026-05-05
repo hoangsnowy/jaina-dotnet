@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "Jaina.sln",
+    "path": "Jaina.slnx",
     "projects": [
       "src/aspnetcore/Jaina.AspNetCore/Jaina.AspNetCore.csproj",
       "src/backgroundjobs/Jaina.BackgroundJobs.Quartz/Jaina.BackgroundJobs.Quartz.csproj",

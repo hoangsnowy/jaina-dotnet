@@ -31,7 +31,7 @@ jobs:
         run: dotnet tool update -g docfx
 
       - name: Restore packages (so docfx metadata can read project refs)
-        run: dotnet restore Jaina.sln
+        run: dotnet restore Jaina.slnx
 
       - name: Build docs site
         run: docfx docfx.json
