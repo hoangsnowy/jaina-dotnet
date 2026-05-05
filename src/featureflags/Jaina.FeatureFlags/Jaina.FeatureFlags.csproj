@@ -1,11 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(LibTfms)</TargetFrameworks>
-    <Description>Feature flag helpers for Jaina framework — wraps Microsoft.FeatureManagement with a Jaina-aware targeting filter</Description>
+    <Description>Feature flag helpers for Jaina framework — wraps Microsoft.FeatureManagement with Jaina-aware targeting filters that auto-bind to ITenantContext + ClaimsPrincipal so tenant- and user-based rollouts "just work" without per-app filter wiring</Description>
     <PackageId>Jaina.FeatureFlags</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\multitenancy\Jaina.MultiTenancy\Jaina.MultiTenancy.csproj" />
+    <ProjectReference Include="..\..\observability\Jaina.Observability\Jaina.Observability.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.FeatureManagement" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 </Project>
