@@ -15,6 +15,7 @@ Real production patterns, real failure modes, runnable sample code. Every post f
 
 | # | Post | Patterns | Status |
 |---|------|---------|--------|
+| 0 | [📘 **EBOOK** — From hello-world to Black Friday: building a production Orders service](2026-05-05-orders-service-from-scratch.md) | Idempotency + Outbox + Saga + Observability — full walkthrough, ~50 min | ✅ |
 | 1 | [Idempotency: surviving the mobile retry storm](2026-05-04-idempotency-retry-storm.md) | Idempotency middleware | ✅ |
 | 2 | [Outbox: never lose another order on Black Friday](2026-05-04-outbox-black-friday.md) | Messaging.Outbox, relay | ✅ |
 | 3 | [Resilience pipelines: 5 Polly patterns in 3 lines](2026-05-05-resilience-pipelines.md) | Resilience | ✅ |
