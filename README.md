@@ -55,6 +55,7 @@ src/
                   Jaina.Messaging.Saga            Orchestration saga + reverse compensation
                   Jaina.Messaging.Saga.InMemory   In-memory saga state repository (dev/test)
                   Jaina.Messaging.Saga.EfCore     EF Core saga state repository
+                  Jaina.Messaging.Saga.Redis      Redis saga state repository
   storage/        Jaina.Storage            IFileStorage abstraction
                   Jaina.Storage.Local      File system
                   Jaina.Storage.AzureBlob  Azure Blob Storage
@@ -73,6 +74,15 @@ src/
   notifications/  Jaina.Notifications       IEmailSender, ISmsSender abstractions
                   Jaina.Notifications.Smtp         SMTP email provider (MailKit)
                   Jaina.Notifications.ConsoleSms   Console/logger SMS provider (dev/test)
+  validation/     Jaina.Validation         FluentValidation endpoint filter (400 ProblemDetails)
+  featureflags/   Jaina.FeatureFlags       Microsoft.FeatureManagement wrapper
+  healthchecks/   Jaina.HealthChecks       /health/live + /health/ready (live/ready tags)
+  localization/   Jaina.Localization       IStringLocalizer convention (Resources/ folder)
+  backgroundjobs/ Jaina.BackgroundJobs     IBackgroundJobScheduler (one-shot + cron)
+                  Jaina.BackgroundJobs.Quartz  Quartz.NET provider
+  grpc/           Jaina.Grpc               gRPC server interceptors (logging + correlation)
+  testing/        Jaina.Testing            JainaWebApplicationFactory + FakeClock + assertions
+                  Jaina.Testing.Containers Testcontainers fixtures (Postgres / Redis / RabbitMQ / Azurite)
 samples/          Aspire AppHost, WebApi, Worker demos
 tests/            xUnit test projects
 docs/blog/        Cookbook posts (real-world patterns + error scenarios)
