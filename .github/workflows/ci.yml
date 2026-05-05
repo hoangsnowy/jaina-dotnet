@@ -5,10 +5,17 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  unit:
+    name: Unit Tests (${{ matrix.tfm }})
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        tfm: [net8.0, net9.0, net10.0]
 
     steps:
       - uses: actions/checkout@v6
@@ -21,19 +28,55 @@ jobs:
             9.0.x
             10.0.x
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore
+        run: dotnet restore Jaina.UnitTests.slnf
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build Jaina.UnitTests.slnf --no-restore --configuration Release -p:TargetFramework=${{ matrix.tfm }}
 
-      - name: Test
-        run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
+      - name: Test (Unit)
+        run: dotnet test Jaina.UnitTests.slnf --no-restore --configuration Release -p:TargetFramework=${{ matrix.tfm }} --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
 
-      - name: Upload coverage reports
+      - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: coverage-reports
+          name: coverage-unit-${{ matrix.tfm }}
+          path: ./test-results/**/coverage.cobertura.xml
+          retention-days: 14
+
+  integration:
+    name: Integration Tests (Docker)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: unit
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Restore
+        run: dotnet restore Jaina.IntegrationTests.slnf
+
+      - name: Build
+        run: dotnet build Jaina.IntegrationTests.slnf --no-restore --configuration Release -p:TargetFramework=net10.0
+
+      - name: Test (Integration)
+        # Integration tests pull Postgres / Redis / RabbitMQ images via Testcontainers.
+        # Docker is preinstalled on ubuntu-latest runners.
+        run: dotnet test Jaina.IntegrationTests.slnf --no-restore --configuration Release -p:TargetFramework=net10.0 --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-integration
           path: ./test-results/**/coverage.cobertura.xml
           retention-days: 14
