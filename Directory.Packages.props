@@ -107,7 +107,7 @@
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.1.0" />
 
     <!-- Aspire (Hosting must match AppHost dependency >= 13.2.2) -->
-    <PackageVersion Include="Aspire.Hosting" Version="13.2.2" />
+    <PackageVersion Include="Aspire.Hosting" Version="13.2.4" />
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.2.2" />
     <PackageVersion Include="Aspire.Hosting.Redis" Version="13.2.2" />
     <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="13.1.0" />
