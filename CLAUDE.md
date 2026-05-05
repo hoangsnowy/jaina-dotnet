@@ -40,7 +40,7 @@ dotnet build Jaina.sln
 dotnet build Jaina.sln -c Release
 
 # Run a specific sample
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # Run tests (once test projects exist)
 dotnet test Jaina.sln

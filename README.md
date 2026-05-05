@@ -61,10 +61,8 @@ src/
                   Jaina.Storage.AzureBlob  Azure Blob Storage
                   Jaina.Storage.AzureFileShare  Azure Files
                   Jaina.Storage.Sftp       SFTP
-                  Jaina.Storage.Compression  ZIP utilities
   security/       Jaina.Security           AES, RSA, BCrypt, SHA, JWT helpers
-                  Jaina.Security.Authentication  JWT bearer auth
-                  Jaina.Security.Authentication.Client  Client credentials
+                  Jaina.Security.Authentication  JWT bearer + ApiKey + UserContext + scope policies
                   Jaina.Security.KeyVault  Azure Key Vault
   observability/  Jaina.Observability      ITelemetry / ISpan abstraction + structured logging
                   Jaina.Observability.ApplicationInsights  Azure App Insights
@@ -478,12 +476,12 @@ git clone https://github.com/HoangSnowy/jaina-dotnet.git
 cd jaina-dotnet
 dotnet restore Jaina.sln
 
-# Run Aspire AppHost (starts everything)
-dotnet run --project samples/Jaina.Samples.AppHost
+# Run the JainaShop Aspire AppHost (5 services: Catalog, Orders, Identity, Notifier, Gateway + Redis)
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
-# Or run the Web API directly
-dotnet run --project samples/Jaina.Samples.WebApi
-# Open: http://localhost:5000/swagger
+# Or run a single service directly
+dotnet run --project samples/JainaShop/JainaShop.Catalog
+# Open: http://localhost:5101/swagger
 ```
 
 ### Available Sample Endpoints

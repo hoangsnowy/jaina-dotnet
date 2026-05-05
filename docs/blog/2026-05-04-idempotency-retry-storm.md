@@ -3,7 +3,7 @@ title: "Idempotency: surviving the mobile retry storm"
 date: 2026-05-04
 tags: [idempotency, http, microservices]
 reading_time: "~6 min"
-sample: samples/Jaina.Samples.WebApi/Program.cs
+sample: samples/JainaShop/JainaShop.AppHost/Program.cs
 ---
 
 # Idempotency: surviving the mobile retry storm
@@ -131,7 +131,7 @@ Add a counter on the `Idempotent-Replay` response header in your gateway to char
 ```bash
 git clone https://github.com/HoangSnowy/jaina-dotnet
 cd jaina-dotnet
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # In another terminal
 KEY=demo-$(date +%s)

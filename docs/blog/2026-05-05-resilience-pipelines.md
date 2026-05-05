@@ -3,7 +3,7 @@ title: "Resilience pipelines: 5 Polly patterns in 3 lines"
 date: 2026-05-05
 tags: [resilience, polly, microservices]
 reading_time: "~5 min"
-sample: samples/Jaina.Samples.WebApi/Program.cs
+sample: samples/JainaShop/JainaShop.AppHost/Program.cs
 ---
 
 # Resilience pipelines: 5 Polly patterns in 3 lines
@@ -144,7 +144,7 @@ Useful metrics (auto-emitted by Polly v8 when you `AddSource("Polly")`):
 ```bash
 git clone https://github.com/HoangSnowy/jaina-dotnet
 cd jaina-dotnet
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # Happy path
 curl http://localhost:5000/api/resilience/flaky

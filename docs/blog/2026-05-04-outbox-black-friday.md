@@ -3,7 +3,7 @@ title: "Outbox: never lose another order on Black Friday"
 date: 2026-05-04
 tags: [messaging, outbox, transactional, microservices]
 reading_time: "~9 min"
-sample: samples/Jaina.Samples.WebApi/Program.cs
+sample: samples/JainaShop/JainaShop.AppHost/Program.cs
 ---
 
 # Outbox: never lose another order on Black Friday
@@ -173,7 +173,7 @@ Useful metrics:
 ```bash
 git clone https://github.com/HoangSnowy/jaina-dotnet
 cd jaina-dotnet
-dotnet run --project samples/Jaina.Samples.WebApi
+dotnet run --project samples/JainaShop/JainaShop.AppHost
 
 # Terminal 2 — enqueue 5 orders
 for i in 1 2 3 4 5; do
