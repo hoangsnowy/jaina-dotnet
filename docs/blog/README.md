@@ -18,14 +18,14 @@ Real production patterns, real failure modes, runnable sample code. Every post f
 | 1 | [Idempotency: surviving the mobile retry storm](2026-05-04-idempotency-retry-storm.md) | Idempotency middleware | ✅ |
 | 2 | [Outbox: never lose another order on Black Friday](2026-05-04-outbox-black-friday.md) | Messaging.Outbox, relay | ✅ |
 | 3 | [Resilience pipelines: 5 Polly patterns in 3 lines](2026-05-05-resilience-pipelines.md) | Resilience | ✅ |
-| 4 | Service discovery: from hard-coded URLs to tenant-aware routing | ServiceDiscovery | TBD |
+| 4 | [Service discovery: from hard-coded URLs to tenant-aware routing](2026-05-05-service-discovery.md) | ServiceDiscovery | ✅ |
 | 5 | [Saga orchestration: Payment + Shipping rollback](2026-05-05-saga-orchestration.md) | Messaging.Saga | ✅ |
 | 5b | [Multi-tenant SaaS: shared schema, row-level isolation](2026-05-05-multi-tenancy.md) | MultiTenancy + EF query filters | ✅ |
-| 6 | Reading OTEL traces like a novel: distributed bug detective work | Observability | TBD (after M2) |
-| 7 | Health checks that don't fool Kubernetes: live vs ready vs startup | HealthChecks | TBD (after M3) |
-| 8 | gRPC + JWT + tenant: auth flow between microservices | Grpc, Auth, MultiTenancy | TBD (after M2/M3) |
-| 9 | Background jobs that survive 1M-row reprocessing | BackgroundJobs, Outbox | TBD (after M3) |
-| 10 | Migrating monolith → microservices, one slice at a time | Strangler fig, Outbox, ServiceDiscovery | TBD (after M3) |
+| 6 | [Reading OTEL traces like a novel: distributed bug detective work](2026-05-05-observability-traces.md) | Observability | ✅ |
+| 7 | [Health checks that don't fool Kubernetes: live vs ready vs startup](2026-05-05-health-checks.md) | HealthChecks | ✅ |
+| 8 | [gRPC + JWT + tenant: auth flow between microservices](2026-05-05-grpc-jwt-tenant.md) | Grpc, Auth, MultiTenancy | ✅ |
+| 9 | [Background jobs that survive 1M-row reprocessing](2026-05-05-background-jobs.md) | BackgroundJobs, Outbox | ✅ |
+| 10 | Migrating monolith → microservices, one slice at a time | Strangler fig, Outbox, ServiceDiscovery | TBD |
 
 ## Conventions
 
