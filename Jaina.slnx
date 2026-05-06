@@ -81,7 +81,6 @@
   </Folder>
   <Folder Name="/src/observability/">
     <Project Path="src/observability/Jaina.Observability.ApplicationInsights/Jaina.Observability.ApplicationInsights.csproj" />
-    <Project Path="src/observability/Jaina.Observability.ElasticApm/Jaina.Observability.ElasticApm.csproj" />
     <Project Path="src/observability/Jaina.Observability/Jaina.Observability.csproj" />
   </Folder>
   <Folder Name="/src/ratelimiting/">

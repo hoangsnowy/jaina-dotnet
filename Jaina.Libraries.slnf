@@ -40,7 +40,6 @@
       "src/notifications/Jaina.Notifications.Smtp/Jaina.Notifications.Smtp.csproj",
       "src/notifications/Jaina.Notifications/Jaina.Notifications.csproj",
       "src/observability/Jaina.Observability.ApplicationInsights/Jaina.Observability.ApplicationInsights.csproj",
-      "src/observability/Jaina.Observability.ElasticApm/Jaina.Observability.ElasticApm.csproj",
       "src/observability/Jaina.Observability/Jaina.Observability.csproj",
       "src/ratelimiting/Jaina.RateLimiting/Jaina.RateLimiting.csproj",
       "src/resilience/Jaina.Resilience/Jaina.Resilience.csproj",
