@@ -13,5 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Elastic.Clients.Elasticsearch" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+  <PackageReference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
 </Project>

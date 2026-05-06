@@ -11,5 +11,6 @@
 
   <ItemGroup>
     <PackageReference Include="Elastic.Apm.NetCoreAll" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
 </Project>
