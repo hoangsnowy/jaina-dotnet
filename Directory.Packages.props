@@ -31,7 +31,6 @@
 
     <!-- Storage -->
     <PackageVersion Include="Azure.Storage.Blobs" Version="12.27.0" />
-    <PackageVersion Include="Azure.Storage.Files.Shares" Version="12.25.0" />
     <PackageVersion Include="SSH.NET" Version="2024.2.0" />
 
     <!-- Logging & Monitoring -->

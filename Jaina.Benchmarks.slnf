@@ -48,7 +48,6 @@
       "src/security/Jaina.Security/Jaina.Security.csproj",
       "src/servicediscovery/Jaina.ServiceDiscovery/Jaina.ServiceDiscovery.csproj",
       "src/storage/Jaina.Storage.AzureBlob/Jaina.Storage.AzureBlob.csproj",
-      "src/storage/Jaina.Storage.AzureFileShare/Jaina.Storage.AzureFileShare.csproj",
       "src/storage/Jaina.Storage.Local/Jaina.Storage.Local.csproj",
       "src/storage/Jaina.Storage.Sftp/Jaina.Storage.Sftp.csproj",
       "src/storage/Jaina.Storage/Jaina.Storage.csproj",

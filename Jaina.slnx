@@ -99,7 +99,6 @@
   </Folder>
   <Folder Name="/src/storage/">
     <Project Path="src/storage/Jaina.Storage.AzureBlob/Jaina.Storage.AzureBlob.csproj" />
-    <Project Path="src/storage/Jaina.Storage.AzureFileShare/Jaina.Storage.AzureFileShare.csproj" />
     <Project Path="src/storage/Jaina.Storage.Local/Jaina.Storage.Local.csproj" />
     <Project Path="src/storage/Jaina.Storage.Sftp/Jaina.Storage.Sftp.csproj" />
     <Project Path="src/storage/Jaina.Storage/Jaina.Storage.csproj" />
