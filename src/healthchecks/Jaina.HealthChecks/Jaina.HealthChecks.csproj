@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Opinionated health-check wiring for Jaina framework — exposes /health/live (process up) and /health/ready (deps up) and registers per-provider checks (Redis, RabbitMQ, SqlServer, NpgSql, Outbox lag)</Description>
     <PackageId>Jaina.HealthChecks</PackageId>
   </PropertyGroup>

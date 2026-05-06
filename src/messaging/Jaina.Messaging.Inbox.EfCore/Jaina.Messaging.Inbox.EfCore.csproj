@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>EF Core provider for Jaina inbox dedup — persists (consumer, message-id) records in your DbContext for cross-instance dedup</Description>
     <PackageId>Jaina.Messaging.Inbox.EfCore</PackageId>
   </PropertyGroup>

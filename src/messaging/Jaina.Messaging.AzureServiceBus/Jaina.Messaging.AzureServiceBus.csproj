@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Azure Service Bus implementation for Jaina Messaging</Description>
     <PackageId>Jaina.Messaging.AzureServiceBus</PackageId>
   </PropertyGroup>

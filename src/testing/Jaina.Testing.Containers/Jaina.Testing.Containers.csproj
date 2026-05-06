@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Testcontainers fixtures for Jaina framework — pre-configured Postgres, Redis, RabbitMQ, Azurite for integration tests</Description>
     <PackageId>Jaina.Testing.Containers</PackageId>
   </PropertyGroup>

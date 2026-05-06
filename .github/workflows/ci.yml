@@ -9,13 +9,9 @@ on:
 
 jobs:
   unit:
-    name: Unit Tests (${{ matrix.tfm }})
+    name: Unit Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        tfm: [net8.0, net9.0, net10.0]
 
     steps:
       - uses: actions/checkout@v6
@@ -23,25 +19,22 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
-            10.0.x
+          dotnet-version: 10.0.x
 
       - name: Restore
         run: dotnet restore Jaina.UnitTests.slnf
 
       - name: Build
-        run: dotnet build Jaina.UnitTests.slnf --no-restore --configuration Release -p:TargetFramework=${{ matrix.tfm }}
+        run: dotnet build Jaina.UnitTests.slnf --no-restore --configuration Release
 
       - name: Test (Unit)
-        run: dotnet test Jaina.UnitTests.slnf --no-restore --configuration Release -p:TargetFramework=${{ matrix.tfm }} --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
+        run: dotnet test Jaina.UnitTests.slnf --no-restore --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
 
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: coverage-unit-${{ matrix.tfm }}
+          name: coverage-unit
           path: ./test-results/**/coverage.cobertura.xml
           retention-days: 14
 
@@ -57,21 +50,18 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
-            10.0.x
+          dotnet-version: 10.0.x
 
       - name: Restore
         run: dotnet restore Jaina.IntegrationTests.slnf
 
       - name: Build
-        run: dotnet build Jaina.IntegrationTests.slnf --no-restore --configuration Release -p:TargetFramework=net10.0
+        run: dotnet build Jaina.IntegrationTests.slnf --no-restore --configuration Release
 
       - name: Test (Integration)
         # Integration tests pull Postgres / Redis / RabbitMQ images via Testcontainers.
         # Docker is preinstalled on ubuntu-latest runners.
-        run: dotnet test Jaina.IntegrationTests.slnf --no-restore --configuration Release -p:TargetFramework=net10.0 --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
+        run: dotnet test Jaina.IntegrationTests.slnf --no-restore --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./test-results
 
       - name: Upload coverage
         if: always()

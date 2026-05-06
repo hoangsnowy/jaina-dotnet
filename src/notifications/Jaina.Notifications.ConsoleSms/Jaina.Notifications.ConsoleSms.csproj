@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Console/logger SMS provider for Jaina Notifications — intended for development and testing</Description>
     <PackageId>Jaina.Notifications.ConsoleSms</PackageId>
   </PropertyGroup>

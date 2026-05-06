@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Email and SMS notification abstractions for Jaina framework</Description>
     <PackageId>Jaina.Notifications</PackageId>
   </PropertyGroup>

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Multi-tenant abstractions for Jaina framework — tenant context, resolver strategies (header/claim/host/route), and middleware</Description>
     <PackageId>Jaina.MultiTenancy</PackageId>
   </PropertyGroup>

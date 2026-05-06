@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>In-memory IIdempotencyStore for Jaina framework — single-process scope, suitable for dev and tests</Description>
     <PackageId>Jaina.Idempotency.InMemory</PackageId>
   </PropertyGroup>

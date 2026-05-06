@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(AppTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Entity Framework Core implementation of Repository and Unit of Work for Jaina framework</Description>
     <PackageId>Jaina.Data.EfCore</PackageId>
   </PropertyGroup>

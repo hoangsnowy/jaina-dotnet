@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Repository pattern and Unit of Work abstractions for Jaina framework</Description>
     <PackageId>Jaina.Data</PackageId>
   </PropertyGroup>

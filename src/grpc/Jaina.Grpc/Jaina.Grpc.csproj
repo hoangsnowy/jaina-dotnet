@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>gRPC server-side helpers for Jaina framework — interceptors for logging, telemetry, and correlation propagation</Description>
     <PackageId>Jaina.Grpc</PackageId>
   </PropertyGroup>

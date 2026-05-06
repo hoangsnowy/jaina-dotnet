@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Opinionated resilience pipelines (retry, timeout, circuit breaker, hedging) on top of Polly v8 / Microsoft.Extensions.Resilience for Jaina framework</Description>
     <PackageId>Jaina.Resilience</PackageId>
   </PropertyGroup>

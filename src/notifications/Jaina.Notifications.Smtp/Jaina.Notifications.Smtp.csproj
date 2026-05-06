@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>SMTP email provider for Jaina Notifications</Description>
     <PackageId>Jaina.Notifications.Smtp</PackageId>
   </PropertyGroup>

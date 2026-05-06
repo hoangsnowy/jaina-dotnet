@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Quartz.NET provider for Jaina.BackgroundJobs — translates IBackgroundJobScheduler operations into Quartz JobDetails / Triggers</Description>
     <PackageId>Jaina.BackgroundJobs.Quartz</PackageId>
   </PropertyGroup>

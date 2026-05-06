@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Inbox pattern abstractions for Jaina framework — consumer-side message deduplication so at-least-once delivery becomes effectively-once</Description>
     <PackageId>Jaina.Messaging.Inbox</PackageId>
   </PropertyGroup>

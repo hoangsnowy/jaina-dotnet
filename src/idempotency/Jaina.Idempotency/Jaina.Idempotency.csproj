@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Idempotency abstractions for Jaina framework — replay-safe HTTP requests and CQRS commands keyed by Idempotency-Key</Description>
     <PackageId>Jaina.Idempotency</PackageId>
   </PropertyGroup>

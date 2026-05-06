@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Saga orchestration abstractions for Jaina framework — sequenced steps with reverse-order compensation on failure</Description>
     <PackageId>Jaina.Messaging.Saga</PackageId>
   </PropertyGroup>

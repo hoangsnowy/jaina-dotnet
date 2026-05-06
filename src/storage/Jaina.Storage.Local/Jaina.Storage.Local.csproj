@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Local filesystem storage implementation for Jaina framework</Description>
     <PackageId>Jaina.Storage.Local</PackageId>
   </PropertyGroup>

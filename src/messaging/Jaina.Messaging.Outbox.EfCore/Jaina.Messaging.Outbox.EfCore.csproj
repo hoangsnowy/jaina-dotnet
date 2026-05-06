@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>EF Core provider for Jaina transactional outbox — stores OutboxMessage rows in your DbContext so they commit atomically with domain writes</Description>
     <PackageId>Jaina.Messaging.Outbox.EfCore</PackageId>
   </PropertyGroup>

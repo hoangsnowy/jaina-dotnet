@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <Description>Observability, telemetry, and structured logging abstractions for Jaina framework</Description>
     <PackageId>Jaina.Observability</PackageId>
   </PropertyGroup>
