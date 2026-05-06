@@ -21,7 +21,6 @@
       "src/idempotency/Jaina.Idempotency.Redis/Jaina.Idempotency.Redis.csproj",
       "src/idempotency/Jaina.Idempotency/Jaina.Idempotency.csproj",
       "src/messaging/Jaina.Messaging.AzureServiceBus/Jaina.Messaging.AzureServiceBus.csproj",
-      "src/messaging/Jaina.Messaging.Broadcast/Jaina.Messaging.Broadcast.csproj",
       "src/messaging/Jaina.Messaging.Inbox.EfCore/Jaina.Messaging.Inbox.EfCore.csproj",
       "src/messaging/Jaina.Messaging.Inbox.InMemory/Jaina.Messaging.Inbox.InMemory.csproj",
       "src/messaging/Jaina.Messaging.Inbox.Redis/Jaina.Messaging.Inbox.Redis.csproj",
