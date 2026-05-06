@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jaina.Data\Jaina.Data.csproj" />
-    <ProjectReference Include="..\..\mapping\Jaina.Mapping\Jaina.Mapping.csproj" />
   </ItemGroup>
 
   <ItemGroup>
