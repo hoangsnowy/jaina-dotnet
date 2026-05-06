@@ -28,7 +28,6 @@
     <Project Path="src/aspnetcore/Jaina.AspNetCore/Jaina.AspNetCore.csproj" />
   </Folder>
   <Folder Name="/src/backgroundjobs/">
-    <Project Path="src/backgroundjobs/Jaina.BackgroundJobs.Quartz/Jaina.BackgroundJobs.Quartz.csproj" />
     <Project Path="src/backgroundjobs/Jaina.BackgroundJobs/Jaina.BackgroundJobs.csproj" />
   </Folder>
   <Folder Name="/src/caching/">

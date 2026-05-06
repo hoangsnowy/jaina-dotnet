@@ -71,8 +71,6 @@
     <PackageVersion Include="Microsoft.FeatureManagement" Version="4.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Localization" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="10.0.5" />
-    <PackageVersion Include="Quartz" Version="3.13.1" />
-    <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.13.1" />
     <PackageVersion Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
     <PackageVersion Include="AspNetCore.HealthChecks.Rabbitmq" Version="9.0.0" />
     <PackageVersion Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />

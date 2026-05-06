@@ -3,7 +3,6 @@
     "path": "Jaina.slnx",
     "projects": [
       "src/aspnetcore/Jaina.AspNetCore/Jaina.AspNetCore.csproj",
-      "src/backgroundjobs/Jaina.BackgroundJobs.Quartz/Jaina.BackgroundJobs.Quartz.csproj",
       "src/backgroundjobs/Jaina.BackgroundJobs/Jaina.BackgroundJobs.csproj",
       "src/caching/Jaina.Caching.Fusion/Jaina.Caching.Fusion.csproj",
       "src/caching/Jaina.Caching.Memory/Jaina.Caching.Memory.csproj",
