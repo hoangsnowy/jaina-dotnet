@@ -20,8 +20,6 @@
       "src/idempotency/Jaina.Idempotency.InMemory/Jaina.Idempotency.InMemory.csproj",
       "src/idempotency/Jaina.Idempotency.Redis/Jaina.Idempotency.Redis.csproj",
       "src/idempotency/Jaina.Idempotency/Jaina.Idempotency.csproj",
-      "src/mapping/Jaina.Mapping.Mapster/Jaina.Mapping.Mapster.csproj",
-      "src/mapping/Jaina.Mapping/Jaina.Mapping.csproj",
       "src/messaging/Jaina.Messaging.AzureServiceBus/Jaina.Messaging.AzureServiceBus.csproj",
       "src/messaging/Jaina.Messaging.Broadcast/Jaina.Messaging.Broadcast.csproj",
       "src/messaging/Jaina.Messaging.Inbox.EfCore/Jaina.Messaging.Inbox.EfCore.csproj",

@@ -49,9 +49,6 @@
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.5.1" />
     <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.10.0" />
 
-    <!-- Mapping -->
-    <PackageVersion Include="Mapster" Version="10.0.7" />
-
     <!-- Data -->
     <PackageVersion Include="Dapper" Version="2.1.72" />
     <PackageVersion Include="Elastic.Clients.Elasticsearch" Version="9.3.6" />

@@ -56,10 +56,6 @@
     <Project Path="src/idempotency/Jaina.Idempotency.Redis/Jaina.Idempotency.Redis.csproj" />
     <Project Path="src/idempotency/Jaina.Idempotency/Jaina.Idempotency.csproj" />
   </Folder>
-  <Folder Name="/src/mapping/">
-    <Project Path="src/mapping/Jaina.Mapping.Mapster/Jaina.Mapping.Mapster.csproj" />
-    <Project Path="src/mapping/Jaina.Mapping/Jaina.Mapping.csproj" />
-  </Folder>
   <Folder Name="/src/messaging/">
     <Project Path="src/messaging/Jaina.Messaging.AzureServiceBus/Jaina.Messaging.AzureServiceBus.csproj" />
     <Project Path="src/messaging/Jaina.Messaging.Broadcast/Jaina.Messaging.Broadcast.csproj" />
