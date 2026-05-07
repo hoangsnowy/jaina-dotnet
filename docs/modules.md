@@ -39,16 +39,15 @@ One line per package. Click through for details.
 | [`Jaina.Grpc`](blog/2026-05-05-grpc-jwt-tenant.md) | gRPC server interceptors — logging, correlation |
 | [`Jaina.Testing`](#) | `JainaWebApplicationFactory<T>` + `FakeClock` + Testcontainers fixtures |
 
-## Storage / Caching / Data / Messaging / Mapping / Notifications
+## Storage / Caching / Data / Messaging / Notifications
 
 | Package | What it gives you |
 |---|---|
 | `Jaina.Caching` (+ `.Memory`, `.Redis`, `.Fusion`) | `ICache` with three provider choices |
 | `Jaina.Data` (+ `.EfCore`, `.Dapper`, `.Cqrs`) | `IRepository<T>`, `IUnitOfWork`, command/query buses |
-| `Jaina.Messaging` (+ `.RabbitMQ`, `.AzureServiceBus`, `.Broadcast`) | `IQueue<T>` + `ITopic<T>` |
-| `Jaina.Storage` (+ `.Local`, `.AzureBlob`, `.AzureFileShare`, `.Sftp`) | `IFileStorage` |
-| `Jaina.Mapping` + `.Mapster` | `IMapper` |
-| `Jaina.Notifications` + `.Smtp`, `.ConsoleSms` | `IEmailSender`, `ISmsSender` |
+| `Jaina.Messaging` (+ `.RabbitMQ`, `.AzureServiceBus`) | `IQueue<T>` + `ITopic<T>` |
+| `Jaina.Storage` (+ `.Local`, `.AzureBlob`, `.Sftp`) | `IFileStorage` |
+| `Jaina.Notifications` + `.Smtp` | `IEmailSender`, `ISmsSender` |
 | `Jaina.Security` (+ `.KeyVault`) | AES / RSA / BCrypt / SHA / JWT helpers |
 
 ## Sample app
@@ -60,7 +59,7 @@ One line per package. Click through for details.
 | `JainaShop.Catalog` | Caching + EF Core + HealthChecks + Observability |
 | `JainaShop.Orders` | Outbox.EfCore + Idempotency + relay |
 | `JainaShop.Identity` | JWT issuer + ApiKey scheme + tenant claim |
-| `JainaShop.Notifier` | BackgroundJobs.Quartz + Inbox dedup + ConsoleSms |
+| `JainaShop.Notifier` | Inbox dedup + sample ConsoleSms (background scheduler swap to Hangfire — Phase 1) |
 | `JainaShop.Gateway` | RateLimiting + MultiTenancy + ServiceDiscovery + HttpClient forwarding |
 | `JainaShop.AppHost` | Aspire orchestration of all 5 + Redis |
 

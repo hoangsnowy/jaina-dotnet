@@ -1,10 +1,15 @@
 ---
 title: "Background jobs that survive 1M-row reprocessing"
 date: 2026-05-05
-tags: [backgroundjobs, quartz, batch, microservices]
+tags: [backgroundjobs, hangfire, batch, microservices]
 reading_time: "~6 min"
 sample: samples/JainaShop/JainaShop.Notifier/Program.cs
+status: stale
 ---
+
+> **Status — stale.** Quartz provider removed Phase 0. Hangfire-based replacement
+> (`Jaina.BackgroundJobs.Hangfire`) lands Phase 1; this post will be rewritten
+> against that provider.
 
 # Background jobs that survive 1M-row reprocessing
 

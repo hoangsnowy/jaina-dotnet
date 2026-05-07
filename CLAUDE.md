@@ -59,22 +59,18 @@ dotnet test --filter "FullyQualifiedName~ClassName"      # single test class
 
 ## Verification Approach
 
-**Do NOT run `dotnet build Jaina.sln` as a verification step locally.** The solution targets `net8.0;net9.0;net10.0` but the local SDK may only support net8. The build will always fail with `NETSDK1045` for net9/net10 targets — this is an environment constraint, not a code error.
-
-**Correct verification strategy by task type:**
+Solution targets `net10.0` only. Local build works if the .NET 10 SDK is installed (`dotnet --list-sdks`). CI on GitHub Actions remains the authoritative validator — push and check.
 
 | Task | How to verify |
 |------|---------------|
 | Code logic changes | Read the code — confirm correctness by inspection |
-| New package added / version changed | Push to CI — GitHub Actions runs on .NET 9+ SDK |
-| New project / .csproj added | Check that `.sln` includes it (`dotnet sln list`) |
-| DI registration / API surface | Check the file compiles for `net8.0` only: `dotnet build <project>.csproj -f net8.0` |
-
-CI is the authoritative build validator for this repository.
+| Package add / version bump | Local `dotnet restore` + `dotnet build` if SDK 10 present; otherwise push CI |
+| New project / .csproj added | Check `Jaina.slnx` + relevant `*.slnf` include it |
+| DI registration / API surface | Local `dotnet build <project>.csproj` |
 
 ## Architecture
 
-Jaina is a modular .NET 8 framework library organized into independent packages:
+Jaina is a modular .NET 10 framework library organized into independent packages:
 
 ```
 src/
@@ -90,19 +86,16 @@ src/
                 Jaina.Data.EfCore     — EF Core provider (EfRepository, EfUnitOfWork)
                 Jaina.Data.Dapper     — Dapper provider (DapperRepository)
                 Jaina.Data.Cqrs       — Command/Query buses, domain events, event store
-  messaging/    Jaina.Messaging*      — IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus/Broadcast
-                Jaina.Messaging.Outbox* — transactional outbox + relay (InMemory; EfCore TBD)
-                Jaina.Messaging.Inbox*  — consumer dedup (InMemory; Redis/EfCore TBD)
-                Jaina.Messaging.Saga*   — orchestration + compensation (InMemory; EfCore/Redis TBD)
-  storage/      Jaina.Storage*        — IFileStorage + Local/AzureBlob/FileShare/SFTP
+  messaging/    Jaina.Messaging*      — IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus
+                Jaina.Messaging.Outbox* — transactional outbox + relay (InMemory + EfCore)
+                Jaina.Messaging.Inbox*  — consumer dedup (InMemory + Redis + EfCore)
+                Jaina.Messaging.Saga*   — orchestration + compensation (InMemory + EfCore + Redis)
+  storage/      Jaina.Storage*        — IFileStorage + Local/AzureBlob/SFTP
   security/     Jaina.Security        — AES/RSA/BCrypt/JWT
                 Jaina.Security.Authentication* — JWT bearer auth, Azure KeyVault
-  observability/ Jaina.Observability*  — ITelemetry + AppInsights/ElasticAPM
-  mapping/      Jaina.Mapping               — IMapper abstraction
-                Jaina.Mapping.Mapster         — Mapster provider (AddJainaMapster)
+  observability/ Jaina.Observability*  — ITelemetry + AppInsights
   notifications/ Jaina.Notifications          — IEmailSender, ISmsSender abstractions
                 Jaina.Notifications.Smtp        — SMTP provider (MailKit)
-                Jaina.Notifications.ConsoleSms  — Console/logger SMS provider (dev/test)
 samples/        Aspire AppHost, WebApi, Worker demos
 tests/          xUnit projects for Core, Caching, Security, Data.Cqrs
 ```
@@ -115,10 +108,11 @@ Each functional area follows the same pattern: one abstraction package + one or 
 
 | Package | Reason | Replacement |
 |---------|--------|-------------|
-| `AutoMapper` | Commercial license (v13+) | `Jaina.Mapping.Mapster` — use `AddJainaMapster()` and inject `IMapper` |
+| `AutoMapper` | Commercial license (v13+) | Manual mapping — extension method per DTO, or EF projection |
+| `Mapster` | Hidden cost + debug pain — Phase 0 cleanup | Manual mapping — extension method per DTO, or EF projection |
 | `FluentAssertions` | Commercial license (v7+) | `xunit` built-in `Assert.*` only |
 
-If you see either package in any `.csproj` or `Directory.Packages.props`, remove it.
+If you see any banned package in a `.csproj` or `Directory.Packages.props`, remove it.
 
 ## Key Patterns
 
@@ -143,7 +137,7 @@ From `.editorconfig` and `Directory.Build.props`:
 - Nullable reference types enabled — annotate all APIs
 - `TreatWarningsAsErrors=true` — no suppressions without justification
 - LF line endings, UTF-8, 4-space indent (2 for JSON/XML/YAML)
-- Target frameworks: both `$(LibTfms)` and `$(AppTfms)` resolve to `net8.0;net9.0;net10.0` — `netstandard2.0` is dropped. Use `$(LibTfms)` for abstraction packages, `$(AppTfms)` for provider packages
+- Target framework: `net10.0` only. Multi-target dropped Phase 0.
 
 ## Testing Conventions
 
