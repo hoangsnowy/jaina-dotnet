@@ -34,7 +34,6 @@
       "src/messaging/Jaina.Messaging.Saga/Jaina.Messaging.Saga.csproj",
       "src/messaging/Jaina.Messaging/Jaina.Messaging.csproj",
       "src/multitenancy/Jaina.MultiTenancy/Jaina.MultiTenancy.csproj",
-      "src/notifications/Jaina.Notifications.ConsoleSms/Jaina.Notifications.ConsoleSms.csproj",
       "src/notifications/Jaina.Notifications.Smtp/Jaina.Notifications.Smtp.csproj",
       "src/notifications/Jaina.Notifications/Jaina.Notifications.csproj",
       "src/observability/Jaina.Observability.ApplicationInsights/Jaina.Observability.ApplicationInsights.csproj",

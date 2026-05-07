@@ -9,7 +9,6 @@
     <Project Path="src/data/Jaina.Data.EfCore/Jaina.Data.EfCore.csproj" />
   </Folder>
   <Folder Name="/notifications/">
-    <Project Path="src/notifications/Jaina.Notifications.ConsoleSms/Jaina.Notifications.ConsoleSms.csproj" />
     <Project Path="src/notifications/Jaina.Notifications.Smtp/Jaina.Notifications.Smtp.csproj" />
   </Folder>
   <Folder Name="/samples/">

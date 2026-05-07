@@ -3,7 +3,6 @@ using Jaina.BackgroundJobs;
 using Jaina.HealthChecks;
 using Jaina.Messaging.Inbox;
 using Jaina.Messaging.Inbox.InMemory;
-using Jaina.Notifications.ConsoleSms;
 using Jaina.Notifications.Sms;
 using Jaina.Samples.ServiceDefaults;
 using JainaShop.Notifier;
@@ -13,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddJainaProblemDetails();
 
-builder.Services.AddJainaConsoleSms();
+builder.Services.AddSampleConsoleSms();
 builder.Services.AddJainaInMemoryInbox();
 builder.Services.AddTransient<IBackgroundJob<OrderPlacedPayload>, NotifyOrderPlacedJob>();
 

@@ -1,7 +1,9 @@
 using Jaina.Notifications.Sms;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace Jaina.Notifications.ConsoleSms.Sms;
+namespace JainaShop.Notifier;
 
 internal sealed class ConsoleSmsLogger : ISmsSender
 {
@@ -21,5 +23,14 @@ internal sealed class ConsoleSmsLogger : ISmsSender
             message.Body);
 
         return Task.CompletedTask;
+    }
+}
+
+internal static class ConsoleSmsServiceCollectionExtensions
+{
+    public static IServiceCollection AddSampleConsoleSms(this IServiceCollection services)
+    {
+        services.TryAddSingleton<ISmsSender, ConsoleSmsLogger>();
+        return services;
     }
 }
