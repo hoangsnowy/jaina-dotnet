@@ -1,0 +1,9 @@
+/* Jaina DocFX overrides */
+
+/* Constrain raster logo so it doesn't blow out the navbar.
+   DocFX modern's `class="svg"` only auto-sizes SVGs; PNGs need an explicit cap. */
+header .navbar-brand #logo {
+  height: 32px;
+  width: auto;
+  max-width: 32px;
+}

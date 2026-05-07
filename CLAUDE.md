@@ -59,7 +59,7 @@ dotnet test --filter "FullyQualifiedName~ClassName"      # single test class
 
 ## Verification Approach
 
-Solution targets `net10.0` only. Local build works if the .NET 10 SDK is installed (`dotnet --list-sdks`). CI on GitHub Actions remains the authoritative validator — push and check.
+Solution multi-targets `net8.0;net9.0;net10.0` (TFMs centralised via `LibTfms` / `AppTfms` in `Directory.Build.props`). Local build works only for the SDKs you have installed (`dotnet --list-sdks`); CI on GitHub Actions remains the authoritative validator — push and check.
 
 | Task | How to verify |
 |------|---------------|
@@ -137,7 +137,7 @@ From `.editorconfig` and `Directory.Build.props`:
 - Nullable reference types enabled — annotate all APIs
 - `TreatWarningsAsErrors=true` — no suppressions without justification
 - LF line endings, UTF-8, 4-space indent (2 for JSON/XML/YAML)
-- Target framework: `net10.0` only. Multi-target dropped Phase 0.
+- Target frameworks: `net8.0;net9.0;net10.0` (multi-target via `LibTfms` / `AppTfms` in `Directory.Build.props`).
 
 ## Testing Conventions
 

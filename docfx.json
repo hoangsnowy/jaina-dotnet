@@ -44,7 +44,7 @@
         "branch": "main"
       }
     },
-    "template": [ "default", "modern" ],
+    "template": [ "default", "modern", "templates/jaina" ],
     "postProcessors": [ "ExtractSearchIndex" ],
     "keepFileLink": false,
     "disableGitFeatures": false
