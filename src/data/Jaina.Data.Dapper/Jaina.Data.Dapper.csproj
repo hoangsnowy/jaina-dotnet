@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(AppTfms)</TargetFrameworks>
     <Description>Dapper implementation of the repository pattern for Jaina framework</Description>
     <PackageId>Jaina.Data.Dapper</PackageId>
   </PropertyGroup>

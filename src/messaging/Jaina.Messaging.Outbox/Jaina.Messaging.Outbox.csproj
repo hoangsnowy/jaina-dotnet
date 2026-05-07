@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
     <Description>Transactional outbox pattern abstractions for Jaina framework — atomic message persistence + asynchronous relay to brokers</Description>
     <PackageId>Jaina.Messaging.Outbox</PackageId>
   </PropertyGroup>

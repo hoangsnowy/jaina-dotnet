@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
     <Description>Rate limiting helpers for Jaina framework — opinionated wrappers over System.Threading.RateLimiting + ASP.NET Core RateLimiter, with per-tenant / per-user partitioning</Description>
     <PackageId>Jaina.RateLimiting</PackageId>
   </PropertyGroup>

@@ -1,12 +1,18 @@
 <Project>
   <PropertyGroup>
+    <!-- Shared target framework monikers — reference these in .csproj files -->
+    <LibTfms>net8.0;net9.0;net10.0</LibTfms>
+    <AppTfms>net8.0;net9.0;net10.0</AppTfms>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- TODO: bump OpenTelemetry past 1.15.0 to fix GHSA-g94r-2vxg-569j etc; remove NU1902 then -->
-    <NoWarn>$(NoWarn);CS1591;NU1902;NU1903;NU1510</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;NU1902;NU1903</NoWarn>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

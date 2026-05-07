@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
     <Description>Service discovery + integrated HttpClient for Jaina framework. AddJainaHttpClient&lt;T&gt; wires service discovery, resilience pipeline, tenant header propagation, and correlation id propagation in one call. Tenant-aware endpoint resolution: tries {service}.{tenant} first, falls back to {service}.</Description>
     <PackageId>Jaina.ServiceDiscovery</PackageId>
   </PropertyGroup>

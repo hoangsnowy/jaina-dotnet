@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
     <Description>Core utilities, result pattern, guard clauses, and extension methods for Jaina framework</Description>
     <PackageId>Jaina.Core</PackageId>
   </PropertyGroup>

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
     <Description>EF Core saga state repository for Jaina framework — persists SagaState as JSON for cross-instance saga continuation</Description>
     <PackageId>Jaina.Messaging.Saga.EfCore</PackageId>
   </PropertyGroup>

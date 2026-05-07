@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>$(LibTfms)</TargetFrameworks>
     <Description>ASP.NET Core middleware that replays cached responses for requests carrying an Idempotency-Key header</Description>
     <PackageId>Jaina.Idempotency.AspNetCore</PackageId>
   </PropertyGroup>
