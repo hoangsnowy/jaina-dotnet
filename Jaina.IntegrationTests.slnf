@@ -52,7 +52,8 @@
       "src/testing/Jaina.Testing/Jaina.Testing.csproj",
       "src/validation/Jaina.Validation/Jaina.Validation.csproj",
       "tests/integration/Jaina.Idempotency.Redis.IntegrationTests/Jaina.Idempotency.Redis.IntegrationTests.csproj",
-      "tests/integration/Jaina.Messaging.Outbox.EfCore.IntegrationTests/Jaina.Messaging.Outbox.EfCore.IntegrationTests.csproj"
+      "tests/integration/Jaina.Messaging.Outbox.EfCore.IntegrationTests/Jaina.Messaging.Outbox.EfCore.IntegrationTests.csproj",
+      "tests/integration/JainaShop.E2E/JainaShop.E2E.csproj"
     ]
   }
 }

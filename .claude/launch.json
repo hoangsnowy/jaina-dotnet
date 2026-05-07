@@ -1,0 +1,41 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "JainaShop.AppHost (Aspire — orchestrates all)",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/JainaShop/JainaShop.AppHost", "--launch-profile", "http"],
+      "port": 15150
+    },
+    {
+      "name": "JainaShop.Catalog",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/JainaShop/JainaShop.Catalog"],
+      "port": 5001
+    },
+    {
+      "name": "JainaShop.Orders",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/JainaShop/JainaShop.Orders"],
+      "port": 5002
+    },
+    {
+      "name": "JainaShop.Identity",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/JainaShop/JainaShop.Identity"],
+      "port": 5003
+    },
+    {
+      "name": "JainaShop.Notifier",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/JainaShop/JainaShop.Notifier"],
+      "port": 5004
+    },
+    {
+      "name": "JainaShop.Gateway",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "samples/JainaShop/JainaShop.Gateway"],
+      "port": 5005
+    }
+  ]
+}

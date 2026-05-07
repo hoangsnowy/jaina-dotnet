@@ -114,6 +114,7 @@
   <Folder Name="/tests/integration/">
     <Project Path="tests/integration/Jaina.Idempotency.Redis.IntegrationTests/Jaina.Idempotency.Redis.IntegrationTests.csproj" />
     <Project Path="tests/integration/Jaina.Messaging.Outbox.EfCore.IntegrationTests/Jaina.Messaging.Outbox.EfCore.IntegrationTests.csproj" />
+    <Project Path="tests/integration/JainaShop.E2E/JainaShop.E2E.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
     <Project Path="tests/unit/Jaina.AspNetCore.UnitTests/Jaina.AspNetCore.UnitTests.csproj" />
