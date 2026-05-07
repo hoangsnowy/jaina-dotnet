@@ -9,7 +9,6 @@
     <Project Path="src/data/Jaina.Data.EfCore/Jaina.Data.EfCore.csproj" />
   </Folder>
   <Folder Name="/notifications/">
-    <Project Path="src/notifications/Jaina.Notifications.ConsoleSms/Jaina.Notifications.ConsoleSms.csproj" />
     <Project Path="src/notifications/Jaina.Notifications.Smtp/Jaina.Notifications.Smtp.csproj" />
   </Folder>
   <Folder Name="/samples/">
@@ -28,7 +27,6 @@
     <Project Path="src/aspnetcore/Jaina.AspNetCore/Jaina.AspNetCore.csproj" />
   </Folder>
   <Folder Name="/src/backgroundjobs/">
-    <Project Path="src/backgroundjobs/Jaina.BackgroundJobs.Quartz/Jaina.BackgroundJobs.Quartz.csproj" />
     <Project Path="src/backgroundjobs/Jaina.BackgroundJobs/Jaina.BackgroundJobs.csproj" />
   </Folder>
   <Folder Name="/src/caching/">
@@ -56,13 +54,8 @@
     <Project Path="src/idempotency/Jaina.Idempotency.Redis/Jaina.Idempotency.Redis.csproj" />
     <Project Path="src/idempotency/Jaina.Idempotency/Jaina.Idempotency.csproj" />
   </Folder>
-  <Folder Name="/src/mapping/">
-    <Project Path="src/mapping/Jaina.Mapping.Mapster/Jaina.Mapping.Mapster.csproj" />
-    <Project Path="src/mapping/Jaina.Mapping/Jaina.Mapping.csproj" />
-  </Folder>
   <Folder Name="/src/messaging/">
     <Project Path="src/messaging/Jaina.Messaging.AzureServiceBus/Jaina.Messaging.AzureServiceBus.csproj" />
-    <Project Path="src/messaging/Jaina.Messaging.Broadcast/Jaina.Messaging.Broadcast.csproj" />
     <Project Path="src/messaging/Jaina.Messaging.Inbox.EfCore/Jaina.Messaging.Inbox.EfCore.csproj" />
     <Project Path="src/messaging/Jaina.Messaging.Inbox.InMemory/Jaina.Messaging.Inbox.InMemory.csproj" />
     <Project Path="src/messaging/Jaina.Messaging.Inbox.Redis/Jaina.Messaging.Inbox.Redis.csproj" />
@@ -85,7 +78,6 @@
   </Folder>
   <Folder Name="/src/observability/">
     <Project Path="src/observability/Jaina.Observability.ApplicationInsights/Jaina.Observability.ApplicationInsights.csproj" />
-    <Project Path="src/observability/Jaina.Observability.ElasticApm/Jaina.Observability.ElasticApm.csproj" />
     <Project Path="src/observability/Jaina.Observability/Jaina.Observability.csproj" />
   </Folder>
   <Folder Name="/src/ratelimiting/">
@@ -104,7 +96,6 @@
   </Folder>
   <Folder Name="/src/storage/">
     <Project Path="src/storage/Jaina.Storage.AzureBlob/Jaina.Storage.AzureBlob.csproj" />
-    <Project Path="src/storage/Jaina.Storage.AzureFileShare/Jaina.Storage.AzureFileShare.csproj" />
     <Project Path="src/storage/Jaina.Storage.Local/Jaina.Storage.Local.csproj" />
     <Project Path="src/storage/Jaina.Storage.Sftp/Jaina.Storage.Sftp.csproj" />
     <Project Path="src/storage/Jaina.Storage/Jaina.Storage.csproj" />
@@ -123,6 +114,7 @@
   <Folder Name="/tests/integration/">
     <Project Path="tests/integration/Jaina.Idempotency.Redis.IntegrationTests/Jaina.Idempotency.Redis.IntegrationTests.csproj" />
     <Project Path="tests/integration/Jaina.Messaging.Outbox.EfCore.IntegrationTests/Jaina.Messaging.Outbox.EfCore.IntegrationTests.csproj" />
+    <Project Path="tests/integration/JainaShop.E2E/JainaShop.E2E.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
     <Project Path="tests/unit/Jaina.AspNetCore.UnitTests/Jaina.AspNetCore.UnitTests.csproj" />

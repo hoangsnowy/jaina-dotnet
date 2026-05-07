@@ -21,21 +21,20 @@ src/
   idempotency/     Jaina.Idempotency*      IIdempotencyStore + InMemory/Redis stores + ASP.NET middleware
   caching/         Jaina.Caching*          ICache + Memory/Redis/Fusion providers
   data/            Jaina.Data*             IRepository<T> + IUnitOfWork + EF Core / Dapper providers + CQRS bus
-  messaging/       Jaina.Messaging*        IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus/Broadcast
+  messaging/       Jaina.Messaging*        IQueue<T>/ITopic<T> + RabbitMQ/ServiceBus
                    Jaina.Messaging.Outbox* Transactional outbox + relay (InMemory + EfCore)
                    Jaina.Messaging.Inbox*  Consumer dedup (InMemory + Redis + EfCore)
                    Jaina.Messaging.Saga*   Orchestration saga + reverse compensation (InMemory + EfCore + Redis)
-  storage/         Jaina.Storage*          IFileStorage + Local/AzureBlob/AzureFileShare/SFTP
+  storage/         Jaina.Storage*          IFileStorage + Local/AzureBlob/SFTP
   security/        Jaina.Security          AES/RSA/BCrypt/SHA + JWT helpers
                    Jaina.Security.Authentication  JWT bearer + ApiKey + IUserContext + scope policies
                    Jaina.Security.KeyVault Azure Key Vault
   observability/   Jaina.Observability     ITelemetry/ISpan + JainaActivitySource + JainaMeter + TagConventions
-                   Jaina.Observability.ApplicationInsights / .ElasticApm
-  mapping/         Jaina.Mapping*          IMapper + Mapster provider
-  notifications/   Jaina.Notifications*    IEmailSender/ISmsSender + SMTP / Console SMS
+                   Jaina.Observability.ApplicationInsights
+  notifications/   Jaina.Notifications*    IEmailSender/ISmsSender + SMTP
   validation/      Jaina.Validation        FluentValidation endpoint filter (400 ProblemDetails)
   healthchecks/    Jaina.HealthChecks      /health/live + /health/ready (live/ready tag convention)
-  backgroundjobs/  Jaina.BackgroundJobs*   IBackgroundJobScheduler + Quartz provider
+  backgroundjobs/  Jaina.BackgroundJobs    IBackgroundJobScheduler abstraction (Hangfire provider — Phase 1)
   grpc/            Jaina.Grpc              gRPC server + interceptors (logging + correlation)
   testing/         Jaina.Testing*          JainaWebApplicationFactory + FakeClock + Testcontainers fixtures
 ```

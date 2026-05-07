@@ -1,6 +1,6 @@
 # Jaina .NET
 
-Modular enterprise framework for .NET 8 / 9 / 10. Microservice patterns (Outbox · Inbox · Saga · Idempotency · Resilience · ServiceDiscovery), MultiTenancy + Auth + RateLimiting, Observability conventions, BackgroundJobs, gRPC, Testing fixtures — all wrapping `Microsoft.Extensions.*` so you don't fight the platform.
+Modular enterprise framework for .NET 10. Microservice patterns (Outbox · Inbox · Saga · Idempotency · Resilience · ServiceDiscovery), MultiTenancy + Auth + RateLimiting, Observability conventions, BackgroundJobs, gRPC, Testing fixtures — all wrapping `Microsoft.Extensions.*` so you don't fight the platform.
 
 [![Build](https://img.shields.io/github/actions/workflow/status/HoangSnowy/jaina-dotnet/ci.yml?branch=main)](https://github.com/HoangSnowy/jaina-dotnet/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -20,7 +20,7 @@ dotnet add package Jaina.AspNetCore
 - 📘 **[Cookbook](docs/blog/README.md)** — runnable recipes per pattern, each with happy path + error scenarios
   - **[📘 Ebook: Building a production Orders service from scratch](docs/blog/2026-05-05-orders-service-from-scratch.md)** — 50-min walkthrough with reproducible failure modes
 - 🛠️ **[Sample app](samples/JainaShop/README.md)** — `JainaShop` (5 microservices + Aspire AppHost)
-- 📊 **[Benchmarks](bench/Jaina.Benchmarks/README.md)** — BenchmarkDotNet harness for hot paths
+- 📊 **[Benchmarks](tests/benchmarks/Jaina.Benchmarks/README.md)** — BenchmarkDotNet harness for hot paths
 - 🧪 **[Tests](tests/README.md)** — unit vs integration suite convention
 
 ## Live docs site

@@ -126,6 +126,12 @@ ipch/
 
 # Visual Studio Trace Files
 *.e2e
+!tests/integration/JainaShop.E2E/
+
+# Claude Code worktree / runtime artifacts
+.claude/launch.json
+.claude/scheduled_tasks.lock
+.claude/worktrees/
 
 # TFS 2012 Local Workspace
 $tf/

@@ -1,10 +1,8 @@
 using Jaina.AspNetCore;
 using Jaina.BackgroundJobs;
-using Jaina.BackgroundJobs.Quartz;
 using Jaina.HealthChecks;
 using Jaina.Messaging.Inbox;
 using Jaina.Messaging.Inbox.InMemory;
-using Jaina.Notifications.ConsoleSms;
 using Jaina.Notifications.Sms;
 using Jaina.Samples.ServiceDefaults;
 using JainaShop.Notifier;
@@ -14,9 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddJainaProblemDetails();
 
-builder.Services.AddJainaConsoleSms();
+builder.Services.AddSampleConsoleSms();
 builder.Services.AddJainaInMemoryInbox();
-builder.Services.AddJainaQuartzBackgroundJobs();
 builder.Services.AddTransient<IBackgroundJob<OrderPlacedPayload>, NotifyOrderPlacedJob>();
 
 builder.Services.AddHealthChecks()
@@ -43,15 +40,15 @@ app.MapJainaHealthChecks();
 app.MapPost("/events/order-placed", async (
     OrderPlacedPayload payload,
     IInboxStore inbox,
-    IBackgroundJobScheduler scheduler) =>
+    IBackgroundJob<OrderPlacedPayload> job,
+    CancellationToken ct) =>
 {
     var firstSeen = await inbox.TryConsumeAsync("notifier", payload.OrderId.ToString(), TimeSpan.FromDays(7));
     if (!firstSeen) return Results.Accepted(value: new { duplicate = true });
 
-    await scheduler.ScheduleAsync<IBackgroundJob<OrderPlacedPayload>, OrderPlacedPayload>(
-        payload, new JobOptions { Delay = TimeSpan.FromSeconds(1) });
+    await job.ExecuteAsync(payload, ct);
 
-    return Results.Accepted(value: new { queued = true });
+    return Results.Accepted(value: new { processed = true });
 });
 
 app.Run();

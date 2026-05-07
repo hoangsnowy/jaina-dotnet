@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using Jaina.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jaina.Data.EfCore;
@@ -9,32 +8,12 @@ public class EfRepository<TContext, TEntity> : IRepository<TEntity>
     where TEntity : class, IEntity
 {
     protected TContext Context { get; }
-    protected IMapper Mapper { get; }
     private readonly DbSet<TEntity> _dbSet;
 
-    public EfRepository(TContext context, IMapper mapper)
+    public EfRepository(TContext context)
     {
         Context = context;
-        Mapper = mapper;
         _dbSet = context.Set<TEntity>();
-    }
-
-    protected async Task<TDto?> GetSingleAsync<TDto>(Expression<Func<TEntity, bool>> predicate)
-    {
-        var entity = await _dbSet.AsNoTracking().SingleOrDefaultAsync(predicate).ConfigureAwait(false);
-        return entity is null ? default : Mapper.Map<TDto>(entity);
-    }
-
-    protected async Task<IEnumerable<TDto>> GetListAsync<TDto>()
-    {
-        var entities = await _dbSet.AsNoTracking().ToListAsync().ConfigureAwait(false);
-        return Mapper.Map<IEnumerable<TDto>>(entities);
-    }
-
-    protected async Task<IEnumerable<TDto>> GetListAsync<TDto>(Expression<Func<TEntity, bool>> predicate)
-    {
-        var entities = await _dbSet.AsNoTracking().Where(predicate).ToListAsync().ConfigureAwait(false);
-        return Mapper.Map<IEnumerable<TDto>>(entities);
     }
 
     protected async Task<IEnumerable<TDto>> GetListAsync<TDto>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TDto>> selector)
