@@ -5,16 +5,21 @@ var builder = DistributedApplication.CreateBuilder(args);
 // in-memory providers cover the demo; swap when you're ready for production-shaped tests.
 var redis = builder.AddRedis("cache");
 
-var identity = builder.AddProject<Projects.JainaShop_Identity>("identity");
+var identity = builder.AddProject<Projects.JainaShop_Identity>("identity")
+    .WithHttpEndpoint();
 
-var catalog = builder.AddProject<Projects.JainaShop_Catalog>("catalog");
+var catalog = builder.AddProject<Projects.JainaShop_Catalog>("catalog")
+    .WithHttpEndpoint();
 
-var orders = builder.AddProject<Projects.JainaShop_Orders>("orders");
+var orders = builder.AddProject<Projects.JainaShop_Orders>("orders")
+    .WithHttpEndpoint();
 
 var notifier = builder.AddProject<Projects.JainaShop_Notifier>("notifier")
+    .WithHttpEndpoint()
     .WithReference(redis);
 
 builder.AddProject<Projects.JainaShop_Gateway>("gateway")
+    .WithHttpEndpoint()
     .WithReference(catalog)
     .WithReference(orders)
     .WithReference(identity);
