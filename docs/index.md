@@ -10,13 +10,13 @@ dotnet add package Jaina.AspNetCore
 # pick the modules you need; everything else stays out of your bin/
 ```
 
-[Quick start →](docs/getting-started.md) · [Architecture →](docs/architecture.md) · [Cookbook →](docs/blog/README.md)
+[Quick start →](getting-started.md) · [Architecture →](architecture.md) · [Cookbook →](blog/README.md)
 
 ## What's in the box
 
-- [📘 **Ebook**: Building a production Orders service from scratch](docs/blog/2026-05-05-orders-service-from-scratch.md) — 50-min walkthrough, every chapter ships runnable code + curl + reproducible failure scenario.
-- [Module reference](docs/modules.md) — what each `Jaina.*` package gives you, in one line per package.
-- [API reference](docs/api/) — generated from XML docs.
+- [📘 **Ebook**: Building a production Orders service from scratch](blog/2026-05-05-orders-service-from-scratch.md) — 50-min walkthrough, every chapter ships runnable code + curl + reproducible failure scenario.
+- [Module reference](modules.md) — what each `Jaina.*` package gives you, in one line per package.
+- [API reference](api/) — generated from XML docs.
 
 ## Contributing
 
