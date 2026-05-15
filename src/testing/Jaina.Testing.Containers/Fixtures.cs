@@ -13,26 +13,22 @@ public static class JainaContainers
 {
     /// <summary>Postgres 16 with a default database, ready for EF migrations.</summary>
     public static PostgreSqlContainer Postgres(string database = "jaina_tests") =>
-        new PostgreSqlBuilder()
-            .WithImage("postgres:16-alpine")
+        new PostgreSqlBuilder("postgres:16-alpine")
             .WithDatabase(database)
             .Build();
 
     /// <summary>Redis 7 — used for Idempotency.Redis, Inbox.Redis, Saga.Redis tests.</summary>
     public static RedisContainer Redis() =>
-        new RedisBuilder()
-            .WithImage("redis:7-alpine")
+        new RedisBuilder("redis:7-alpine")
             .Build();
 
     /// <summary>RabbitMQ 3 with management plugin — used for Messaging.RabbitMQ tests.</summary>
     public static RabbitMqContainer RabbitMq() =>
-        new RabbitMqBuilder()
-            .WithImage("rabbitmq:3-management-alpine")
+        new RabbitMqBuilder("rabbitmq:3-management-alpine")
             .Build();
 
     /// <summary>Azurite — Azure Storage emulator (Blob + Files) for Storage.AzureBlob tests.</summary>
     public static AzuriteContainer Azurite() =>
-        new AzuriteBuilder()
-            .WithImage("mcr.microsoft.com/azure-storage/azurite:latest")
+        new AzuriteBuilder("mcr.microsoft.com/azure-storage/azurite:latest")
             .Build();
 }
