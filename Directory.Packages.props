@@ -48,7 +48,7 @@
     <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.11.0" />
 
     <!-- Data -->
-    <PackageVersion Include="Dapper" Version="2.1.72" />
+    <PackageVersion Include="Dapper" Version="2.1.79" />
     <PackageVersion Include="Elastic.Clients.Elasticsearch" Version="9.4.0" />
 
     <!-- gRPC -->
